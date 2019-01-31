@@ -1,0 +1,67 @@
+##################
+# Compiled files #
+##################
+*.class
+
+##################
+# intellij files #
+##################
+*.iml
+.idea
+*/.idea
+
+#################
+# eclipse files #
+#################
+/.project
+/.classpath
+/.settings
+
+#########################
+# maven generated files #
+#########################
+/target
+*.versionsBackup
+
+#############
+# Zip files #
+#############
+*.tar
+*.tar.gz
+*.zip
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.war
+*.ear
+*.rar
+
+##############
+# Logs files #
+##############
+*.log
+
+#################
+# test-ng files #
+#################
+/test-output
+
+############################
+# Binaries generated files #
+############################
+/bin
+
+################
+# gradle files #
+################
+/build
+/.gradle
+/gradle
+/pom.xml.bak
+
+################
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+################
+hs_err_pid*

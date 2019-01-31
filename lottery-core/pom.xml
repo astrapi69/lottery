@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>de.alpharogroup</groupId>
+    <artifactId>lottery</artifactId>
+    <version>5.4</version>
+  </parent>
+  
+  <artifactId>lottery-core</artifactId>
+  
+  <dependencies>
+  
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>silly-collections</artifactId>
+		</dependency>
+  
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>randomizer-core</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>lottery-data</artifactId>
+		</dependency>
+		<!-- MEANBEAN DEPENDENCY -->
+		<dependency>
+			<groupId>org.meanbean</groupId>
+			<artifactId>meanbean</artifactId>
+			<scope>test</scope>
+		</dependency>
+  
+  </dependencies>
+  
+</project>

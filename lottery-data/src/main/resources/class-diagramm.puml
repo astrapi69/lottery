@@ -1,0 +1,173 @@
+@startuml
+
+class LotteryBox
+{
+
+	/** The game type. */
+	LotteryGameType gameType;
+
+	/** The index of this box in the lottery ticket */
+	Integer index;
+
+	/** The selected numbers. */
+	@Singular
+	Set<Integer> selectedNumbers;
+
+	/** The win category. */
+	LotteryWinCategory winCategory;
+}
+
+enum LotteryGameType
+{
+
+	SIX_OF_FOURTYNINE_FULL_SYSTEM,
+	SIX_OF_FOURTYNINE_NORMAL,
+	SIX_OF_FOURTYNINE_SUB_SYSTEM
+
+}
+
+class EvaluatedLotteryNumbers
+{
+
+	/** The id. */
+	Integer id;
+
+	/** The evaluated game seventy seven. */
+	Integer wonGameSeventySevenNumber;
+
+	/** The played lottery numbers. */
+	@Builder.Default
+	Map<LotteryGameType, List<Collection<Integer>>> wonLotteryNumbers = MapFactory.newHashMap();
+
+	/** The evaluated super number. */
+	Integer wonSuperNumber;
+
+	/** The evaluated super six number. */
+	Integer wonSuperSixNumber;
+
+}
+
+class GameSeventySeven
+{
+	/** The game seventy seven number. */
+	Integer number;
+
+}
+
+class LotteryPlayedNumbers implements Cloneable
+{
+
+	/** The id. */
+	Integer id;
+
+	/** The played lottery numbers. */
+	Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers;
+
+	/** The super number. */
+	Integer superNumber;
+
+	/** The super six number. */
+	Integer superSixNumber;
+
+}
+
+class LotteryTicket
+{
+	/** The game seventy seven. */
+	GameSeventySeven gameSeventySeven;
+
+	/** The id. */
+	String id;
+
+	/** The played lottery boxes. */
+	@Singular
+	Set<LotteryBox> lotteryBoxes;
+
+	/** The super number. */
+	Integer superNumber;
+
+	/** The super six number. */
+	Integer superSixNumber;
+}
+
+class EuroMillionsWinCategory implements Cloneable
+{
+
+	/** The computation. */
+	String computation;
+
+	/** The payout rate of this winning category. */
+	double payoutRate;
+
+	/** The quantity of winning numbers. */
+	int quantityOfWonNumbers;
+
+	/** The quantity of winning star numbers. */
+	int quantityOfWonStarNumbers;
+
+	/** The flag if the joker is selected. */
+	boolean withJoker;
+
+}
+
+enum GameSeventySevenWinCategory
+{
+
+	/** The fifth winning class. */
+	FIFTH_CLASS(3),
+	/** The first winning class. */
+	FIRST_CLASS(7),
+	/** The fourth winning class. */
+	FOURTH_CLASS(4),
+	/** The none winning class. */
+	NONE(0),
+	/** The second winning class. */
+	SECOND_CLASS(6),
+	/** The seventh winning class. */
+	SEVENTH_CLASS(1),
+	/** The sixth winning class. */
+	SIXTH_CLASS(2),
+	/** The third winning class. */
+	THIRD_CLASS(5);
+
+
+
+}
+
+enum LotteryWinCategory
+{
+
+	/** The eighth winning class. */
+	EIGHTH_CLASS(WinCategory.builder().quantityOfWonNumbers(3).withSuperNumber(false).build()),
+	/** The fifth winning class. */
+	FIFTH_CLASS(WinCategory.builder().quantityOfWonNumbers(4).withSuperNumber(true).build()),
+	/** The first winning class. */
+	FIRST_CLASS(WinCategory.builder().quantityOfWonNumbers(6).withSuperNumber(true).build()),
+	/** The fourth winning class. */
+	FOURTH_CLASS(WinCategory.builder().quantityOfWonNumbers(5).withSuperNumber(false).build()),
+	/** The ninth winning class. */
+	NINTH_CLASS(WinCategory.builder().quantityOfWonNumbers(2).withSuperNumber(true).build()),
+	/** The none winning class. */
+	NONE(null),
+	/** The second winning class. */
+	SECOND_CLASS(WinCategory.builder().quantityOfWonNumbers(6).withSuperNumber(false).build()),
+	/** The seventh winning class. */
+	SEVENTH_CLASS(WinCategory.builder().quantityOfWonNumbers(3).withSuperNumber(true).build()),
+	/** The sixth winning class. */
+	SIXTH_CLASS(WinCategory.builder().quantityOfWonNumbers(4).withSuperNumber(false).build()),
+	/** The third winning class. */
+	THIRD_CLASS(WinCategory.builder().quantityOfWonNumbers(5).withSuperNumber(true).build());
+
+}
+
+class WinCategory implements Cloneable
+{
+
+	/** The quantity of winning numbers. */
+	int quantityOfWonNumbers;
+
+	/** The flag if the played super number is selected. */
+	boolean withSuperNumber;
+
+}
+@enduml

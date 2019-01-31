@@ -1,0 +1,222 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.alpharogroup</groupId>
+		<artifactId>mvn-java-parent</artifactId>
+		<version>4.5</version>
+	</parent>
+
+	<artifactId>lottery</artifactId>
+	<!-- NOTE: on version change DO NOT FORGET to change ${lottery.version} 
+		in the properties section ON SAME VERSION. -->
+	<version>5.4</version>
+
+	<packaging>pom</packaging>
+	<inceptionYear>2015</inceptionYear>
+
+	<name>${project.artifactId}</name>
+
+	<description>
+		The target of this parent project is to draw lottery data.
+	</description>
+
+	<url>https://bitbucket.org/alpharogroupug/${project.artifactId}</url>
+
+	<properties>
+		<!-- LOTTERY versions -->
+		<lottery.version>5.4-SNAPSHOT</lottery.version>
+		<lottery-core.version>${lottery.version}</lottery-core.version>
+		<lottery-data.version>${lottery.version}</lottery-data.version>
+		<!-- NEW EXTENSIONS LIB versions -->
+		<silly-collections.version>5.1</silly-collections.version>
+		<!-- JOBJECT-EXTENSIONS versions -->
+		<jobject-extensions.version>2.5</jobject-extensions.version>
+		<jobject-evaluate.version>${jobject-extensions.version}</jobject-evaluate.version>
+		<!-- RANDOMIZER versions -->
+		<randomizer.version>5.6</randomizer.version>
+		<randomizer-core.version>${randomizer.version}</randomizer-core.version>
+		<!-- MEANBEAN version -->
+		<meanbean.version>2.0.3</meanbean.version>
+	</properties>
+
+	<modules>
+		<module>lottery-core</module>
+		<module>lottery-data</module>
+	</modules>
+
+	<developers>
+
+		<developer>
+			<id>astrapi69</id>
+			<name>Asterios Raptis</name>
+			<roles>
+				<role>Project manager</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>Berlin</timezone>
+		</developer>
+
+	</developers>
+
+	<scm>
+		<connection>scm:git:git:@bitbucket.org:alpharogroupug/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:git@bitbucket.org:alpharogroupug/${project.artifactId}.git</developerConnection>
+		<url>git:@bitbucket.org:alpharogroupug/${project.artifactId}.git</url>
+	</scm>
+
+	<issueManagement>
+		<system>bitbucket.org</system>
+		<url>https://bitbucket.org/alpharogroupug/${project.artifactId}/issues</url>
+	</issueManagement>
+
+	<dependencyManagement>
+
+		<dependencies>
+			<!-- LOTTERY DEPENDENCIES -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>lottery-data</artifactId>
+				<version>${lottery-data.version}</version>
+			</dependency>
+			<!-- NEW EXTENSIONS LIB DEPENDENCIES -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>silly-collections</artifactId>
+				<version>${silly-collections.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>randomizer-core</artifactId>
+				<version>${randomizer-core.version}</version>
+			</dependency>
+			<!-- MEANBEAN DEPENDENCY -->
+			<dependency>
+				<groupId>org.meanbean</groupId>
+				<artifactId>meanbean</artifactId>
+				<version>${meanbean.version}</version>
+			</dependency>
+			<!-- JOBJECT-EVALUATE DEPENDENCY -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jobject-evaluate</artifactId>
+				<version>${jobject-evaluate.version}</version>
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
+
+	<build>
+
+		<resources>
+
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+					<exclude>**/package.html</exclude>
+				</excludes>
+			</resource>
+
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/site</directory>
+			</resource>
+
+		</resources>
+
+		<testResources>
+
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/java</directory>
+				<includes>
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+					<exclude>**/package.html</exclude>
+				</excludes>
+			</testResource>
+			<testResource>
+				<filtering>false</filtering>
+				<directory>src/test/resources</directory>
+			</testResource>
+
+		</testResources>
+
+		<pluginManagement>
+
+			<plugins>
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<configuration>
+						<instrumentation>
+							<excludes>
+								<!-- abstract classes -->
+								<!-- enums -->
+								<!-- beans -->
+								<!-- constant classes with only constants -->
+								<!-- interfaces -->
+								<!-- exceptions -->
+								<!-- deprecated classes -->
+								<!-- explicit abstract classes -->
+								<!-- explicit bean classes -->
+								<!-- explicit deprecated classes -->
+								<!-- explicit enums -->
+								<exclude>de/alpharogroup/random/lotto/LottoGameType.class</exclude>
+								<!-- explicit interfaces -->
+								<!-- explicit constant classes with only constants -->
+								<!-- explicit delegation classes -->
+							</excludes>
+						</instrumentation>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>clean</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+			</plugins>
+
+		</pluginManagement>
+
+		<plugins>
+
+			<plugin>
+				<inherited>true</inherited>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<inherited>true</inherited>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<inherited>true</inherited>
+				<artifactId>maven-eclipse-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>
