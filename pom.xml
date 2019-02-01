@@ -11,7 +11,7 @@
 	<artifactId>lottery</artifactId>
 	<!-- NOTE: on version change DO NOT FORGET to change ${lottery.version} 
 		in the properties section ON SAME VERSION. -->
-	<version>5.4</version>
+	<version>5.4.1</version>
 
 	<packaging>pom</packaging>
 	<inceptionYear>2015</inceptionYear>
@@ -26,7 +26,7 @@
 
 	<properties>
 		<!-- LOTTERY versions -->
-		<lottery.version>5.4-SNAPSHOT</lottery.version>
+		<lottery.version>5.4.1</lottery.version>
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 		<!-- NEW EXTENSIONS LIB versions -->

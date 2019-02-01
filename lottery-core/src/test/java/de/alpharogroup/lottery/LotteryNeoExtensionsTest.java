@@ -61,15 +61,15 @@ public class LotteryNeoExtensionsTest
 	{
 		LotteryTicket lotteryTicket = LotterySetsFactory
 			.newLotteryTicket(LotterySetsFactory.newLotterySetsForTests());
-		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FIFTH_CLASS);
+		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FIFTH_CLASS, 2);
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCalculateDrawsInFourthClass()
 	{
 		LotteryTicket lotteryTicket = LotterySetsFactory
 			.newLotteryTicket(LotterySetsFactory.newLotterySetsForTests());
-		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FOURTH_CLASS);
+		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FOURTH_CLASS, 2);
 	}
 
 	@Test(enabled = true)
@@ -77,7 +77,7 @@ public class LotteryNeoExtensionsTest
 	{
 		LotteryTicket lotteryTicket = LotterySetsFactory
 			.newLotteryTicket(LotterySetsFactory.newLotterySetsForTests());
-		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.SIXTH_CLASS);
+		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.SIXTH_CLASS, 2);
 	}
 
 	@Test(enabled = true)
