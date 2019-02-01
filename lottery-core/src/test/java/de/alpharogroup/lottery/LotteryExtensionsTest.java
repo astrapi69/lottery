@@ -97,7 +97,7 @@ public class LotteryExtensionsTest
 		final LotteryPlayedNumbers lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
 			.playedLotteryNumbers(playedLotteryNumbers).superNumber(23).superSixNumber(4).build();
 
-		LotteryExtensions.calculateDraws(lotteryPlayedNumbers, 4, 10);
+		LotteryExtensions.calculateDraws(lotteryPlayedNumbers, 4, 2);
 	}
 
 
@@ -110,7 +110,7 @@ public class LotteryExtensionsTest
 	{
 		LotteryTicket lotteryTicket = LotterySetsFactory
 			.newLotteryTicket(LotterySetsFactory.newLotterySetsForTests());
-		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FIRST_CLASS, 10);
+		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FIRST_CLASS, 2);
 	}
 
 	/**
