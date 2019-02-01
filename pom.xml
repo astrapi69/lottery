@@ -58,17 +58,22 @@
 		</developer>
 
 	</developers>
-
+	
 	<scm>
-		<connection>scm:git:git:@bitbucket.org:alpharogroupug/${project.artifactId}.git</connection>
-		<developerConnection>scm:git:git@bitbucket.org:alpharogroupug/${project.artifactId}.git</developerConnection>
-		<url>git:@bitbucket.org:alpharogroupug/${project.artifactId}.git</url>
+		<connection>scm:git:git:@github.com:astrapi69/${project.artifactId}.git</connection>
+		<developerConnection>scm:git:git@github.com:astrapi69/${project.artifactId}.git</developerConnection>
+		<url>git:@github.com:astrapi69/${project.artifactId}.git</url>
 	</scm>
 
 	<issueManagement>
-		<system>bitbucket.org</system>
-		<url>https://bitbucket.org/alpharogroupug/${project.artifactId}/issues</url>
+		<system>github</system>
+		<url>https://github.com/astrapi69/${project.artifactId}/issues</url>
 	</issueManagement>
+
+	<ciManagement>
+		<system>travis-ci</system>
+		<url>https://travis-ci.org/astrapi69/${project.artifactId}</url>
+	</ciManagement>
 
 	<dependencyManagement>
 
