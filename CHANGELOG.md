@@ -1,12 +1,8 @@
 ## Change log
 ----------------------
 
-Version 5.4.1
+Version 5.5-SNAPSHOT
 -------------
-
-CHANGED:
-
-- new patch for version mismatch
 
 Version 5.4
 -------------

@@ -9,24 +9,23 @@
 	</parent>
 
 	<artifactId>lottery</artifactId>
-	<!-- NOTE: on version change DO NOT FORGET to change ${lottery.version} 
-		in the properties section ON SAME VERSION. -->
-	<version>5.4.1</version>
-
 	<packaging>pom</packaging>
 	<inceptionYear>2015</inceptionYear>
+	<!-- NOTE: on version change DO NOT FORGET to change ${lottery.version} 
+		in the properties section ON SAME VERSION. -->
+	<version>5.5-SNAPSHOT</version>
 
 	<name>${project.artifactId}</name>
 
 	<description>
-		The target of this parent project is to draw lottery data.
+		The target of this parent project is to draw lottery data
 	</description>
 
-	<url>https://bitbucket.org/alpharogroupug/${project.artifactId}</url>
+	<url>https://github.com/astrapi69/${project.artifactId}</url>
 
 	<properties>
 		<!-- LOTTERY versions -->
-		<lottery.version>5.4.1</lottery.version>
+		<lottery.version>5.5-SNAPSHOT</lottery.version>
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 		<!-- NEW EXTENSIONS LIB versions -->
