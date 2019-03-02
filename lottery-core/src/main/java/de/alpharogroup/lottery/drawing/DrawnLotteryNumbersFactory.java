@@ -46,8 +46,7 @@ public class DrawnLotteryNumbersFactory
 	 *            the volume of the numbers starts from 1 till volume
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
-	@SneakyThrows
-	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume)
+	@SneakyThrows public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume)
 	{
 		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder()
 			.id(RandomExtensions.randomInt(Integer.MAX_VALUE))
@@ -88,8 +87,7 @@ public class DrawnLotteryNumbersFactory
 	 *            the max volume
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
-	@SneakyThrows
-	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
+	@SneakyThrows public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
 		int maxVolume)
 	{
 		Set<Integer> drawnNumbers = DrawnLotteryNumbersExtensions.draw(max, minVolume, maxVolume);

@@ -275,13 +275,13 @@ public final class LotteryExtensions
 			{
 				breakout = true;
 			}
-			log.info("This is the " + count + " draw of the lottery queen: " + luckyNumbers);
+			// log.info("This is the " + count + " draw of the lottery queen: " + luckyNumbers);
 		}
 
-		log.info("Elapsed time till you have won something: "
-			+ calculateElapsedTimeInSeconds(startTime));
-		log.info("you have won after " + count + " drawings");
-		log.info("you have won: " + evaluatedLotteryNumbers);
+		// log.info("Elapsed time till you have won something: "
+		// 	+ calculateElapsedTimeInSeconds(startTime));
+		// log.info("you have won after " + count + " drawings");
+		// log.info("you have won: " + evaluatedLotteryNumbers);
 		return count;
 	}
 

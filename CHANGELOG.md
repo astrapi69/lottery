@@ -1,12 +1,12 @@
 ## Change log
 ----------------------
 
-Version 5.4.1
+Version 5.4.2
 -------------
 
 CHANGED:
 
-- new patch for version mismatch
+- update of parent version to 4.7
 
 Version 5.4
 -------------
