@@ -23,10 +23,10 @@ package de.alpharogroup.lottery.gameseventyseven;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
+import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
+import lombok.SneakyThrows;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
-
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
 
 /**
  * The unit test class for the class {@link GameSeventySeven}.
@@ -39,12 +39,13 @@ public class GameSeventySevenTest
 	 * and {@link GameSeventySeven#toString()}
 	 */
 	@Test
+	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
 		boolean expected;
 		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(GameSeventySeven.class);
+		actual = EqualsHashCodeAndToStringEvaluator
+				.evaluateEqualsHashcodeAndToString(GameSeventySeven.class);
 		expected = true;
 		assertEquals(expected, actual);
 	}

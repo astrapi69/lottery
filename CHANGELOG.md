@@ -4,9 +4,13 @@
 Version 5.5-SNAPSHOT
 -------------
 
+ADDED:
+ 
+- new dependency of jobj-contract-verifier in version 3 added
+
 CHANGED:
 
-- update of parent version to 4.7
+- update of parent version to 4.8
 
 Version 5.4
 -------------

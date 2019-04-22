@@ -20,15 +20,15 @@
  */
 package de.alpharogroup.lottery.wincategories;
 
-import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
-
+import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
+import lombok.SneakyThrows;
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * The unit test class for the class {@link EuroMillionsWinCategory}.
@@ -41,12 +41,14 @@ public class EuroMillionsWinCategoryTest
 	 * {@link EuroMillionsWinCategory#hashCode()} and {@link EuroMillionsWinCategory#toString()}
 	 */
 	@Test
+	@SneakyThrows
 	public void testEqualsHashcodeAndToStringWithClassSilently()
 	{
 		boolean expected;
 		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(EuroMillionsWinCategory.class);
+
+		actual = EqualsHashCodeAndToStringEvaluator
+				.evaluateEqualsHashcodeAndToString(EuroMillionsWinCategory.class);
 		expected = true;
 		assertEquals(expected, actual);
 	}
