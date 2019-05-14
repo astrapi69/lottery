@@ -6,10 +6,34 @@
 [![Coverage Status](https://coveralls.io/repos/github/astrapi69/lottery/badge.svg?branch=develop)](https://coveralls.io/github/astrapi69/lottery?branch=master)
 [![Open Issues](https://img.shields.io/github/issues/astrapi69/lottery.svg?style=flat)](https://github.com/astrapi69/lottery/issues) 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/lottery/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/lottery)
+[![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
 
 </div>
 
 The target of this project is to create random lottery results. 
+
+## Note
+
+No animals were harmed in the making of this library.
+
+# Donations
+
+This project is kept as an open source product and relies on contributions to remain being developed. 
+If you like this project, please consider a donation through paypal: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8" target="_blank">
+<img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal this" title="PayPal – The safer, easier way to pay online!" border="0" />
+</a>
+
+or over bitcoin or bitcoin-cash with:
+
+1Jzso5h7U82QCNmgxxSCya1yUK7UVcSXsW
+
+or over ether with:
+
+0xaB6EaE10F352268B0CA672Dd6e999C86344D49D8
+
+or over flattr: <a href="http://flattr.com/thing/4152938/astrapi69lottery-on-GitHub" target="_blank">
+<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
+</a>
 
 ## Key features:
 
@@ -39,7 +63,7 @@ You can first define the version properties:
 	<properties>
 			...
 		<!-- LOTTERY versions -->
-		<lottery.version>5.4.2</lottery.version>
+		<lottery.version>5.5</lottery.version>
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 			...
@@ -98,28 +122,6 @@ Don't forget to add new units tests on your changes.
 Do not hesitate to contact the lottery developers with your questions, concerns, comments, bug reports, or feature requests.
 - Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/astrapi69/lottery/issues).
 
-## Note
-
-No animals were harmed in the making of this library.
-
-# Donations
-
-This project is kept as an open source product and relies on contributions to remain being developed. 
-If you like this project, please consider a donation through paypal: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8" target="_blank">
-<img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal this" title="PayPal – The safer, easier way to pay online!" border="0" />
-</a>
-
-or over bitcoin or bitcoin-cash with:
-
-1Jzso5h7U82QCNmgxxSCya1yUK7UVcSXsW
-
-or over ether with:
-
-0xaB6EaE10F352268B0CA672Dd6e999C86344D49D8
-
-or over flattr: <a href="http://flattr.com/thing/4152938/astrapi69lottery-on-GitHub" target="_blank">
-<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
-</a>
 
 ## Credits
 
@@ -131,7 +133,8 @@ or over flattr: <a href="http://flattr.com/thing/4152938/astrapi69lottery-on-Git
 
 |**Nexus Sonatype repositories**|
 |     :---:      |
-|[![sonatype repository](https://img.shields.io/nexus/r/https/oss.sonatype.org/de.alpharogroup/lottery.svg?style=for-the-badge)](https://oss.sonatype.org/index.html#nexus-search;gav~de.alpharogroup~lottery~~~)|
+|[![sonatype repository](https://img.shields.io/nexus/r/https/oss.sonatype.org/de.alpharogroup/lottery-core.svg?style=for-the-badge)](https://oss.sonatype.org/index.html#nexus-search;gav~de.alpharogroup~lottery-core~~~) lottery-core|
+|[![sonatype repository](https://img.shields.io/nexus/r/https/oss.sonatype.org/de.alpharogroup/lottery-data.svg?style=for-the-badge)](https://oss.sonatype.org/index.html#nexus-search;gav~de.alpharogroup~lottery-data~~~) lottery-data|
 |Special thanks to [sonatype repository](https://www.sonatype.com) for providing a free maven repository service for open source projects|
 |     <img width=1000/>     |
 
