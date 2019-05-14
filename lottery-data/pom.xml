@@ -4,7 +4,7 @@
   <parent>
     <groupId>de.alpharogroup</groupId>
     <artifactId>lottery</artifactId>
-    <version>5.4.2</version>
+    <version>5.5</version>
   </parent>
   
   <artifactId>lottery-data</artifactId>  
@@ -22,12 +22,12 @@
 			<artifactId>meanbean</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- JOBJECT-EVALUATE DEPENDENCY -->
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>jobject-evaluate</artifactId>
-			<scope>test</scope>
-		</dependency>
+	  <!-- JOBJ-CONTRACT-VERIFIER DEPENDENCY -->
+	  <dependency>
+		  <groupId>de.alpharogroup</groupId>
+		  <artifactId>jobj-contract-verifier</artifactId>
+		  <scope>test</scope>
+	  </dependency>
   
   </dependencies>
   

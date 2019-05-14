@@ -24,7 +24,6 @@
 package de.alpharogroup.lottery.drawings;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
 
 import java.util.Set;
 
@@ -32,28 +31,13 @@ import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link DrawnEuroMillionsNumbers}.
  */
 public class DrawnEuroMillionsNumbersTest
 {
-
-	/**
-	 * Test method for {@link DrawnEuroMillionsNumbers#equals(Object)} ,
-	 * {@link DrawnEuroMillionsNumbers#hashCode()} and {@link DrawnEuroMillionsNumbers#toString()}
-	 */
-	@Test
-	public void testEqualsHashcodeAndToStringWithClassSilently()
-	{
-		boolean expected;
-		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(DrawnEuroMillionsNumbers.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
 
 	/**
 	 * Test method for creation of object {@link DrawnEuroMillionsNumbers}
@@ -84,6 +68,16 @@ public class DrawnEuroMillionsNumbersTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(DrawnEuroMillionsNumbers.class);
+	}
+
+	/**
+	 * Test method for {@link DrawnEuroMillionsNumbers#equals(Object)} ,
+	 * {@link DrawnEuroMillionsNumbers#hashCode()} and {@link DrawnEuroMillionsNumbers#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(DrawnEuroMillionsNumbers.class).verify();
 	}
 
 }

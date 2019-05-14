@@ -51,7 +51,8 @@ public final class DrawnLotteryNumbersExtensions
 	 *            the volume of the numbers starts from 1 till volume
 	 * @return the drawn super number
 	 */
-	@SneakyThrows public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int volume)
+	@SneakyThrows
+	public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int volume)
 	{
 		final SecureRandom sr = SecureRandomBean.builder()
 			.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build();
@@ -79,7 +80,8 @@ public final class DrawnLotteryNumbersExtensions
 	 *            the max volume
 	 * @return the drawn super number
 	 */
-	@SneakyThrows public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int minVolume,
+	@SneakyThrows
+	public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int minVolume,
 		int maxVolume)
 	{
 		int superNumber = -1;
@@ -114,7 +116,8 @@ public final class DrawnLotteryNumbersExtensions
 	 *            the volume of the numbers starts from 1 till volume
 	 * @return the sets the
 	 */
-	@SneakyThrows public static Set<Integer> draw(int maxNumbers, int volume)
+	@SneakyThrows
+	public static Set<Integer> draw(int maxNumbers, int volume)
 	{
 		Set<Integer> numbers = SetFactory.newTreeSet();
 		final SecureRandom sr = SecureRandomBean.builder()
@@ -176,7 +179,8 @@ public final class DrawnLotteryNumbersExtensions
 	 *            the volume of the numbers starts from 1 till volume
 	 * @return the sets the
 	 */
-	@SneakyThrows public static Set<Integer> drawDefaultAlgorithm(int maxNumbers, int minVolume, int maxVolume)
+	@SneakyThrows
+	public static Set<Integer> drawDefaultAlgorithm(int maxNumbers, int minVolume, int maxVolume)
 	{
 		Set<Integer> numbers = SetFactory.newTreeSet();
 		ArrayList<Integer> rangeList = new ArrayList<>(

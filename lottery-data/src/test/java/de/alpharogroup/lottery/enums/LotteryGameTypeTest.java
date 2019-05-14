@@ -18,36 +18,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.alpharogroup.lottery.played;
+package de.alpharogroup.lottery.enums;
 
-import org.meanbean.test.BeanTester;
+import static org.testng.Assert.assertEquals;
+
 import org.testng.annotations.Test;
 
-import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
-
 /**
- * The unit test class for the class {@link LotteryPlayedNumbers}.
+ * The unit test class for the class {@link LotteryGameType}
  */
-public class LotteryPlayedNumbersTest
+public class LotteryGameTypeTest
 {
 
 	/**
-	 * Test method for {@link LotteryPlayedNumbers}
+	 * Test method for the constant values of {@link LotteryGameType}
 	 */
 	@Test
-	public void testWithBeanTester()
+	public void testValues()
 	{
-		final BeanTester beanTester = new BeanTester();
-		beanTester.testBean(LotteryPlayedNumbers.class);
-	}
+		String actual;
+		String expected;
 
-	/**
-	 * Test method for {@link LotteryPlayedNumbers#equals(Object)} ,
-	 * {@link LotteryPlayedNumbers#hashCode()} and {@link LotteryPlayedNumbers#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(LotteryPlayedNumbers.class).verify();
+		actual = LotteryGameType.SIX_OF_FOURTYNINE_FULL_SYSTEM.name();
+		expected = "SIX_OF_FOURTYNINE_FULL_SYSTEM";
+		assertEquals(actual, expected);
+
+		actual = LotteryGameType.SIX_OF_FOURTYNINE_NORMAL.name();
+		expected = "SIX_OF_FOURTYNINE_NORMAL";
+		assertEquals(actual, expected);
+
 	}
 }

@@ -21,35 +21,19 @@
 package de.alpharogroup.lottery.wincategories;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
 
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link EuroMillionsWinCategory}.
  */
 public class EuroMillionsWinCategoryTest
 {
-
-	/**
-	 * Test method for {@link EuroMillionsWinCategory#equals(Object)} ,
-	 * {@link EuroMillionsWinCategory#hashCode()} and {@link EuroMillionsWinCategory#toString()}
-	 */
-	@Test
-	public void testEqualsHashcodeAndToStringWithClassSilently()
-	{
-		boolean expected;
-		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(EuroMillionsWinCategory.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
 
 	/**
 	 * Test method for creation of object {@link EuroMillionsWinCategory}
@@ -89,6 +73,16 @@ public class EuroMillionsWinCategoryTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(EuroMillionsWinCategory.class);
+	}
+
+	/**
+	 * Test method for {@link EuroMillionsWinCategory#equals(Object)} ,
+	 * {@link EuroMillionsWinCategory#hashCode()} and {@link EuroMillionsWinCategory#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(EuroMillionsWinCategory.class).verify();
 	}
 
 }

@@ -21,13 +21,12 @@
 package de.alpharogroup.lottery.box;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
 
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 import de.alpharogroup.lottery.enums.LotteryGameType;
 
 /**
@@ -35,21 +34,6 @@ import de.alpharogroup.lottery.enums.LotteryGameType;
  */
 public class LotteryBoxTest
 {
-
-	/**
-	 * Test method for {@link LotteryBox#equals(Object)} , {@link LotteryBox#hashCode()} and
-	 * {@link LotteryBox#toString()}
-	 */
-	@Test
-	public void testEqualsHashcodeAndToStringWithClassSilently()
-	{
-		boolean expected;
-		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(LotteryBox.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
 
 	/**
 	 * Test method for creation of object {@link LotteryBox}
@@ -72,5 +56,15 @@ public class LotteryBoxTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(LotteryBox.class);
+	}
+
+	/**
+	 * Test method for {@link LotteryBox#equals(Object)} , {@link LotteryBox#hashCode()} and
+	 * {@link LotteryBox#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(LotteryBox.class).verify();
 	}
 }

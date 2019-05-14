@@ -1,12 +1,18 @@
 ## Change log
 ----------------------
 
-Version 5.4.2
+Version 5.5
 -------------
+
+ADDED:
+ 
+- new dependency of jobj-contract-verifier in version 3.2 added
 
 CHANGED:
 
-- update of parent version to 4.7
+- update of parent version to 5
+- update of dependency silly-collections version to 5.2.1
+- update of randomizer version to 6.0.1
 
 Version 5.4
 -------------

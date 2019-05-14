@@ -21,7 +21,6 @@
 package de.alpharogroup.lottery.evaluation;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ import java.util.Map;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.evaluate.object.evaluators.SilentEqualsHashCodeAndToStringEvaluator;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 import de.alpharogroup.lottery.enums.LotteryGameType;
 
 /**
@@ -39,21 +38,6 @@ import de.alpharogroup.lottery.enums.LotteryGameType;
  */
 public class EvaluatedLotteryNumbersTest
 {
-	/**
-	 * Test method for {@link EvaluatedLotteryNumbers#equals(Object)} ,
-	 * {@link EvaluatedLotteryNumbers#hashCode()} and {@link EvaluatedLotteryNumbers#toString()}
-	 */
-	@Test
-	public void testEqualsHashcodeAndToStringWithClassSilently()
-	{
-		boolean expected;
-		boolean actual;
-		actual = SilentEqualsHashCodeAndToStringEvaluator
-			.evaluateEqualsHashcodeAndToStringQuietly(EvaluatedLotteryNumbers.class);
-		expected = true;
-		assertEquals(expected, actual);
-	}
-
 	/**
 	 * Test method for creation of object {@link EvaluatedLotteryNumbers}
 	 */
@@ -91,6 +75,16 @@ public class EvaluatedLotteryNumbersTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(EvaluatedLotteryNumbers.class);
+	}
+
+	/**
+	 * Test method for {@link EvaluatedLotteryNumbers#equals(Object)} ,
+	 * {@link EvaluatedLotteryNumbers#hashCode()} and {@link EvaluatedLotteryNumbers#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(EvaluatedLotteryNumbers.class).verify();
 	}
 
 }
