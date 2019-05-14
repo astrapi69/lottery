@@ -36,16 +36,6 @@ public class EuroMillionsWinCategoryTest
 {
 
 	/**
-	 * Test method for {@link EuroMillionsWinCategory#equals(Object)} ,
-	 * {@link EuroMillionsWinCategory#hashCode()} and {@link EuroMillionsWinCategory#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(EuroMillionsWinCategory.class).verify();
-	}
-
-	/**
 	 * Test method for creation of object {@link EuroMillionsWinCategory}
 	 */
 	@Test
@@ -83,6 +73,16 @@ public class EuroMillionsWinCategoryTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(EuroMillionsWinCategory.class);
+	}
+
+	/**
+	 * Test method for {@link EuroMillionsWinCategory#equals(Object)} ,
+	 * {@link EuroMillionsWinCategory#hashCode()} and {@link EuroMillionsWinCategory#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(EuroMillionsWinCategory.class).verify();
 	}
 
 }

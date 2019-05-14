@@ -32,16 +32,6 @@ public class LotteryPlayedNumbersTest
 {
 
 	/**
-	 * Test method for {@link LotteryPlayedNumbers#equals(Object)} ,
-	 * {@link LotteryPlayedNumbers#hashCode()} and {@link LotteryPlayedNumbers#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(LotteryPlayedNumbers.class).verify();
-	}
-
-	/**
 	 * Test method for {@link LotteryPlayedNumbers}
 	 */
 	@Test
@@ -49,5 +39,15 @@ public class LotteryPlayedNumbersTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(LotteryPlayedNumbers.class);
+	}
+
+	/**
+	 * Test method for {@link LotteryPlayedNumbers#equals(Object)} ,
+	 * {@link LotteryPlayedNumbers#hashCode()} and {@link LotteryPlayedNumbers#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(LotteryPlayedNumbers.class).verify();
 	}
 }

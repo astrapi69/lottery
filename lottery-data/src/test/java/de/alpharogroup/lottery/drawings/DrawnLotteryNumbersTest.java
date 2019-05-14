@@ -37,16 +37,6 @@ public class DrawnLotteryNumbersTest
 {
 
 	/**
-	 * Test method for {@link DrawnLotteryNumbers#equals(Object)} ,
-	 * {@link DrawnLotteryNumbers#hashCode()} and {@link DrawnLotteryNumbers#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(DrawnLotteryNumbers.class).verify();
-	}
-
-	/**
 	 * Test method for creation of object {@link DrawnLotteryNumbers}
 	 */
 	@Test
@@ -78,6 +68,16 @@ public class DrawnLotteryNumbersTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(DrawnLotteryNumbers.class);
+	}
+
+	/**
+	 * Test method for {@link DrawnLotteryNumbers#equals(Object)} ,
+	 * {@link DrawnLotteryNumbers#hashCode()} and {@link DrawnLotteryNumbers#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(DrawnLotteryNumbers.class).verify();
 	}
 
 }

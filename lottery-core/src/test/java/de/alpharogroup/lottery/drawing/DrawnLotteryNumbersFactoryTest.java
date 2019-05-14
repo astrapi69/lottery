@@ -59,18 +59,6 @@ public class DrawnLotteryNumbersFactoryTest
 	}
 
 	/**
-	 * Test method for
-	 * {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers(int, int, int)}.
-	 */
-	@Test
-	public void testNewRandomDrawnLotteryNumbersMaxMinMaxVolume()
-	{
-		final DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
-				.newRandomDrawnLotteryNumbers(5, 1, 49);
-		assertNotNull(luckyNumbers);
-	}
-
-	/**
 	 * Test method for {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers(int, int)}.
 	 */
 	@Test
@@ -78,6 +66,18 @@ public class DrawnLotteryNumbersFactoryTest
 	{
 		final DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
 			.newRandomDrawnLotteryNumbers(5, 48);
+		assertNotNull(luckyNumbers);
+	}
+
+	/**
+	 * Test method for
+	 * {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers(int, int, int)}.
+	 */
+	@Test
+	public void testNewRandomDrawnLotteryNumbersMaxMinMaxVolume()
+	{
+		final DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
+			.newRandomDrawnLotteryNumbers(5, 1, 49);
 		assertNotNull(luckyNumbers);
 	}
 

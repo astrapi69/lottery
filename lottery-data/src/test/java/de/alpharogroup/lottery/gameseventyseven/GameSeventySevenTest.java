@@ -35,16 +35,6 @@ public class GameSeventySevenTest
 {
 
 	/**
-	 * Test method for {@link GameSeventySeven#equals(Object)} , {@link GameSeventySeven#hashCode()}
-	 * and {@link GameSeventySeven#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(GameSeventySeven.class).verify();
-	}
-
-	/**
 	 * Test method for creation of object {@link GameSeventySeven}
 	 */
 	@Test
@@ -70,6 +60,16 @@ public class GameSeventySevenTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(GameSeventySeven.class);
+	}
+
+	/**
+	 * Test method for {@link GameSeventySeven#equals(Object)} , {@link GameSeventySeven#hashCode()}
+	 * and {@link GameSeventySeven#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(GameSeventySeven.class).verify();
 	}
 
 }

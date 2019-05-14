@@ -279,7 +279,7 @@ public final class LotteryExtensions
 		}
 
 		// log.info("Elapsed time till you have won something: "
-		// 	+ calculateElapsedTimeInSeconds(startTime));
+		// + calculateElapsedTimeInSeconds(startTime));
 		// log.info("you have won after " + count + " drawings");
 		// log.info("you have won: " + evaluatedLotteryNumbers);
 		return count;

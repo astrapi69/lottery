@@ -39,16 +39,6 @@ public class LotteryTicketTest
 {
 
 	/**
-	 * Test method for {@link LotteryTicket#equals(Object)} , {@link LotteryTicket#hashCode()} and
-	 * {@link LotteryTicket#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(LotteryBox.class).verify();
-	}
-
-	/**
 	 * Test method for creation of object {@link LotteryTicket}
 	 */
 	@Test
@@ -83,6 +73,16 @@ public class LotteryTicketTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(LotteryTicket.class);
+	}
+
+	/**
+	 * Test method for {@link LotteryTicket#equals(Object)} , {@link LotteryTicket#hashCode()} and
+	 * {@link LotteryTicket#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(LotteryBox.class).verify();
 	}
 
 }

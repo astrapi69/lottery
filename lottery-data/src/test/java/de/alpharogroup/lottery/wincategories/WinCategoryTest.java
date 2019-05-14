@@ -34,16 +34,6 @@ public class WinCategoryTest
 {
 
 	/**
-	 * Test method for {@link WinCategory#equals(Object)} , {@link WinCategory#hashCode()} and
-	 * {@link WinCategory#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(WinCategory.class).verify();
-	}
-
-	/**
 	 * Test method for {@link WinCategory}
 	 */
 	@Test(expectedExceptions = { ObjectCreationException.class, BeanTestException.class,
@@ -52,6 +42,16 @@ public class WinCategoryTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(WinCategory.class);
+	}
+
+	/**
+	 * Test method for {@link WinCategory#equals(Object)} , {@link WinCategory#hashCode()} and
+	 * {@link WinCategory#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(WinCategory.class).verify();
 	}
 
 }

@@ -39,16 +39,6 @@ import de.alpharogroup.lottery.enums.LotteryGameType;
 public class EvaluatedLotteryNumbersTest
 {
 	/**
-	 * Test method for {@link EvaluatedLotteryNumbers#equals(Object)} ,
-	 * {@link EvaluatedLotteryNumbers#hashCode()} and {@link EvaluatedLotteryNumbers#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(EvaluatedLotteryNumbers.class).verify();
-	}
-
-	/**
 	 * Test method for creation of object {@link EvaluatedLotteryNumbers}
 	 */
 	@Test
@@ -85,6 +75,16 @@ public class EvaluatedLotteryNumbersTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(EvaluatedLotteryNumbers.class);
+	}
+
+	/**
+	 * Test method for {@link EvaluatedLotteryNumbers#equals(Object)} ,
+	 * {@link EvaluatedLotteryNumbers#hashCode()} and {@link EvaluatedLotteryNumbers#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(EvaluatedLotteryNumbers.class).verify();
 	}
 
 }

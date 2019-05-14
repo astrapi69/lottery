@@ -40,16 +40,6 @@ public class DrawnEuroMillionsNumbersTest
 {
 
 	/**
-	 * Test method for {@link DrawnEuroMillionsNumbers#equals(Object)} ,
-	 * {@link DrawnEuroMillionsNumbers#hashCode()} and {@link DrawnEuroMillionsNumbers#toString()}
-	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
-	{
-		ContractVerifier.of(DrawnEuroMillionsNumbers.class).verify();
-	}
-
-	/**
 	 * Test method for creation of object {@link DrawnEuroMillionsNumbers}
 	 */
 	@Test
@@ -78,6 +68,16 @@ public class DrawnEuroMillionsNumbersTest
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(DrawnEuroMillionsNumbers.class);
+	}
+
+	/**
+	 * Test method for {@link DrawnEuroMillionsNumbers#equals(Object)} ,
+	 * {@link DrawnEuroMillionsNumbers#hashCode()} and {@link DrawnEuroMillionsNumbers#toString()}
+	 */
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
+	{
+		ContractVerifier.of(DrawnEuroMillionsNumbers.class).verify();
 	}
 
 }
