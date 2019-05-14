@@ -20,13 +20,10 @@
  */
 package de.alpharogroup.lottery.played;
 
-import static org.testng.AssertJUnit.assertEquals;
-
-import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import de.alpharogroup.lottery.box.LotteryBox;
-import lombok.SneakyThrows;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
+
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link LotteryPlayedNumbers}.
@@ -39,15 +36,9 @@ public class LotteryPlayedNumbersTest
 	 * {@link LotteryPlayedNumbers#hashCode()} and {@link LotteryPlayedNumbers#toString()}
 	 */
 	@Test
-	@SneakyThrows
-	public void testEqualsHashcodeAndToStringWithClassSilently()
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-				.evaluateEqualsHashcodeAndToString(LotteryPlayedNumbers.class);
-		expected = true;
-		assertEquals(expected, actual);
+		ContractVerifier.of(LotteryPlayedNumbers.class).verify();
 	}
 
 	/**

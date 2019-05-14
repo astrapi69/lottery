@@ -20,14 +20,12 @@
  */
 package de.alpharogroup.lottery.wincategories;
 
-import static org.testng.AssertJUnit.assertEquals;
-
-import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import lombok.SneakyThrows;
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
+
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link WinCategory}.
@@ -40,16 +38,9 @@ public class WinCategoryTest
 	 * {@link WinCategory#toString()}
 	 */
 	@Test
-	@SneakyThrows
-	public void testEqualsHashcodeAndToStringWithClassSilently()
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-
-		actual = EqualsHashCodeAndToStringEvaluator
-				.evaluateEqualsHashcodeAndToString(WinCategory.class);
-		expected = true;
-		assertEquals(expected, actual);
+		ContractVerifier.of(WinCategory.class).verify();
 	}
 
 	/**

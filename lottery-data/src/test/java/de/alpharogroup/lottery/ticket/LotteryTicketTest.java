@@ -20,17 +20,15 @@
  */
 package de.alpharogroup.lottery.ticket;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.util.Set;
 
-import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import lombok.SneakyThrows;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.set.SetFactory;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 import de.alpharogroup.lottery.box.LotteryBox;
 import de.alpharogroup.lottery.gameseventyseven.GameSeventySeven;
 
@@ -45,16 +43,9 @@ public class LotteryTicketTest
 	 * {@link LotteryTicket#toString()}
 	 */
 	@Test
-	@SneakyThrows
-	public void testEqualsHashcodeAndToStringWithClassSilently()
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-
-		actual = EqualsHashCodeAndToStringEvaluator
-				.evaluateEqualsHashcodeAndToString(LotteryBox.class);
-		expected = true;
-		assertEquals(expected, actual);
+		ContractVerifier.of(LotteryBox.class).verify();
 	}
 
 	/**

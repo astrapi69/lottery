@@ -21,18 +21,16 @@
 package de.alpharogroup.lottery.evaluation;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import lombok.SneakyThrows;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 import de.alpharogroup.lottery.enums.LotteryGameType;
 
 /**
@@ -45,15 +43,9 @@ public class EvaluatedLotteryNumbersTest
 	 * {@link EvaluatedLotteryNumbers#hashCode()} and {@link EvaluatedLotteryNumbers#toString()}
 	 */
 	@Test
-	@SneakyThrows
-	public void testEqualsHashcodeAndToStringWithClassSilently()
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-		actual = EqualsHashCodeAndToStringEvaluator
-				.evaluateEqualsHashcodeAndToString(EvaluatedLotteryNumbers.class);
-		expected = true;
-		assertEquals(expected, actual);
+		ContractVerifier.of(EvaluatedLotteryNumbers.class).verify();
 	}
 
 	/**

@@ -20,15 +20,14 @@
  */
 package de.alpharogroup.lottery.wincategories;
 
-import de.alpharogroup.evaluate.object.evaluators.EqualsHashCodeAndToStringEvaluator;
-import lombok.SneakyThrows;
+import static org.testng.Assert.assertNotNull;
+
 import org.meanbean.factories.ObjectCreationException;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertNotNull;
-import static org.testng.AssertJUnit.assertEquals;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link EuroMillionsWinCategory}.
@@ -41,16 +40,9 @@ public class EuroMillionsWinCategoryTest
 	 * {@link EuroMillionsWinCategory#hashCode()} and {@link EuroMillionsWinCategory#toString()}
 	 */
 	@Test
-	@SneakyThrows
-	public void testEqualsHashcodeAndToStringWithClassSilently()
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		boolean expected;
-		boolean actual;
-
-		actual = EqualsHashCodeAndToStringEvaluator
-				.evaluateEqualsHashcodeAndToString(EuroMillionsWinCategory.class);
-		expected = true;
-		assertEquals(expected, actual);
+		ContractVerifier.of(EuroMillionsWinCategory.class).verify();
 	}
 
 	/**
