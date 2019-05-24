@@ -4,6 +4,13 @@
 Version 5.6-SNAPSHOT
 -------------
 
+Version 5.5.1
+-------------
+
+CHANGED:
+
+- changed jdk from oraclejdk8 to openjdk8 in .travis.yml
+
 Version 5.5
 -------------
 
