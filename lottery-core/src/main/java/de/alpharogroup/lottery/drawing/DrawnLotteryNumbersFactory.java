@@ -26,7 +26,7 @@ import java.util.Set;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.random.RandomExtensions;
-import de.alpharogroup.random.SecureRandomBean;
+import de.alpharogroup.random.SecureRandomFactory;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
@@ -46,14 +46,12 @@ public class DrawnLotteryNumbersFactory
 	 *            the volume of the numbers starts from 1 till volume
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
-	@SneakyThrows
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume)
 	{
 		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder()
 			.id(RandomExtensions.randomInt(Integer.MAX_VALUE))
 			.lotteryNumbers(SetFactory.newTreeSet()).build();
-		final SecureRandom sr = SecureRandomBean.builder()
-			.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build();
+		final SecureRandom sr = SecureRandomFactory.newSecureRandom();
 		int cnt = 0;
 
 		while (cnt < max)
