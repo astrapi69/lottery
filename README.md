@@ -63,7 +63,7 @@ You can first define the version properties:
 	<properties>
 			...
 		<!-- LOTTERY versions -->
-		<lottery.version>5.5</lottery.version>
+		<lottery.version>5.5.1</lottery.version>
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 			...
