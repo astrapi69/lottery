@@ -28,6 +28,7 @@ import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.lottery.drawing.DrawnLotteryNumbersFactory.LotteryAlgorithm;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 
 /**
@@ -78,6 +79,18 @@ public class DrawnLotteryNumbersFactoryTest
 	{
 		final DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
 			.newRandomDrawnLotteryNumbers(5, 1, 49);
+		assertNotNull(luckyNumbers);
+	}
+
+	/**
+	 * Test method for
+	 * {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers(int, int, int, LotteryAlgorithm)}
+	 */
+	@Test
+	public void testNewRandomDrawnLotteryNumbersMaxMinMaxVolumeAlgo()
+	{
+		final DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
+			.newRandomDrawnLotteryNumbers(5, 1, 49, LotteryAlgorithm.MAP);
 		assertNotNull(luckyNumbers);
 	}
 

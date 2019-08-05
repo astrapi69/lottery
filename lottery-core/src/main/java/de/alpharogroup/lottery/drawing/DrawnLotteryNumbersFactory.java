@@ -21,12 +21,20 @@
 package de.alpharogroup.lottery.drawing;
 
 import java.security.SecureRandom;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import de.alpharogroup.collections.list.ListFactory;
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.random.RandomExtensions;
 import de.alpharogroup.random.SecureRandomFactory;
+import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
@@ -36,6 +44,19 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class DrawnLotteryNumbersFactory
 {
+	enum LotteryAlgorithm
+	{
+
+		/** The default algorithm */
+		DEFAULT,
+
+		/** The set algorithm */
+		SET,
+
+		/** The map algorithm */
+		MAP;
+
+	}
 
 	/**
 	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers.
@@ -96,6 +117,66 @@ public class DrawnLotteryNumbersFactory
 			.superNumber(
 				DrawnLotteryNumbersExtensions.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
 			.superSixNumber(RandomExtensions.randomIntBetween(1, 10)).build();
+	}
+
+	/**
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers.
+	 *
+	 * @param max
+	 *            the max number to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @return the new {@link DrawnLotteryNumbers}
+	 */
+	@SneakyThrows
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
+		int maxVolume, @NonNull LotteryAlgorithm algorithm)
+	{
+		switch (algorithm)
+		{
+			case SET :
+				return newRandomDrawnLotteryNumbers(max, maxVolume);
+			case MAP :
+				Map<Integer, Integer> numberCount = MapFactory.newHashMap();
+				for (int i = minVolume; i <= maxVolume; i++)
+				{
+					numberCount.put(i, 0);
+				}
+				DrawnLotteryNumbers drawnLotteryNumbers = null;
+				for (int i = 0; i < 200; i++)
+				{
+					drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
+						minVolume, maxVolume);
+					drawnLotteryNumbers.getLotteryNumbers().stream()
+						.forEach(key -> numberCount.merge(key, 1, Integer::sum));
+				}
+				List<Entry<Integer, Integer>> sortByValue = sortByValue(numberCount);
+				List<Integer> newLotteryNumbers = ListFactory.newArrayList();
+				int count = 1;
+				for(Entry<Integer, Integer> entry : sortByValue) {
+					if(6 < count) {
+						break;
+					}
+					newLotteryNumbers.add(entry.getKey());
+					count++;
+				}
+				newLotteryNumbers.sort(Comparator.naturalOrder());
+				drawnLotteryNumbers.setLotteryNumbers(SetFactory.newLinkedHashSet(newLotteryNumbers));
+				return drawnLotteryNumbers;
+			case DEFAULT :
+			default :
+				return newRandomDrawnLotteryNumbersDefaultAlgorithm(max, maxVolume);
+		}
+	}
+
+	public static <K, V extends Comparable<? super V>> List<Entry<K, V>> sortByValue(Map<K, V> map)
+	{
+		List<Entry<K, V>> list = ListFactory.newArrayList(map.entrySet());
+		list.sort(Entry.comparingByValue());
+		Collections.reverse(list);
+		return list;
 	}
 
 	/**
