@@ -139,31 +139,9 @@ public class DrawnLotteryNumbersFactory
 			case SET :
 				return newRandomDrawnLotteryNumbers(max, maxVolume);
 			case MAP :
-				Map<Integer, Integer> numberCount = MapFactory.newHashMap();
-				for (int i = minVolume; i <= maxVolume; i++)
-				{
-					numberCount.put(i, 0);
-				}
-				DrawnLotteryNumbers drawnLotteryNumbers = null;
-				for (int i = 0; i < 200; i++)
-				{
-					drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
+				DrawnLotteryNumbers drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
 						minVolume, maxVolume);
-					drawnLotteryNumbers.getLotteryNumbers().stream()
-						.forEach(key -> numberCount.merge(key, 1, Integer::sum));
-				}
-				List<Entry<Integer, Integer>> sortByValue = sortByValue(numberCount);
-				List<Integer> newLotteryNumbers = ListFactory.newArrayList();
-				int count = 1;
-				for(Entry<Integer, Integer> entry : sortByValue) {
-					if(6 < count) {
-						break;
-					}
-					newLotteryNumbers.add(entry.getKey());
-					count++;
-				}
-				newLotteryNumbers.sort(Comparator.naturalOrder());
-				drawnLotteryNumbers.setLotteryNumbers(SetFactory.newLinkedHashSet(newLotteryNumbers));
+				drawnLotteryNumbers.setLotteryNumbers(DrawnLotteryNumbersExtensions.drawFromMultiMap(max, minVolume, maxVolume, 200));
 				return drawnLotteryNumbers;
 			case DEFAULT :
 			default :
