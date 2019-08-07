@@ -60,13 +60,31 @@ public final class DrawnLotteryNumbersExtensions
 		boolean breakout = false;
 		while (!breakout)
 		{
-			superNumber = 1 + Math.abs(sr.nextInt()) % volume;
+			superNumber = drawNumber(1, volume);
 			if (!alreadyDrawnNumbers.contains(superNumber))
 			{
 				breakout = true;
 			}
 		}
 		return superNumber;
+	}
+
+	/**
+	 * Draw of lottery number in between the range.
+	 *
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @return the sets the
+	 * @deprecated use instead the new method getRandomIntBetween from RandomExtensions
+	 */
+	@SneakyThrows
+	public static int drawNumber(int minVolume,
+								 int maxVolume)
+	{
+		return minVolume + Math.abs(SecureRandomBean.builder()
+				.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build().nextInt()) % maxVolume;
 	}
 
 	/**
@@ -121,7 +139,7 @@ public final class DrawnLotteryNumbersExtensions
 	{
 		Set<Integer> numbers = SetFactory.newTreeSet();
 		final SecureRandom sr = SecureRandomBean.builder()
-			.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build();
+				.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build();
 
 		int cnt = 0;
 
