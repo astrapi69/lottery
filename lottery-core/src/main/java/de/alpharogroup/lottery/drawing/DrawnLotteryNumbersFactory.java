@@ -22,14 +22,12 @@ package de.alpharogroup.lottery.drawing;
 
 import java.security.SecureRandom;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import de.alpharogroup.collections.list.ListFactory;
-import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.random.SecureRandomFactory;

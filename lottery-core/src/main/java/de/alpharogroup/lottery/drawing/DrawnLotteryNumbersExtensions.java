@@ -21,7 +21,11 @@
 package de.alpharogroup.lottery.drawing;
 
 import java.security.SecureRandom;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 
 import de.alpharogroup.collections.list.ListFactory;
@@ -29,9 +33,6 @@ import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.random.DefaultSecureRandom;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
-import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
-import de.alpharogroup.random.RandomExtensions;
-import de.alpharogroup.random.SecureRandomBean;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import lombok.extern.java.Log;
@@ -185,7 +186,6 @@ public final class DrawnLotteryNumbersExtensions
 		{
 			numberCount.put(i, 0);
 		}
-		DrawnLotteryNumbers drawnLotteryNumbers = null;
 		for (int i = 0; i < drawCount; i++)
 		{
 			Set<Integer> lotteryNumbers = DrawnLotteryNumbersExtensions.draw(maxNumbers, minVolume, maxVolume);
