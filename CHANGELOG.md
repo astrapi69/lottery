@@ -4,6 +4,10 @@
 Version 5.6-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of randomizer version to 6.3
+
 Version 5.5.1
 -------------
 
