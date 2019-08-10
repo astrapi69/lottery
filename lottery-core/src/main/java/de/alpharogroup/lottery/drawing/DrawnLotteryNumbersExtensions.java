@@ -21,15 +21,17 @@
 package de.alpharogroup.lottery.drawing;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 
 import de.alpharogroup.collections.list.ListFactory;
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.random.DefaultSecureRandom;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
+import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
+import de.alpharogroup.random.RandomExtensions;
+import de.alpharogroup.random.SecureRandomBean;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import lombok.extern.java.Log;
@@ -164,6 +166,53 @@ public final class DrawnLotteryNumbersExtensions
 			}
 		}
 		return numbers;
+	}
+	/**
+	 * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most times and return a new set.
+	 *
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @return the sets of the drawn numbers
+	 */
+	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume, int drawCount)
+	{
+		Map<Integer, Integer> numberCount = MapFactory.newHashMap();
+		for (int i = minVolume; i <= maxVolume; i++)
+		{
+			numberCount.put(i, 0);
+		}
+		DrawnLotteryNumbers drawnLotteryNumbers = null;
+		for (int i = 0; i < drawCount; i++)
+		{
+			Set<Integer> lotteryNumbers = DrawnLotteryNumbersExtensions.draw(maxNumbers, minVolume, maxVolume);
+
+			lotteryNumbers.stream()
+					.forEach(key -> numberCount.merge(key, 1, Integer::sum));
+		}
+		List<Map.Entry<Integer, Integer>> sortByValue = sortByValue(numberCount);
+		List<Integer> newLotteryNumbers = ListFactory.newArrayList();
+		int count = 1;
+		for(Map.Entry<Integer, Integer> entry : sortByValue) {
+			if(maxNumbers < count) {
+				break;
+			}
+			newLotteryNumbers.add(entry.getKey());
+			count++;
+		}
+		return SetFactory.newTreeSet(newLotteryNumbers);
+	}
+
+
+	public static <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> sortByValue(Map<K, V> map)
+	{
+		List<Map.Entry<K, V>> list = ListFactory.newArrayList(map.entrySet());
+		list.sort(Map.Entry.comparingByValue());
+		Collections.reverse(list);
+		return list;
 	}
 
 	/**
