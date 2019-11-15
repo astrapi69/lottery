@@ -241,14 +241,12 @@ public final class LotteryExtensions
 			log.info("winningNumbersCount have to be between 1 and 5");
 			return -1;
 		}
-		final long startTime = System.nanoTime();
 		int count = 0;
 		DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
 			.newRandomDrawnLotteryNumbers();
 		count++;
 		EvaluatedLotteryNumbers evaluatedLotteryNumbers = null;
 		boolean breakout = false;
-		// int i1 = 3;
 		while (!breakout)
 		{
 			evaluatedLotteryNumbers = LotteryExtensions.checkResult(luckyNumbers,
@@ -275,13 +273,8 @@ public final class LotteryExtensions
 			{
 				breakout = true;
 			}
-			// log.info("This is the " + count + " draw of the lottery queen: " + luckyNumbers);
 		}
 
-		// log.info("Elapsed time till you have won something: "
-		// + calculateElapsedTimeInSeconds(startTime));
-		// log.info("you have won after " + count + " drawings");
-		// log.info("you have won: " + evaluatedLotteryNumbers);
 		return count;
 	}
 

@@ -21,12 +21,19 @@
 package de.alpharogroup.lottery.drawing;
 
 import java.security.SecureRandom;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
+import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
-import de.alpharogroup.random.RandomExtensions;
-import de.alpharogroup.random.SecureRandomBean;
+import de.alpharogroup.lottery.enums.LotteryAlgorithm;
+import de.alpharogroup.random.SecureRandomFactory;
+import de.alpharogroup.random.number.RandomPrimitivesExtensions;
+import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
@@ -46,14 +53,12 @@ public class DrawnLotteryNumbersFactory
 	 *            the volume of the numbers starts from 1 till volume
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
-	@SneakyThrows
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume)
 	{
 		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder()
-			.id(RandomExtensions.randomInt(Integer.MAX_VALUE))
+			.id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
 			.lotteryNumbers(SetFactory.newTreeSet()).build();
-		final SecureRandom sr = SecureRandomBean.builder()
-			.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build();
+		final SecureRandom sr = SecureRandomFactory.newSecureRandom();
 		int cnt = 0;
 
 		while (cnt < max)
@@ -73,7 +78,7 @@ public class DrawnLotteryNumbersFactory
 				++cnt;
 			}
 		}
-		drawnLotteryNumbers.setSuperSixNumber(RandomExtensions.randomIntBetween(1, 10));
+		drawnLotteryNumbers.setSuperSixNumber(RandomPrimitivesExtensions.randomIntBetween(1, 10));
 		return drawnLotteryNumbers;
 	}
 
@@ -93,11 +98,54 @@ public class DrawnLotteryNumbersFactory
 		int maxVolume)
 	{
 		Set<Integer> drawnNumbers = DrawnLotteryNumbersExtensions.draw(max, minVolume, maxVolume);
-		return DrawnLotteryNumbers.builder().id(RandomExtensions.randomInt(Integer.MAX_VALUE))
+		return DrawnLotteryNumbers.builder()
+			.id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
 			.lotteryNumbers(drawnNumbers)
 			.superNumber(
 				DrawnLotteryNumbersExtensions.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
-			.superSixNumber(RandomExtensions.randomIntBetween(1, 10)).build();
+			.superSixNumber(RandomPrimitivesExtensions.randomIntBetween(1, 10)).build();
+	}
+
+	/**
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
+	 * with the given algorithm
+	 *
+	 * @param max
+	 *            the max number to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param algorithm
+	 *            the algorithm to use
+	 * @return the new {@link DrawnLotteryNumbers}
+	 */
+	@SneakyThrows
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
+		int maxVolume, @NonNull LotteryAlgorithm algorithm)
+	{
+		switch (algorithm)
+		{
+			case MAP :
+				DrawnLotteryNumbers drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
+					minVolume, maxVolume);
+				drawnLotteryNumbers.setLotteryNumbers(
+					DrawnLotteryNumbersExtensions.drawFromMultiMap(max, minVolume, maxVolume, 200));
+				return drawnLotteryNumbers;
+			case SET :
+				return newRandomDrawnLotteryNumbers(max, maxVolume);
+			case DEFAULT :
+			default :
+				return newRandomDrawnLotteryNumbersDefaultAlgorithm(max, maxVolume);
+		}
+	}
+
+	public static <K, V extends Comparable<? super V>> List<Entry<K, V>> sortByValue(Map<K, V> map)
+	{
+		List<Entry<K, V>> list = ListFactory.newArrayList(map.entrySet());
+		list.sort(Entry.comparingByValue());
+		Collections.reverse(list);
+		return list;
 	}
 
 	/**
@@ -113,9 +161,9 @@ public class DrawnLotteryNumbersFactory
 		int volume)
 	{
 		Set<Integer> lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
-		int id = RandomExtensions.randomInt(Integer.MAX_VALUE);
+		int id = RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE);
 		int superNumber = DrawnLotteryNumbersExtensions.drawSuperNumber(lotteryNumbers, volume);
-		int superSixNumber = RandomExtensions.randomIntBetween(1, 10);
+		int superSixNumber = RandomPrimitivesExtensions.randomIntBetween(1, 10);
 
 		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder().id(id)
 			.lotteryNumbers(lotteryNumbers).superNumber(superNumber).superSixNumber(superSixNumber)

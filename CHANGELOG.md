@@ -1,6 +1,16 @@
 ## Change log
 ----------------------
 
+Version 5.6
+-------------
+
+CHANGED:
+
+- update of parent version to 5.3
+- update of randomizer version to 6.3
+- update of silly-collections version to 5.4.1
+- extracted enum LotteryAlgorithm to own class file
+
 Version 5.5.1
 -------------
 

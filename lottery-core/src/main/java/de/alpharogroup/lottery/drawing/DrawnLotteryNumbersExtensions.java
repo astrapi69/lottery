@@ -23,13 +23,16 @@ package de.alpharogroup.lottery.drawing;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
 import de.alpharogroup.collections.list.ListFactory;
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.random.RandomExtensions;
-import de.alpharogroup.random.SecureRandomBean;
+import de.alpharogroup.random.DefaultSecureRandom;
+import de.alpharogroup.random.number.RandomPrimitivesExtensions;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import lombok.extern.java.Log;
@@ -54,13 +57,11 @@ public final class DrawnLotteryNumbersExtensions
 	@SneakyThrows
 	public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int volume)
 	{
-		final SecureRandom sr = SecureRandomBean.builder()
-			.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build();
 		int superNumber = -1;
 		boolean breakout = false;
 		while (!breakout)
 		{
-			superNumber = 1 + Math.abs(sr.nextInt()) % volume;
+			superNumber = RandomPrimitivesExtensions.getRandomIntBetween(1, volume);
 			if (!alreadyDrawnNumbers.contains(superNumber))
 			{
 				breakout = true;
@@ -88,7 +89,8 @@ public final class DrawnLotteryNumbersExtensions
 		boolean breakout = false;
 		while (!breakout)
 		{
-			superNumber = RandomExtensions.randomIntBetween(minVolume, maxVolume, true, true);
+			superNumber = RandomPrimitivesExtensions.randomIntBetween(minVolume, maxVolume, true,
+				true);
 			if (!alreadyDrawnNumbers.contains(superNumber))
 			{
 				breakout = true;
@@ -104,7 +106,7 @@ public final class DrawnLotteryNumbersExtensions
 	 */
 	public static int drawGameSeventySeven()
 	{
-		return RandomExtensions.randomIntBetween(0, 9999999, true, true);
+		return RandomPrimitivesExtensions.randomIntBetween(0, 9999999, true, true);
 	}
 
 	/**
@@ -120,14 +122,12 @@ public final class DrawnLotteryNumbersExtensions
 	public static Set<Integer> draw(int maxNumbers, int volume)
 	{
 		Set<Integer> numbers = SetFactory.newTreeSet();
-		final SecureRandom sr = SecureRandomBean.builder()
-			.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build();
 
 		int cnt = 0;
 
 		while (cnt < maxNumbers)
 		{
-			final int num = 1 + Math.abs(sr.nextInt()) % volume;
+			final int num = RandomPrimitivesExtensions.getRandomIntBetween(1, volume);
 
 			if (!numbers.contains(num))
 			{
@@ -157,7 +157,8 @@ public final class DrawnLotteryNumbersExtensions
 
 		while (cnt < maxNumbers)
 		{
-			final int num = RandomExtensions.randomIntBetween(minVolume, maxVolume, true, true);
+			final int num = RandomPrimitivesExtensions.randomIntBetween(minVolume, maxVolume, true,
+				true);
 
 			if (!numbers.contains(num))
 			{
@@ -166,6 +167,60 @@ public final class DrawnLotteryNumbersExtensions
 			}
 		}
 		return numbers;
+	}
+
+	/**
+	 * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
+	 * times and return a new set.
+	 *
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
+	 * @return the sets of the drawn numbers
+	 */
+	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+		int drawCount)
+	{
+		Map<Integer, Integer> numberCount = MapFactory.newHashMap();
+		for (int i = minVolume; i <= maxVolume; i++)
+		{
+			numberCount.put(i, 0);
+		}
+		for (int i = 0; i < drawCount; i++)
+		{
+			Set<Integer> lotteryNumbers = DrawnLotteryNumbersExtensions.draw(maxNumbers, minVolume,
+				maxVolume);
+
+			lotteryNumbers.stream().forEach(key -> numberCount.merge(key, 1, Integer::sum));
+		}
+		List<Map.Entry<Integer, Integer>> sortByValue = sortByValue(numberCount);
+		List<Integer> newLotteryNumbers = ListFactory.newArrayList();
+		int count = 1;
+		for (Map.Entry<Integer, Integer> entry : sortByValue)
+		{
+			if (maxNumbers < count)
+			{
+				break;
+			}
+			newLotteryNumbers.add(entry.getKey());
+			count++;
+		}
+		return SetFactory.newTreeSet(newLotteryNumbers);
+	}
+
+
+	public static <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> sortByValue(
+		Map<K, V> map)
+	{
+		List<Map.Entry<K, V>> list = ListFactory.newArrayList(map.entrySet());
+		list.sort(Map.Entry.comparingByValue());
+		Collections.reverse(list);
+		return list;
 	}
 
 	/**
@@ -186,14 +241,14 @@ public final class DrawnLotteryNumbersExtensions
 		ArrayList<Integer> rangeList = new ArrayList<>(
 			ListFactory.newRangeList(minVolume, maxVolume));
 
-		final SecureRandom sr = SecureRandomBean.builder()
-			.algorithm(SecureRandomBean.DEFAULT_ALGORITHM).build();
+		final SecureRandom sr = DefaultSecureRandom.get();
 		int cnt = 0;
 
 		while (cnt < maxNumbers)
 		{
 			Collections.shuffle(rangeList, sr);
-			final int index = RandomExtensions.randomIntBetween(0, rangeList.size(), true, false);
+			final int index = RandomPrimitivesExtensions.randomIntBetween(0, rangeList.size(), true,
+				false);
 			Integer drawnNumber = rangeList.get(index);
 			if (rangeList.remove(drawnNumber))
 			{
