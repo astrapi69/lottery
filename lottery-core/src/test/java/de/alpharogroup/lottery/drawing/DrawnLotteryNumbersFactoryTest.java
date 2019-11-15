@@ -28,7 +28,7 @@ import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.lottery.drawing.DrawnLotteryNumbersFactory.LotteryAlgorithm;
+import de.alpharogroup.lottery.drawing.LotteryAlgorithm;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 
 /**

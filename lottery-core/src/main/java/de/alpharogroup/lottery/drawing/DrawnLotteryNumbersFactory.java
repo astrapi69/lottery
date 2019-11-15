@@ -42,19 +42,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class DrawnLotteryNumbersFactory
 {
-	enum LotteryAlgorithm
-	{
-
-		/** The default algorithm */
-		DEFAULT,
-
-		/** The set algorithm */
-		SET,
-
-		/** The map algorithm */
-		MAP;
-
-	}
 
 	/**
 	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers.
@@ -134,13 +121,13 @@ public class DrawnLotteryNumbersFactory
 	{
 		switch (algorithm)
 		{
-			case SET :
-				return newRandomDrawnLotteryNumbers(max, maxVolume);
 			case MAP :
 				DrawnLotteryNumbers drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
 						minVolume, maxVolume);
 				drawnLotteryNumbers.setLotteryNumbers(DrawnLotteryNumbersExtensions.drawFromMultiMap(max, minVolume, maxVolume, 200));
 				return drawnLotteryNumbers;
+			case SET :
+				return newRandomDrawnLotteryNumbers(max, maxVolume);
 			case DEFAULT :
 			default :
 				return newRandomDrawnLotteryNumbersDefaultAlgorithm(max, maxVolume);
