@@ -168,8 +168,10 @@ public final class DrawnLotteryNumbersExtensions
 		}
 		return numbers;
 	}
+
 	/**
-	 * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most times and return a new set.
+	 * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
+	 * times and return a new set.
 	 *
 	 * @param maxNumbers
 	 *            the maximum of numbers to draw
@@ -179,7 +181,8 @@ public final class DrawnLotteryNumbersExtensions
 	 *            the max volume
 	 * @return the sets of the drawn numbers
 	 */
-	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume, int drawCount)
+	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+		int drawCount)
 	{
 		Map<Integer, Integer> numberCount = MapFactory.newHashMap();
 		for (int i = minVolume; i <= maxVolume; i++)
@@ -188,16 +191,18 @@ public final class DrawnLotteryNumbersExtensions
 		}
 		for (int i = 0; i < drawCount; i++)
 		{
-			Set<Integer> lotteryNumbers = DrawnLotteryNumbersExtensions.draw(maxNumbers, minVolume, maxVolume);
+			Set<Integer> lotteryNumbers = DrawnLotteryNumbersExtensions.draw(maxNumbers, minVolume,
+				maxVolume);
 
-			lotteryNumbers.stream()
-					.forEach(key -> numberCount.merge(key, 1, Integer::sum));
+			lotteryNumbers.stream().forEach(key -> numberCount.merge(key, 1, Integer::sum));
 		}
 		List<Map.Entry<Integer, Integer>> sortByValue = sortByValue(numberCount);
 		List<Integer> newLotteryNumbers = ListFactory.newArrayList();
 		int count = 1;
-		for(Map.Entry<Integer, Integer> entry : sortByValue) {
-			if(maxNumbers < count) {
+		for (Map.Entry<Integer, Integer> entry : sortByValue)
+		{
+			if (maxNumbers < count)
+			{
 				break;
 			}
 			newLotteryNumbers.add(entry.getKey());
@@ -207,7 +212,8 @@ public final class DrawnLotteryNumbersExtensions
 	}
 
 
-	public static <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> sortByValue(Map<K, V> map)
+	public static <K, V extends Comparable<? super V>> List<Map.Entry<K, V>> sortByValue(
+		Map<K, V> map)
 	{
 		List<Map.Entry<K, V>> list = ListFactory.newArrayList(map.entrySet());
 		list.sort(Map.Entry.comparingByValue());

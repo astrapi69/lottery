@@ -30,6 +30,7 @@ import java.util.Set;
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
+import de.alpharogroup.lottery.enums.LotteryAlgorithm;
 import de.alpharogroup.random.SecureRandomFactory;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
 import lombok.NonNull;
@@ -97,7 +98,8 @@ public class DrawnLotteryNumbersFactory
 		int maxVolume)
 	{
 		Set<Integer> drawnNumbers = DrawnLotteryNumbersExtensions.draw(max, minVolume, maxVolume);
-		return DrawnLotteryNumbers.builder().id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
+		return DrawnLotteryNumbers.builder()
+			.id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
 			.lotteryNumbers(drawnNumbers)
 			.superNumber(
 				DrawnLotteryNumbersExtensions.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
@@ -123,8 +125,9 @@ public class DrawnLotteryNumbersFactory
 		{
 			case MAP :
 				DrawnLotteryNumbers drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
-						minVolume, maxVolume);
-				drawnLotteryNumbers.setLotteryNumbers(DrawnLotteryNumbersExtensions.drawFromMultiMap(max, minVolume, maxVolume, 200));
+					minVolume, maxVolume);
+				drawnLotteryNumbers.setLotteryNumbers(
+					DrawnLotteryNumbersExtensions.drawFromMultiMap(max, minVolume, maxVolume, 200));
 				return drawnLotteryNumbers;
 			case SET :
 				return newRandomDrawnLotteryNumbers(max, maxVolume);

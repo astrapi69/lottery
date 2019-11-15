@@ -28,8 +28,8 @@ import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.lottery.drawing.LotteryAlgorithm;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
+import de.alpharogroup.lottery.enums.LotteryAlgorithm;
 
 /**
  * The class {@link DrawnLotteryNumbersFactory}.
