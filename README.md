@@ -96,6 +96,25 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 			</dependency>
 			...
 		</dependencies>
+	
+			
+## gradle dependency
+
+You can first define the version in the ext section and add than the following gradle dependency to your project `build.gradle` if you want to import the core functionality of lottery:
+
+```
+ext {
+			...
+    lotteryVersion = "5.6"
+			...
+}
+dependencies {
+			...
+compile "de.alpharogroup:lottery-core:${lotteryVersion}"
+compile "de.alpharogroup:lottery-data:${lotteryVersion}"
+			...
+}
+```
 
 ## Semantic Versioning
 
