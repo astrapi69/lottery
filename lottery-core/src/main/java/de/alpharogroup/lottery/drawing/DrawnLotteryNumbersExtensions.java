@@ -179,6 +179,8 @@ public final class DrawnLotteryNumbersExtensions
 	 *            the min volume
 	 * @param maxVolume
 	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
 	 * @return the sets of the drawn numbers
 	 */
 	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,

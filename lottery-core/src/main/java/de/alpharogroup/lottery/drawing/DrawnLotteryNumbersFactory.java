@@ -107,7 +107,8 @@ public class DrawnLotteryNumbersFactory
 	}
 
 	/**
-	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers.
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
+	 * with the given algorithm
 	 *
 	 * @param max
 	 *            the max number to draw
@@ -115,6 +116,8 @@ public class DrawnLotteryNumbersFactory
 	 *            the min volume
 	 * @param maxVolume
 	 *            the max volume
+	 * @param algorithm
+	 *            the algorithm to use
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
 	@SneakyThrows
