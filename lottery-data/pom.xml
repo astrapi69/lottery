@@ -4,7 +4,7 @@
   <parent>
     <groupId>de.alpharogroup</groupId>
     <artifactId>lottery</artifactId>
-    <version>5.6-SNAPSHOT</version>
+    <version>5.6</version>
   </parent>
   
   <artifactId>lottery-data</artifactId>  
