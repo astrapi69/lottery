@@ -1,6 +1,20 @@
 ## Change log
 ----------------------
 
+Version 5.7
+-------------
+
+ADDED:
+ 
+- new dependency of jobj-compare in version 3.2 added
+- new method created for drawing with a multimap
+- new method created for drawing in paranoid manner with a multimap 
+
+CHANGED:
+
+- update of randomizer version to 6.4
+- update of silly-collections version to 5.5.1
+
 Version 5.6
 -------------
 

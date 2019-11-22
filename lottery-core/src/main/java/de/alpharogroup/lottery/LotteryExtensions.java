@@ -65,7 +65,6 @@ public final class LotteryExtensions
 	public static EvaluatedLotteryNumbers checkResult(final DrawnLotteryNumbers drawnLotteryNumbers,
 		final LotteryPlayedNumbers lotteryPlayedNumbers)
 	{
-
 		final Set<Integer> drawnLuckyLotteryNumbers = drawnLotteryNumbers.getLotteryNumbers();
 		final Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers = lotteryPlayedNumbers
 			.getPlayedLotteryNumbers();
@@ -245,7 +244,7 @@ public final class LotteryExtensions
 		DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
 			.newRandomDrawnLotteryNumbers();
 		count++;
-		EvaluatedLotteryNumbers evaluatedLotteryNumbers = null;
+		EvaluatedLotteryNumbers evaluatedLotteryNumbers;
 		boolean breakout = false;
 		while (!breakout)
 		{

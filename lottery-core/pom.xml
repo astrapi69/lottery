@@ -4,7 +4,7 @@
   <parent>
     <groupId>de.alpharogroup</groupId>
     <artifactId>lottery</artifactId>
-    <version>5.6</version>
+    <version>5.7</version>
   </parent>
   
   <artifactId>lottery-core</artifactId>
@@ -15,6 +15,11 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>silly-collections</artifactId>
 		</dependency>
+	  <!-- JOBJ-COMPARE DEPENDENCY -->
+	  <dependency>
+		  <groupId>de.alpharogroup</groupId>
+		  <artifactId>jobj-compare</artifactId>
+	  </dependency>
   
 		<dependency>
 			<groupId>de.alpharogroup</groupId>

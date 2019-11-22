@@ -20,9 +20,11 @@
  */
 package de.alpharogroup.lottery.drawing;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
@@ -36,6 +38,22 @@ import de.alpharogroup.lottery.enums.LotteryAlgorithm;
  */
 public class DrawnLotteryNumbersFactoryTest
 {
+	/**
+	 * Test method for {@link DrawnLotteryNumbersFactory#newNumberCounterMap(int, int)}
+	 */
+	@Test
+	public void testNewNumberCounterMap()
+	{
+		int minVolume;
+		int maxVolume;
+		minVolume = 1;
+		maxVolume = 10;
+		Map<Integer, Integer> numberCounterMap = DrawnLotteryNumbersFactory
+			.newNumberCounterMap(minVolume, maxVolume);
+		assertNotNull(numberCounterMap);
+		assertEquals(numberCounterMap.size(), maxVolume);
+	}
+
 	/**
 	 * Test method for {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers()}.
 	 */
@@ -72,7 +90,7 @@ public class DrawnLotteryNumbersFactoryTest
 
 	/**
 	 * Test method for
-	 * {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers(int, int, int)}.
+	 * {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers(int, int, int)}
 	 */
 	@Test
 	public void testNewRandomDrawnLotteryNumbersMaxMinMaxVolume()
@@ -90,7 +108,7 @@ public class DrawnLotteryNumbersFactoryTest
 	public void testNewRandomDrawnLotteryNumbersMaxMinMaxVolumeAlgo()
 	{
 		final DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
-			.newRandomDrawnLotteryNumbers(5, 1, 49, LotteryAlgorithm.MAP);
+			.newRandomDrawnLotteryNumbers(6, 1, 49, LotteryAlgorithm.MAP);
 		assertNotNull(luckyNumbers);
 	}
 
