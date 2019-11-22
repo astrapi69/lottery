@@ -20,32 +20,27 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import java.security.SecureRandom;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import de.alpharogroup.collections.list.ListFactory;
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.lottery.enums.LotteryAlgorithm;
 import de.alpharogroup.random.SecureRandomFactory;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
 import lombok.NonNull;
-import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 
+import java.security.SecureRandom;
+import java.util.Map;
+import java.util.Set;
+
 /**
- * A factory for creating {@link DrawnLotteryNumbers} objects with generated lottery numbers.
+ * A factory for creating {@link DrawnLotteryNumbers} objects with generated lottery numbers
  */
-@UtilityClass
-public class DrawnLotteryNumbersFactory
+@UtilityClass public final class DrawnLotteryNumbersFactory
 {
 
 	/**
-	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers.
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
 	 *
 	 * @param max
 	 *            the max number to draw
@@ -55,8 +50,7 @@ public class DrawnLotteryNumbersFactory
 	 */
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume)
 	{
-		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder()
-			.id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
+		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder().id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
 			.lotteryNumbers(SetFactory.newTreeSet()).build();
 		final SecureRandom sr = SecureRandomFactory.newSecureRandom();
 		int cnt = 0;
@@ -83,7 +77,7 @@ public class DrawnLotteryNumbersFactory
 	}
 
 	/**
-	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers.
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
 	 *
 	 * @param max
 	 *            the max number to draw
@@ -93,16 +87,11 @@ public class DrawnLotteryNumbersFactory
 	 *            the max volume
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
-	@SneakyThrows
-	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
-		int maxVolume)
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume, int maxVolume)
 	{
 		Set<Integer> drawnNumbers = DrawnLotteryNumbersExtensions.draw(max, minVolume, maxVolume);
-		return DrawnLotteryNumbers.builder()
-			.id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
-			.lotteryNumbers(drawnNumbers)
-			.superNumber(
-				DrawnLotteryNumbersExtensions.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
+		return DrawnLotteryNumbers.builder().id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
+			.lotteryNumbers(drawnNumbers).superNumber(DrawnLotteryNumbersExtensions.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
 			.superSixNumber(RandomPrimitivesExtensions.randomIntBetween(1, 10)).build();
 	}
 
@@ -120,9 +109,24 @@ public class DrawnLotteryNumbersFactory
 	 *            the algorithm to use
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
-	@SneakyThrows
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume, int maxVolume, @NonNull LotteryAlgorithm algorithm)
+	{
+		return newRandomDrawnLotteryNumbers(max, minVolume, maxVolume, 200, algorithm);
+	}
+
+	/**
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
+	 * with the given algorithm
+	 *
+	 * @param max       the max number to draw
+	 * @param minVolume the min volume
+	 * @param maxVolume the max volume
+	 * @param drawCount the draw count defines how many times to draw numbers. Note: only with map algorithm
+	 * @param algorithm the algorithm to use
+	 * @return the new {@link DrawnLotteryNumbers}
+	 */
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
-		int maxVolume, @NonNull LotteryAlgorithm algorithm)
+		int maxVolume, int drawCount, @NonNull LotteryAlgorithm algorithm)
 	{
 		switch (algorithm)
 		{
@@ -130,7 +134,8 @@ public class DrawnLotteryNumbersFactory
 				DrawnLotteryNumbers drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
 					minVolume, maxVolume);
 				drawnLotteryNumbers.setLotteryNumbers(
-					DrawnLotteryNumbersExtensions.drawFromMultiMap(max, minVolume, maxVolume, 200));
+					DrawnLotteryNumbersExtensions.drawFromMultiMap(max, minVolume, maxVolume,
+						drawCount));
 				return drawnLotteryNumbers;
 			case SET :
 				return newRandomDrawnLotteryNumbers(max, maxVolume);
@@ -140,16 +145,8 @@ public class DrawnLotteryNumbersFactory
 		}
 	}
 
-	public static <K, V extends Comparable<? super V>> List<Entry<K, V>> sortByValue(Map<K, V> map)
-	{
-		List<Entry<K, V>> list = ListFactory.newArrayList(map.entrySet());
-		list.sort(Entry.comparingByValue());
-		Collections.reverse(list);
-		return list;
-	}
-
 	/**
-	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers.
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
 	 *
 	 * @param max
 	 *            the max number to draw
@@ -157,19 +154,14 @@ public class DrawnLotteryNumbersFactory
 	 *            the volume of the numbers starts from 1 till volume
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
-	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbersDefaultAlgorithm(int max,
-		int volume)
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbersDefaultAlgorithm(int max, int volume)
 	{
 		Set<Integer> lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
 		int id = RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE);
 		int superNumber = DrawnLotteryNumbersExtensions.drawSuperNumber(lotteryNumbers, volume);
 		int superSixNumber = RandomPrimitivesExtensions.randomIntBetween(1, 10);
-
-		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder().id(id)
-			.lotteryNumbers(lotteryNumbers).superNumber(superNumber).superSixNumber(superSixNumber)
+		return DrawnLotteryNumbers.builder().id(id).lotteryNumbers(lotteryNumbers).superNumber(superNumber).superSixNumber(superSixNumber)
 			.build();
-
-		return drawnLotteryNumbers;
 	}
 
 	/**
@@ -180,6 +172,25 @@ public class DrawnLotteryNumbersFactory
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers()
 	{
 		return newRandomDrawnLotteryNumbers(7, 49);
+	}
+
+	/**
+	 * Factory method for create a map for count drawn numbers
+	 *
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @return the new map with the initial values
+	 */
+	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume)
+	{
+		Map<Integer, Integer> numberCount = MapFactory.newHashMap();
+		for (int i = minVolume; i <= maxVolume; i++)
+		{
+			numberCount.put(i, 0);
+		}
+		return numberCount;
 	}
 
 }

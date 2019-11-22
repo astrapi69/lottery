@@ -15,6 +15,11 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>silly-collections</artifactId>
 		</dependency>
+	  <!-- JOBJ-COMPARE DEPENDENCY -->
+	  <dependency>
+		  <groupId>de.alpharogroup</groupId>
+		  <artifactId>jobj-compare</artifactId>
+	  </dependency>
   
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
