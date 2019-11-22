@@ -20,6 +20,10 @@
  */
 package de.alpharogroup.lottery.drawing;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
@@ -30,69 +34,11 @@ import org.testng.annotations.Test;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.math.MathExtensions;
 
-import static org.testng.Assert.*;
-
 /**
  * The class {@link DrawnLotteryNumbersExtensionsTest}.
  */
 public class DrawnLotteryNumbersExtensionsTest
 {
-
-	/**
-	 * Test method for {@link DrawnLotteryNumbersExtensions#drawParanoidFromMultiMap(int, int, int, int)}
-	 */
-	@Test
-	public void testDrawParanoidFromMultiMap(){
-		int actual;
-		int expected;
-		Set<Integer> lotteryNumbers;
-		int maxNumbers;
-		int minVolume;
-		int maxVolume;
-		int drawCount;
-
-		maxNumbers = 7;
-		minVolume = 1;
-		maxVolume = 70;
-		drawCount = 1000;
-		lotteryNumbers = DrawnLotteryNumbersExtensions
-			.drawParanoidFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount);
-		actual = lotteryNumbers.size();
-		expected = maxNumbers;
-		assertEquals(actual, expected);
-		for (Integer lotteryNumber : lotteryNumbers)
-		{
-			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
-		}
-	}
-
-	/**
-	 * Test method for {@link DrawnLotteryNumbersExtensions#drawFromMultiMap(int, int, int, int)}
-	 */
-	@Test
-	public void testDrawFromMultiMap(){
-		int actual;
-		int expected;
-		Set<Integer> lotteryNumbers;
-		int maxNumbers;
-		int minVolume;
-		int maxVolume;
-		int drawCount;
-
-		maxNumbers = 7;
-		minVolume = 1;
-		maxVolume = 70;
-		drawCount = 10000;
-		lotteryNumbers = DrawnLotteryNumbersExtensions
-			.drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount);
-		actual = lotteryNumbers.size();
-		expected = maxNumbers;
-		assertEquals(actual, expected);
-		for (Integer lotteryNumber : lotteryNumbers)
-		{
-			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
-		}
-	}
 
 	/**
 	 * Test method for {@link DrawnLotteryNumbersExtensions#drawDefaultAlgorithm(int, int, int)}.
@@ -117,6 +63,35 @@ public class DrawnLotteryNumbersExtensionsTest
 			maxVolume);
 		actual = lotteryNumbers.size();
 		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
+
+	/**
+	 * Test method for {@link DrawnLotteryNumbersExtensions#drawFromMultiMap(int, int, int, int)}
+	 */
+	@Test
+	public void testDrawFromMultiMap()
+	{
+		int actual;
+		int expected;
+		Set<Integer> lotteryNumbers;
+		int maxNumbers;
+		int minVolume;
+		int maxVolume;
+		int drawCount;
+
+		maxNumbers = 7;
+		minVolume = 1;
+		maxVolume = 70;
+		drawCount = 10000;
+		lotteryNumbers = DrawnLotteryNumbersExtensions.drawFromMultiMap(maxNumbers, minVolume,
+			maxVolume, drawCount);
+		actual = lotteryNumbers.size();
+		expected = maxNumbers;
 		assertEquals(actual, expected);
 		for (Integer lotteryNumber : lotteryNumbers)
 		{
@@ -351,6 +326,36 @@ public class DrawnLotteryNumbersExtensionsTest
 		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, minVolume, maxVolume);
 		actual = lotteryNumbers.size();
 		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
+
+	/**
+	 * Test method for
+	 * {@link DrawnLotteryNumbersExtensions#drawParanoidFromMultiMap(int, int, int, int)}
+	 */
+	@Test
+	public void testDrawParanoidFromMultiMap()
+	{
+		int actual;
+		int expected;
+		Set<Integer> lotteryNumbers;
+		int maxNumbers;
+		int minVolume;
+		int maxVolume;
+		int drawCount;
+
+		maxNumbers = 7;
+		minVolume = 1;
+		maxVolume = 70;
+		drawCount = 1000;
+		lotteryNumbers = DrawnLotteryNumbersExtensions.drawParanoidFromMultiMap(maxNumbers,
+			minVolume, maxVolume, drawCount);
+		actual = lotteryNumbers.size();
+		expected = maxNumbers;
 		assertEquals(actual, expected);
 		for (Integer lotteryNumber : lotteryNumbers)
 		{

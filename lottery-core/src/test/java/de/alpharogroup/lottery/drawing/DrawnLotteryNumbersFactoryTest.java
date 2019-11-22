@@ -20,23 +20,40 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
-import de.alpharogroup.lottery.enums.LotteryAlgorithm;
-import org.meanbean.test.BeanTestException;
-import org.meanbean.test.BeanTester;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
+import org.testng.annotations.Test;
+
+import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
+import de.alpharogroup.lottery.enums.LotteryAlgorithm;
 
 /**
  * The class {@link DrawnLotteryNumbersFactory}.
  */
 public class DrawnLotteryNumbersFactoryTest
 {
+	/**
+	 * Test method for {@link DrawnLotteryNumbersFactory#newNumberCounterMap(int, int)}
+	 */
+	@Test
+	public void testNewNumberCounterMap()
+	{
+		int minVolume;
+		int maxVolume;
+		minVolume = 1;
+		maxVolume = 10;
+		Map<Integer, Integer> numberCounterMap = DrawnLotteryNumbersFactory
+			.newNumberCounterMap(minVolume, maxVolume);
+		assertNotNull(numberCounterMap);
+		assertEquals(numberCounterMap.size(), maxVolume);
+	}
+
 	/**
 	 * Test method for {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers()}.
 	 */
@@ -81,23 +98,6 @@ public class DrawnLotteryNumbersFactoryTest
 		final DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
 			.newRandomDrawnLotteryNumbers(5, 1, 49);
 		assertNotNull(luckyNumbers);
-	}
-
-	/**
-	 * Test method for
-	 * {@link DrawnLotteryNumbersFactory#newNumberCounterMap(int, int)}
-	 */
-	@Test
-	public void testNewNumberCounterMap()
-	{
-		int minVolume;
-		int maxVolume;
-		minVolume = 1;
-		maxVolume = 10;
-		Map<Integer, Integer> numberCounterMap = DrawnLotteryNumbersFactory
-			.newNumberCounterMap(minVolume, maxVolume);
-		assertNotNull(numberCounterMap);
-		assertEquals(numberCounterMap.size(), maxVolume);
 	}
 
 	/**

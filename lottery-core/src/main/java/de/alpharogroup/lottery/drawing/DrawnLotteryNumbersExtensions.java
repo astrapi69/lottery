@@ -20,6 +20,15 @@
  */
 package de.alpharogroup.lottery.drawing;
 
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapExtensions;
 import de.alpharogroup.collections.set.SetFactory;
@@ -28,14 +37,12 @@ import de.alpharogroup.random.DefaultSecureRandom;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
 import lombok.experimental.UtilityClass;
 
-import java.security.SecureRandom;
-import java.util.*;
-import java.util.stream.Collectors;
-
 /**
- * The class {@link DrawnLotteryNumbersExtensions} provides utility methods to draw lottery numbers with different algorithms
+ * The class {@link DrawnLotteryNumbersExtensions} provides utility methods to draw lottery numbers
+ * with different algorithms
  */
-@UtilityClass public final class DrawnLotteryNumbersExtensions
+@UtilityClass
+public final class DrawnLotteryNumbersExtensions
 {
 
 	/**
@@ -80,8 +87,8 @@ import java.util.stream.Collectors;
 		boolean breakout = false;
 		while (!breakout)
 		{
-			superNumber = RandomPrimitivesExtensions
-				.randomIntBetween(minVolume, maxVolume, true, true);
+			superNumber = RandomPrimitivesExtensions.randomIntBetween(minVolume, maxVolume, true,
+				true);
 			if (!alreadyDrawnNumbers.contains(superNumber))
 			{
 				breakout = true;
@@ -147,8 +154,8 @@ import java.util.stream.Collectors;
 
 		while (cnt < maxNumbers)
 		{
-			final int num = RandomPrimitivesExtensions
-				.randomIntBetween(minVolume, maxVolume, true, true);
+			final int num = RandomPrimitivesExtensions.randomIntBetween(minVolume, maxVolume, true,
+				true);
 
 			if (!numbers.contains(num))
 			{
@@ -180,13 +187,17 @@ import java.util.stream.Collectors;
 	}
 
 	/**
-	 * Draw of paranoid lottery numbers from given drawCount and take the numbers that are drawn the most
-	 * times and return a new set.
+	 * Draw of paranoid lottery numbers from given drawCount and take the numbers that are drawn the
+	 * most times and return a new set.
 	 *
-	 * @param maxNumbers the maximum of numbers to draw
-	 * @param minVolume  the min volume
-	 * @param maxVolume  the max volume
-	 * @param drawCount  the draw count defines how many times to draw numbers
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
 	 * @return the sets of the drawn numbers
 	 */
 	public static Set<Integer> drawParanoidFromMultiMap(int maxNumbers, int minVolume,
@@ -200,32 +211,44 @@ import java.util.stream.Collectors;
 	 * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
 	 * times and return a new set.
 	 *
-	 * @param maxNumbers the maximum of numbers to draw
-	 * @param minVolume  the min volume
-	 * @param maxVolume  the max volume
-	 * @param drawCount  the draw count defines how many times to draw numbers
-	 * @param mostDrawn  the flag that indicates if the most drawn numbers should be taken if true,
-	 *                   otherwise the reverse order will be taken
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
+	 * @param mostDrawn
+	 *            the flag that indicates if the most drawn numbers should be taken if true,
+	 *            otherwise the reverse order will be taken
 	 * @return the sets of the drawn numbers
 	 */
 	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
 		int drawCount, boolean mostDrawn)
 	{
-		return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount,
-			mostDrawn, false);
+		return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, false);
 	}
 
 	/**
 	 * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
 	 * times and return a new set.
 	 *
-	 * @param maxNumbers the maximum of numbers to draw
-	 * @param minVolume  the min volume
-	 * @param maxVolume  the max volume
-	 * @param drawCount  the draw count defines how many times to draw numbers
-	 * @param mostDrawn  the comparator that defines in which order to take the drawn numbers.
-	 *                   For instance if you want to have the reverse order you can simply give
-	 *                   the <code>Comparator.reverseOrder()</code> or you can define your custom order
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
+	 * @param mostDrawn
+	 *            the flag that indicates if the most drawn numbers should be taken if true,
+	 *            otherwise the reverse order will be taken
+	 * @param paranoid
+	 *            the flag paranoid indicates to create a custom comparator from the counter map and
+	 *            define a random defined order to draw if true, otherwise the flag mostDrawn will
+	 *            define the order to draw
 	 * @return the sets of the drawn numbers
 	 */
 	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
@@ -239,18 +262,34 @@ import java.util.stream.Collectors;
 				.forEach(key -> numberCounterMap.merge(key, 1, Integer::sum));
 		}
 		Comparator<Integer> mostDrawnComparator;
-		if(paranoid){
+		if (paranoid)
+		{
 			List<Integer> numberCounterValues = ListFactory
 				.newArrayList(SetFactory.newTreeSet(numberCounterMap.values()));
 			Collections.shuffle(numberCounterValues, DefaultSecureRandom.get());
-			mostDrawnComparator = ComparatorFactory
-				.newComparator(numberCounterValues);
-		} else {
+			mostDrawnComparator = ComparatorFactory.newComparator(numberCounterValues);
+		}
+		else
+		{
 			mostDrawnComparator = mostDrawn ? Comparator.reverseOrder() : Comparator.naturalOrder();
 		}
 		return resolveLotteryNumbers(maxNumbers, mostDrawnComparator, numberCounterMap);
 	}
 
+	/**
+	 * Resolves the lottery numbers from the given number counter map in the order from the given
+	 * comparator limited to maxNumbers
+	 *
+	 * @param maxNumbers
+	 *            the max numbers
+	 * @param mostDrawn
+	 *            the comparator that defines in which order to take the drawn numbers. For instance
+	 *            if you want to have the reverse order you can simply give the
+	 *            <code>Comparator.reverseOrder()</code> or you can define your custom order
+	 * @param numberCounterMap
+	 *            the number counter map
+	 * @return the sets of the lottery numbers
+	 */
 	public static Set<Integer> resolveLotteryNumbers(int maxNumbers, Comparator<Integer> mostDrawn,
 		Map<Integer, Integer> numberCounterMap)
 	{
@@ -276,7 +315,8 @@ import java.util.stream.Collectors;
 	public static Set<Integer> drawDefaultAlgorithm(int maxNumbers, int minVolume, int maxVolume)
 	{
 		Set<Integer> numbers = SetFactory.newTreeSet();
-		ArrayList<Integer> rangeList = new ArrayList<>(ListFactory.newRangeList(minVolume, maxVolume));
+		ArrayList<Integer> rangeList = new ArrayList<>(
+			ListFactory.newRangeList(minVolume, maxVolume));
 
 		final SecureRandom sr = DefaultSecureRandom.get();
 		int cnt = 0;
@@ -284,8 +324,8 @@ import java.util.stream.Collectors;
 		while (cnt < maxNumbers)
 		{
 			Collections.shuffle(rangeList, sr);
-			final int index = RandomPrimitivesExtensions
-				.randomIntBetween(0, rangeList.size(), true, false);
+			final int index = RandomPrimitivesExtensions.randomIntBetween(0, rangeList.size(), true,
+				false);
 			Integer drawnNumber = rangeList.get(index);
 			if (!numbers.contains(drawnNumber))
 			{
