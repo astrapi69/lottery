@@ -24,6 +24,7 @@ import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Set;
 
+import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
@@ -198,12 +199,7 @@ public final class DrawnLotteryNumbersFactory
 	 */
 	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume)
 	{
-		Map<Integer, Integer> numberCount = MapFactory.newHashMap();
-		for (int i = minVolume; i <= maxVolume; i++)
-		{
-			numberCount.put(i, 0);
-		}
-		return numberCount;
+		return MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume));
 	}
 
 }

@@ -29,7 +29,7 @@
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 		<!-- NEW EXTENSIONS LIB versions -->
-		<silly-collections.version>5.5.1</silly-collections.version>
+		<silly-collections.version>5.6</silly-collections.version>
 		<!-- JOBJ-COMPARE version -->
 		<jobj-compare.version>3.2</jobj-compare.version>
 		<!-- JOBJ-CONTRACT-VERIFIER version -->

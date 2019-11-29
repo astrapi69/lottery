@@ -4,6 +4,10 @@
 Version 5.8-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of dependency silly-collections version to 5.6
+
 Version 5.7
 -------------
 
