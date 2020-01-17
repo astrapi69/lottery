@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>mvn-java-parent</artifactId>
-		<version>5.3</version>
+		<version>5.4</version>
 	</parent>
 
 	<artifactId>lottery</artifactId>
@@ -13,7 +13,7 @@
 	<inceptionYear>2015</inceptionYear>
 	<!-- NOTE: on version change DO NOT FORGET to change ${lottery.version} 
 		in the properties section ON SAME VERSION. -->
-	<version>5.7</version>
+	<version>5.8</version>
 
 	<name>${project.artifactId}</name>
 
@@ -25,17 +25,18 @@
 
 	<properties>
 		<!-- LOTTERY versions -->
-		<lottery.version>5.7</lottery.version>
+		<lottery.version>5.8</lottery.version>
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 		<!-- NEW EXTENSIONS LIB versions -->
-		<silly-collections.version>5.5.1</silly-collections.version>
+		<silly-collections.version>5.8</silly-collections.version>
+		<silly-beans.version>1</silly-beans.version>
 		<!-- JOBJ-COMPARE version -->
 		<jobj-compare.version>3.2</jobj-compare.version>
 		<!-- JOBJ-CONTRACT-VERIFIER version -->
 		<jobj-contract-verifier.version>3.2</jobj-contract-verifier.version>
 		<!-- RANDOMIZER versions -->
-		<randomizer.version>6.4</randomizer.version>
+		<randomizer.version>6.5</randomizer.version>
 		<randomizer-core.version>${randomizer.version}</randomizer-core.version>
 		<!-- MEANBEAN version -->
 		<meanbean.version>2.0.3</meanbean.version>
@@ -90,6 +91,12 @@
 				<groupId>de.alpharogroup</groupId>
 				<artifactId>silly-collections</artifactId>
 				<version>${silly-collections.version}</version>
+			</dependency>
+			<!-- SILLY-BEANS DEPENDENCY -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>silly-beans</artifactId>
+				<version>${silly-beans.version}</version>
 			</dependency>
 			<!-- JOBJ-COMPARE DEPENDENCY -->
 			<dependency>

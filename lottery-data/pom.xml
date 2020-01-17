@@ -1,34 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <parent>
-    <groupId>de.alpharogroup</groupId>
-    <artifactId>lottery</artifactId>
-    <version>5.7</version>
-  </parent>
-  
-  <artifactId>lottery-data</artifactId>  
-   
-  <dependencies>
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.alpharogroup</groupId>
+		<artifactId>lottery</artifactId>
+		<version>5.8</version>
+	</parent>
+
+	<artifactId>lottery-data</artifactId>
+
+	<dependencies>
+
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>silly-collections</artifactId>
 		</dependency>
-  
+		<!-- SILLY-BEANS DEPENDENCY -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>silly-beans</artifactId>
+		</dependency>
 		<!-- MEANBEAN DEPENDENCY -->
 		<dependency>
 			<groupId>org.meanbean</groupId>
 			<artifactId>meanbean</artifactId>
 			<scope>test</scope>
 		</dependency>
-	  <!-- JOBJ-CONTRACT-VERIFIER DEPENDENCY -->
-	  <dependency>
-		  <groupId>de.alpharogroup</groupId>
-		  <artifactId>jobj-contract-verifier</artifactId>
-		  <scope>test</scope>
-	  </dependency>
-  
-  </dependencies>
-  
+		<!-- JOBJ-CONTRACT-VERIFIER DEPENDENCY -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>jobj-contract-verifier</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
 </project>
