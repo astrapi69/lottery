@@ -1,7 +1,7 @@
 ## Change log
 ----------------------
 
-Version 5.8-SNAPSHOT
+Version 5.8
 -------------
 
 ADDED:
@@ -13,6 +13,7 @@ CHANGED:
 - update of parent version to 5.4
 - update of dependency silly-collections version to 5.8
 - update of dependency randomizer version to 6.5
+- moved class-diagramm to test resources
 
 Version 5.7
 -------------
