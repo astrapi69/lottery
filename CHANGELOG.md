@@ -4,9 +4,15 @@
 Version 5.8-SNAPSHOT
 -------------
 
+ADDED:
+ 
+- new dependency of silly-beans in version 1 added
+
 CHANGED:
 
-- update of dependency silly-collections version to 5.6
+- update of parent version to 5.4
+- update of dependency silly-collections version to 5.8
+- update of dependency randomizer version to 6.5
 
 Version 5.7
 -------------
