@@ -256,6 +256,14 @@ public final class DrawnLotteryNumbersExtensions
 	{
 		Map<Integer, Integer> numberCounterMap = DrawnLotteryNumbersFactory
 			.newNumberCounterMap(minVolume, maxVolume);
+		Comparator<Integer> mostDrawnComparator = drawFromMultiMap(maxNumbers, minVolume, maxVolume,
+			drawCount, mostDrawn, paranoid, numberCounterMap);
+		return resolveLotteryNumbers(maxNumbers, mostDrawnComparator, numberCounterMap);
+	}
+
+	public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+		int drawCount, boolean mostDrawn, boolean paranoid, Map<Integer, Integer> numberCounterMap)
+	{
 		for (int i = 0; i < drawCount; i++)
 		{
 			DrawnLotteryNumbersExtensions.draw(maxNumbers, minVolume, maxVolume)
@@ -273,7 +281,7 @@ public final class DrawnLotteryNumbersExtensions
 		{
 			mostDrawnComparator = mostDrawn ? Comparator.reverseOrder() : Comparator.naturalOrder();
 		}
-		return resolveLotteryNumbers(maxNumbers, mostDrawnComparator, numberCounterMap);
+		return mostDrawnComparator;
 	}
 
 	/**

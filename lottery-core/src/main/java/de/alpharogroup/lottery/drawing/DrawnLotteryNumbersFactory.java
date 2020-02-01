@@ -21,9 +21,14 @@
 package de.alpharogroup.lottery.drawing;
 
 import java.security.SecureRandom;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import de.alpharogroup.check.Argument;
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
@@ -199,7 +204,43 @@ public final class DrawnLotteryNumbersFactory
 	 */
 	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume)
 	{
-		return MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume));
+		List<Integer> integerList = ListFactory.newRangeList(minVolume, maxVolume);
+		Map<Integer, Integer> numberCounterMap =
+		 MapFactory.newCounterMap(integerList);
+		return numberCounterMap;
+	}
+
+	/**
+	 * Factory method for create a map for count drawn numbers
+	 *
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param numberCounterMap
+	 *            the Map that will be summarized
+	 * @return the new map with the initial values
+	 */
+	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume, Map<Integer, Integer> numberCounterMap)
+	{
+		Argument.notNull(numberCounterMap, "numberCounterMap");
+		Map<Integer, Integer> initialNumberCounterMap =
+			MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume));
+		return mergeAndSummarize(initialNumberCounterMap, numberCounterMap);
+	}
+
+	public static <K> Map<K, Integer> mergeAndSummarize(Map<K, Integer> valueCounterMap, Map<K, Integer> summarizeWithThisValueCounterMap){
+		Map<K, Integer> mergedMap = Stream.of(valueCounterMap, summarizeWithThisValueCounterMap)
+			.map(Map::entrySet)
+			.flatMap(Collection::stream)
+			.collect(
+				Collectors.toMap(
+					Map.Entry::getKey,
+					Map.Entry::getValue,
+					Integer::sum
+				)
+			);
+		return mergedMap;
 	}
 
 }
