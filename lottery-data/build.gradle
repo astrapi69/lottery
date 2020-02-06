@@ -1,0 +1,7 @@
+
+dependencies {
+    compile "de.alpharogroup:silly-collections:$sillyCollectionsVersion"
+    compile "de.alpharogroup:silly-beans:$sillyBeansVersion"
+    testCompile "org.meanbean:meanbean:$meanbeanVersion"
+    testImplementation("de.alpharogroup:jobj-contract-verifier:$jobjContractVerifierVersion")
+}

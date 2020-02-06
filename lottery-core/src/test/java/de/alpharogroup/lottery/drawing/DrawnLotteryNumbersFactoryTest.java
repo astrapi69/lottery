@@ -26,6 +26,7 @@ import static org.testng.Assert.assertNotNull;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+import de.alpharogroup.collections.map.MapExtensions;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
@@ -62,7 +63,7 @@ public class DrawnLotteryNumbersFactoryTest
 		for (int i = minVolume; i <= maxVolume; i++){
 			initialNumberCounterMap.merge(i, RandomPrimitivesExtensions.getRandomIntBetween(1, 4), Integer::sum);
 		}
-		Map<Integer, Integer> mergedMap = DrawnLotteryNumbersFactory
+		Map<Integer, Integer> mergedMap = MapExtensions
 			.mergeAndSummarize(initialNumberCounterMap, numberCounterMap);
 		for (int i = minVolume; i <= maxVolume; i++){
 			int actual = mergedMap.get(i);

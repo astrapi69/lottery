@@ -30,6 +30,7 @@ import java.util.stream.Stream;
 
 import de.alpharogroup.check.Argument;
 import de.alpharogroup.collections.list.ListFactory;
+import de.alpharogroup.collections.map.MapExtensions;
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
@@ -224,23 +225,9 @@ public final class DrawnLotteryNumbersFactory
 	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume, Map<Integer, Integer> numberCounterMap)
 	{
 		Argument.notNull(numberCounterMap, "numberCounterMap");
-		Map<Integer, Integer> initialNumberCounterMap =
-			MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume));
-		return mergeAndSummarize(initialNumberCounterMap, numberCounterMap);
-	}
-
-	public static <K> Map<K, Integer> mergeAndSummarize(Map<K, Integer> valueCounterMap, Map<K, Integer> summarizeWithThisValueCounterMap){
-		Map<K, Integer> mergedMap = Stream.of(valueCounterMap, summarizeWithThisValueCounterMap)
-			.map(Map::entrySet)
-			.flatMap(Collection::stream)
-			.collect(
-				Collectors.toMap(
-					Map.Entry::getKey,
-					Map.Entry::getValue,
-					Integer::sum
-				)
-			);
-		return mergedMap;
+		return MapExtensions.mergeAndSummarize(
+			MapFactory.newCounterMap(
+				ListFactory.newRangeList(minVolume, maxVolume)), numberCounterMap);
 	}
 
 }

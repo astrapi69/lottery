@@ -1,0 +1,68 @@
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.27.0"
+        classpath "gradle.plugin.com.hierynomus.gradle.plugins:license-gradle-plugin:0.15.0"
+    }
+}
+
+allprojects {
+    group = "de.alpharogroup"
+    version = "5.9-SNAPSHOT"
+}
+
+subprojects {
+    apply plugin: "signing"
+    apply plugin: "java"
+    apply plugin: "jacoco"
+    apply plugin: "maven-publish"
+    apply plugin: "com.github.ben-manes.versions"
+    apply plugin: "com.github.hierynomus.license"
+
+    repositories {
+        mavenLocal()
+        maven {
+            url = "http://repo.maven.apache.org/maven2"
+        }
+    }
+
+    dependencies {
+        compileOnly("org.projectlombok:lombok:$lombokVersion")
+        annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+        testCompile("org.testng:testng:$testngVersion")
+        testCompile("junit:junit:$junitVersion")
+        testCompile("org.mockito:mockito-core:$mockitoCoreVersion")
+    }
+
+    sourceCompatibility = "1.8"
+
+    task sourcesJar(type: Jar) {
+        classifier = "sources"
+        from(sourceSets.main.allJava)
+    }
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                from(components.java)
+                artifact(sourcesJar)
+            }
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    test {
+        useTestNG()
+    }
+}
