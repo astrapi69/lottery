@@ -12,19 +12,22 @@ CHANGED:
 
 - removed maven related files
 - changed project nature from maven to gradle nature
+- update of dependency silly-collections major version to 8
+- update of dependency randomizer version to 6.6
+- update of dependency silly-beans in minor version 1.1 added
 
 Version 5.8
 -------------
 
 ADDED:
  
-- new dependency of silly-beans in minor version 1.1 added
+- new dependency of silly-beans in minor version 1 added
 
 CHANGED:
 
 - update of parent version to 5.4
-- update of dependency silly-collections major version to 8
-- update of dependency randomizer version to 6.6
+- update of dependency silly-collections major version to 5.8
+- update of dependency randomizer version to 6.5
 - moved class-diagramm to test resources
 
 Version 5.7
