@@ -7,6 +7,7 @@ Version 5.9-SNAPSHOT
 ADDED:
  
 - gradle as build system
+- new factory method for create a map for count drawn numbers and can summarized with a given Map
 
 CHANGED:
 

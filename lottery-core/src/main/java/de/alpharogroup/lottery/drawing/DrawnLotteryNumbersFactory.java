@@ -208,7 +208,8 @@ public final class DrawnLotteryNumbersFactory
 	}
 
 	/**
-	 * Factory method for create a map for count drawn numbers
+	 * Factory method for create a map for count drawn numbers and will be summarized with the given
+	 * Map
 	 *
 	 * @param minVolume
 	 *            the min volume
