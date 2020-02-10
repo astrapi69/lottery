@@ -21,7 +21,7 @@ Version 5.8
 
 ADDED:
  
-- new dependency of silly-beans in minor version 1 added
+- new dependency of silly-beans in version 1 added
 
 CHANGED:
 
