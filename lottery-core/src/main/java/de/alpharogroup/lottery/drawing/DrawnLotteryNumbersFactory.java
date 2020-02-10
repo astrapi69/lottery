@@ -21,12 +21,9 @@
 package de.alpharogroup.lottery.drawing;
 
 import java.security.SecureRandom;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import de.alpharogroup.check.Argument;
 import de.alpharogroup.collections.list.ListFactory;
@@ -206,8 +203,7 @@ public final class DrawnLotteryNumbersFactory
 	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume)
 	{
 		List<Integer> integerList = ListFactory.newRangeList(minVolume, maxVolume);
-		Map<Integer, Integer> numberCounterMap =
-		 MapFactory.newCounterMap(integerList);
+		Map<Integer, Integer> numberCounterMap = MapFactory.newCounterMap(integerList);
 		return numberCounterMap;
 	}
 
@@ -222,12 +218,13 @@ public final class DrawnLotteryNumbersFactory
 	 *            the Map that will be summarized
 	 * @return the new map with the initial values
 	 */
-	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume, Map<Integer, Integer> numberCounterMap)
+	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume,
+		Map<Integer, Integer> numberCounterMap)
 	{
 		Argument.notNull(numberCounterMap, "numberCounterMap");
 		return MapExtensions.mergeAndSummarize(
-			MapFactory.newCounterMap(
-				ListFactory.newRangeList(minVolume, maxVolume)), numberCounterMap);
+			MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume)),
+			numberCounterMap);
 	}
 
 }

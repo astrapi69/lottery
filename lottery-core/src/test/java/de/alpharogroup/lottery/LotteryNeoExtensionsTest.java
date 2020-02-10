@@ -21,6 +21,7 @@
 package de.alpharogroup.lottery;
 
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.testng.annotations.Test;
 
@@ -29,14 +30,14 @@ import de.alpharogroup.lottery.drawing.DrawnLotteryNumbersFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.lottery.ticket.LotteryTicket;
 import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
-import lombok.extern.java.Log;
 
 /**
  * The unit test class for the class {@link LotteryExtensions}.
  */
-@Log
 public class LotteryNeoExtensionsTest
 {
+
+	private final static Logger log = Logger.getLogger(LotteryNeoExtensionsTest.class.getName());
 
 	/**
 	 * Log the winning category of every lottery box from the given lottery ticket.

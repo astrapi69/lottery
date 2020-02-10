@@ -26,14 +26,14 @@ import static org.testng.Assert.assertNotNull;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import de.alpharogroup.collections.map.MapExtensions;
-import de.alpharogroup.random.number.RandomPrimitivesExtensions;
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
+import de.alpharogroup.collections.map.MapExtensions;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.lottery.enums.LotteryAlgorithm;
+import de.alpharogroup.random.number.RandomPrimitivesExtensions;
 
 /**
  * The class {@link DrawnLotteryNumbersFactory}.
@@ -45,7 +45,8 @@ public class DrawnLotteryNumbersFactoryTest
 	 * Test method for {@link DrawnLotteryNumbersFactory#mergeAndSummarize(Map, Map)}
 	 */
 	@Test
-	public void testMergeAndSummarize(){
+	public void testMergeAndSummarize()
+	{
 		int minVolume;
 		int maxVolume;
 		Map<Integer, Integer> initialNumberCounterMap;
@@ -53,19 +54,23 @@ public class DrawnLotteryNumbersFactoryTest
 
 		minVolume = 1;
 		maxVolume = 10;
-		numberCounterMap = DrawnLotteryNumbersFactory
-			.newNumberCounterMap(minVolume, maxVolume);
-		for (int i = minVolume; i <= maxVolume; i++){
-			numberCounterMap.merge(i, RandomPrimitivesExtensions.getRandomIntBetween(1, 4), Integer::sum);
+		numberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume, maxVolume);
+		for (int i = minVolume; i <= maxVolume; i++)
+		{
+			numberCounterMap.merge(i, RandomPrimitivesExtensions.getRandomIntBetween(1, 4),
+				Integer::sum);
 		}
-		initialNumberCounterMap = DrawnLotteryNumbersFactory
-			.newNumberCounterMap(minVolume, maxVolume);
-		for (int i = minVolume; i <= maxVolume; i++){
-			initialNumberCounterMap.merge(i, RandomPrimitivesExtensions.getRandomIntBetween(1, 4), Integer::sum);
+		initialNumberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume,
+			maxVolume);
+		for (int i = minVolume; i <= maxVolume; i++)
+		{
+			initialNumberCounterMap.merge(i, RandomPrimitivesExtensions.getRandomIntBetween(1, 4),
+				Integer::sum);
 		}
-		Map<Integer, Integer> mergedMap = MapExtensions
-			.mergeAndSummarize(initialNumberCounterMap, numberCounterMap);
-		for (int i = minVolume; i <= maxVolume; i++){
+		Map<Integer, Integer> mergedMap = MapExtensions.mergeAndSummarize(initialNumberCounterMap,
+			numberCounterMap);
+		for (int i = minVolume; i <= maxVolume; i++)
+		{
 			int actual = mergedMap.get(i);
 			int expected = numberCounterMap.get(i) + initialNumberCounterMap.get(i);
 			assertEquals(actual, expected);

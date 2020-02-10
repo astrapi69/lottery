@@ -26,6 +26,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
@@ -40,14 +41,14 @@ import de.alpharogroup.lottery.evaluation.EvaluatedLotteryNumbers;
 import de.alpharogroup.lottery.played.LotteryPlayedNumbers;
 import de.alpharogroup.lottery.ticket.LotteryTicket;
 import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
-import lombok.extern.java.Log;
 
 /**
  * The unit test class for the class {@link LotteryExtensions}.
  */
-@Log
 public class LotteryExtensionsTest
 {
+
+	private final static Logger log = Logger.getLogger(LotteryExtensionsTest.class.getName());
 
 	private static final LotteryGameType sixOffourtynineGameType = LotteryGameType.SIX_OF_FOURTYNINE_NORMAL;
 
