@@ -42,6 +42,7 @@ or over flattr: <a href="http://flattr.com/thing/4152938/astrapi69lottery-on-Git
 * Draw a super number
 * Draw the number of the game seventy seven
 * Draw of lottery numbers in a given number area and a given volume
+* Summarize draw with a given counter map from already drawn lottery numbers
  
 ## License
 
