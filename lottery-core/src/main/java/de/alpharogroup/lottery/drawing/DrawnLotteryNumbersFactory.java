@@ -23,6 +23,7 @@ package de.alpharogroup.lottery.drawing;
 import java.security.SecureRandom;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import de.alpharogroup.check.Argument;
@@ -34,15 +35,58 @@ import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.lottery.enums.LotteryAlgorithm;
 import de.alpharogroup.random.SecureRandomFactory;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
-import lombok.NonNull;
-import lombok.experimental.UtilityClass;
 
 /**
  * A factory for creating {@link DrawnLotteryNumbers} objects with generated lottery numbers
  */
-@UtilityClass
 public final class DrawnLotteryNumbersFactory
 {
+	/**
+	 * Factory method for create a map for count drawn numbers
+	 *
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @return the new map with the initial values
+	 */
+	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume)
+	{
+		List<Integer> integerList = ListFactory.newRangeList(minVolume, maxVolume);
+		Map<Integer, Integer> numberCounterMap = MapFactory.newCounterMap(integerList);
+		return numberCounterMap;
+	}
+
+	/**
+	 * Factory method for create a map for count drawn numbers and will be summarized with the given
+	 * Map
+	 *
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param numberCounterMap
+	 *            the Map that will be summarized
+	 * @return the new map with the initial values
+	 */
+	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume,
+		Map<Integer, Integer> numberCounterMap)
+	{
+		Argument.notNull(numberCounterMap, "numberCounterMap");
+		return MapExtensions.mergeAndSummarize(
+			MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume)),
+			numberCounterMap);
+	}
+
+	/**
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
+	 *
+	 * @return the new {@link DrawnLotteryNumbers}
+	 */
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers()
+	{
+		return newRandomDrawnLotteryNumbers(7, 49);
+	}
 
 	/**
 	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
@@ -115,26 +159,6 @@ public final class DrawnLotteryNumbersFactory
 	 *            the min volume
 	 * @param maxVolume
 	 *            the max volume
-	 * @param algorithm
-	 *            the algorithm to use
-	 * @return the new {@link DrawnLotteryNumbers}
-	 */
-	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
-		int maxVolume, @NonNull LotteryAlgorithm algorithm)
-	{
-		return newRandomDrawnLotteryNumbers(max, minVolume, maxVolume, 200, algorithm);
-	}
-
-	/**
-	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
-	 * with the given algorithm
-	 *
-	 * @param max
-	 *            the max number to draw
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the max volume
 	 * @param drawCount
 	 *            the draw count defines how many times to draw numbers. Note: only with map
 	 *            algorithm
@@ -143,8 +167,9 @@ public final class DrawnLotteryNumbersFactory
 	 * @return the new {@link DrawnLotteryNumbers}
 	 */
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
-		int maxVolume, int drawCount, @NonNull LotteryAlgorithm algorithm)
+		int maxVolume, int drawCount, LotteryAlgorithm algorithm)
 	{
+		Objects.requireNonNull(algorithm);
 		switch (algorithm)
 		{
 			case MAP :
@@ -159,6 +184,27 @@ public final class DrawnLotteryNumbersFactory
 			default :
 				return newRandomDrawnLotteryNumbersDefaultAlgorithm(max, maxVolume);
 		}
+	}
+
+	/**
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
+	 * with the given algorithm
+	 *
+	 * @param max
+	 *            the max number to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param algorithm
+	 *            the algorithm to use
+	 * @return the new {@link DrawnLotteryNumbers}
+	 */
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
+		int maxVolume, LotteryAlgorithm algorithm)
+	{
+		Objects.requireNonNull(algorithm);
+		return newRandomDrawnLotteryNumbers(max, minVolume, maxVolume, 200, algorithm);
 	}
 
 	/**
@@ -181,51 +227,8 @@ public final class DrawnLotteryNumbersFactory
 			.superNumber(superNumber).superSixNumber(superSixNumber).build();
 	}
 
-	/**
-	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
-	 *
-	 * @return the new {@link DrawnLotteryNumbers}
-	 */
-	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers()
+	private DrawnLotteryNumbersFactory()
 	{
-		return newRandomDrawnLotteryNumbers(7, 49);
-	}
-
-	/**
-	 * Factory method for create a map for count drawn numbers
-	 *
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the max volume
-	 * @return the new map with the initial values
-	 */
-	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume)
-	{
-		List<Integer> integerList = ListFactory.newRangeList(minVolume, maxVolume);
-		Map<Integer, Integer> numberCounterMap = MapFactory.newCounterMap(integerList);
-		return numberCounterMap;
-	}
-
-	/**
-	 * Factory method for create a map for count drawn numbers and will be summarized with the given
-	 * Map
-	 *
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the max volume
-	 * @param numberCounterMap
-	 *            the Map that will be summarized
-	 * @return the new map with the initial values
-	 */
-	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume,
-		Map<Integer, Integer> numberCounterMap)
-	{
-		Argument.notNull(numberCounterMap, "numberCounterMap");
-		return MapExtensions.mergeAndSummarize(
-			MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume)),
-			numberCounterMap);
 	}
 
 }

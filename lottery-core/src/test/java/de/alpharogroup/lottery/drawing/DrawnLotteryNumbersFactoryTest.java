@@ -42,7 +42,7 @@ public class DrawnLotteryNumbersFactoryTest
 {
 
 	/**
-	 * Test method for {@link DrawnLotteryNumbersFactory#mergeAndSummarize(Map, Map)}
+	 * Test method for {@link DrawnLotteryNumbersFactory#newNumberCounterMap(int, int, Map)}
 	 */
 	@Test
 	public void testMergeAndSummarize()
@@ -61,7 +61,7 @@ public class DrawnLotteryNumbersFactoryTest
 				Integer::sum);
 		}
 		initialNumberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume,
-			maxVolume);
+			maxVolume, numberCounterMap);
 		for (int i = minVolume; i <= maxVolume; i++)
 		{
 			initialNumberCounterMap.merge(i, RandomPrimitivesExtensions.getRandomIntBetween(1, 4),
@@ -154,8 +154,7 @@ public class DrawnLotteryNumbersFactoryTest
 	/**
 	 * Test method for {@link DrawnLotteryNumbersFactory} with {@link BeanTester}
 	 */
-	@Test(expectedExceptions = { BeanTestException.class, InvocationTargetException.class,
-			UnsupportedOperationException.class })
+	@Test
 	public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();

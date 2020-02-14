@@ -20,30 +20,104 @@
  */
 package de.alpharogroup.lottery.gameseventyseven;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.FieldDefaults;
-
 /**
  * The class {@link GameSeventySeven}.
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder(toBuilder = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class GameSeventySeven
 {
-	/** The game seventy seven number. */
-	Integer number;
+	public static class GameSeventySevenBuilder
+	{
+		private Integer number;
 
+		GameSeventySevenBuilder()
+		{
+		}
+
+		public GameSeventySeven build()
+		{
+			return new GameSeventySeven(number);
+		}
+
+		public GameSeventySeven.GameSeventySevenBuilder number(Integer number)
+		{
+			this.number = number;
+			return this;
+		}
+
+		@Override
+		public String toString()
+		{
+			return "GameSeventySeven.GameSeventySevenBuilder(number=" + this.number + ")";
+		}
+	}
+
+	public static GameSeventySevenBuilder builder()
+	{
+		return new GameSeventySevenBuilder();
+	}
+
+	/** The game seventy seven number. */
+	private Integer number;
+
+	public GameSeventySeven()
+	{
+	}
+
+	public GameSeventySeven(Integer number)
+	{
+		this.number = number;
+	}
+
+	protected boolean canEqual(final Object other)
+	{
+		return other instanceof GameSeventySeven;
+	}
+
+	@Override
+	public boolean equals(final Object o)
+	{
+		if (o == this)
+			return true;
+		if (!(o instanceof GameSeventySeven))
+			return false;
+		final GameSeventySeven other = (GameSeventySeven)o;
+		if (!other.canEqual(this))
+			return false;
+		final Object this$number = this.getNumber();
+		final Object other$number = other.getNumber();
+		if (this$number == null ? other$number != null : !this$number.equals(other$number))
+			return false;
+		return true;
+	}
+
+	public Integer getNumber()
+	{
+		return this.number;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int PRIME = 59;
+		int result = 1;
+		final Object $number = this.getNumber();
+		result = result * PRIME + ($number == null ? 43 : $number.hashCode());
+		return result;
+	}
+
+	public void setNumber(Integer number)
+	{
+		this.number = number;
+	}
+
+	public GameSeventySevenBuilder toBuilder()
+	{
+		return new GameSeventySevenBuilder().number(this.number);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "GameSeventySeven(number=" + this.getNumber() + ")";
+	}
 }

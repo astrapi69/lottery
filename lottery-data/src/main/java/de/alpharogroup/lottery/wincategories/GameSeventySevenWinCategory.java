@@ -20,12 +20,9 @@
  */
 package de.alpharogroup.lottery.wincategories;
 
-import lombok.Getter;
-
 /**
  * The enum {@link GameSeventySevenWinCategory}.
  */
-@Getter
 public enum GameSeventySevenWinCategory
 {
 
@@ -118,4 +115,8 @@ public enum GameSeventySevenWinCategory
 		this.equalNumbers = equalNumbers;
 	}
 
+	public Integer getEqualNumbers()
+	{
+		return this.equalNumbers;
+	}
 }

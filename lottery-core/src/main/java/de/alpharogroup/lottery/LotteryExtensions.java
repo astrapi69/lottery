@@ -23,8 +23,10 @@ package de.alpharogroup.lottery;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import de.alpharogroup.collections.CollectionExtensions;
 import de.alpharogroup.collections.list.ListFactory;
@@ -38,173 +40,14 @@ import de.alpharogroup.lottery.played.LotteryPlayedNumbers;
 import de.alpharogroup.lottery.ticket.LotteryTicket;
 import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
 import de.alpharogroup.math.MathExtensions;
-import lombok.NonNull;
-import lombok.experimental.UtilityClass;
-import lombok.extern.java.Log;
 
 /**
  * The class {@link LotteryExtensions} provides utility methods for draw lottery, super numbers and
  * other gambling algorithms.
  */
-@UtilityClass
-@Log
 public final class LotteryExtensions
 {
-
-	/**
-	 * Checks the result if the drawn lottery numbers are equal to the given played numbers. The
-	 * result is a {@link EvaluatedLotteryNumbers} object that keep the winning numbers.
-	 *
-	 * @param drawnLotteryNumbers
-	 *            the drawn lottery numbers are the numbers that are drawn from the lottery
-	 *            corporation
-	 * @param lotteryPlayedNumbers
-	 *            the lottery played numbers are the numbers that are played from the users
-	 * @return the won numbers
-	 */
-	public static EvaluatedLotteryNumbers checkResult(final DrawnLotteryNumbers drawnLotteryNumbers,
-		final LotteryPlayedNumbers lotteryPlayedNumbers)
-	{
-		final Set<Integer> drawnLuckyLotteryNumbers = drawnLotteryNumbers.getLotteryNumbers();
-		final Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers = lotteryPlayedNumbers
-			.getPlayedLotteryNumbers();
-		final Set<LotteryGameType> playedLotteryTickets = playedLotteryNumbers.keySet();
-		final EvaluatedLotteryNumbers evaluatedLotteryNumbersBean = EvaluatedLotteryNumbers
-			.builder().build();
-		final Map<LotteryGameType, List<Collection<Integer>>> wonLotteryNumbersMap = evaluatedLotteryNumbersBean
-			.getWonLotteryNumbers();
-		for (final LotteryGameType lotteryGameType : playedLotteryTickets)
-		{
-			final List<Set<Integer>> lotteryTicket = playedLotteryNumbers.get(lotteryGameType);
-			final List<Collection<Integer>> currentWonLotteryNumbersList = ListFactory
-				.newArrayList(wonLotteryNumbersMap.get(lotteryGameType));
-			wonLotteryNumbersMap.put(lotteryGameType, currentWonLotteryNumbersList);
-			for (int i = 0; i < lotteryTicket.size(); i++)
-			{
-				Set<Integer> currentLotteryPlayedBox = lotteryTicket.get(i);
-				final Collection<Integer> wonNumbers = CollectionExtensions.intersection(
-					SetFactory.newTreeSet(drawnLuckyLotteryNumbers), currentLotteryPlayedBox);
-				currentWonLotteryNumbersList.add(wonNumbers);
-			}
-		}
-		return evaluatedLotteryNumbersBean;
-	}
-
-	/**
-	 * Evaluate the given lottery ticket from the given drawn numbers.
-	 *
-	 * @param drawnLotteryNumbers
-	 *            the drawn lottery numbers
-	 * @param playedLotteryTicket
-	 *            the played lottery ticket
-	 */
-	public static void evaluate(DrawnLotteryNumbers drawnLotteryNumbers,
-		LotteryTicket playedLotteryTicket)
-	{
-		Set<LotteryBox> lotteryBoxes = playedLotteryTicket.getLotteryBoxes();
-
-		for (LotteryBox lotteryBox : lotteryBoxes)
-		{
-			boolean withSuperNumber = lotteryBox.getSelectedNumbers()
-				.contains(drawnLotteryNumbers.getSuperNumber());
-			Optional<LotteryWinCategory> lotteryWinCategory = LotteryWinCategory
-				.getLotteryWinCategory(drawnLotteryNumbers.getLotteryNumbers(),
-					lotteryBox.getSelectedNumbers(), withSuperNumber);
-			lotteryWinCategory.ifPresent(lwc -> lotteryBox.setWinCategory(lwc));
-		}
-	}
-
-
-	public static void setWinCategories(final EvaluatedLotteryNumbers evaluatedLotteryNumbers)
-	{
-		final Map<LotteryGameType, List<Collection<Integer>>> wonLotteryNumbersMap = evaluatedLotteryNumbers
-			.getWonLotteryNumbers();
-		Set<LotteryGameType> lotteryGameTypeSet = wonLotteryNumbersMap.keySet();
-		boolean withSuperNumber = false;
-		for (final LotteryGameType lotteryGameType : lotteryGameTypeSet)
-		{
-			List<Collection<Integer>> currentWonLotteryNumbersList = wonLotteryNumbersMap
-				.get(lotteryGameType);
-			for (Collection<Integer> wonLotteryTicket : currentWonLotteryNumbersList)
-			{
-				Optional<LotteryWinCategory> lotteryWinCategory = LotteryWinCategory
-					.getLotteryWinCategory(wonLotteryTicket, withSuperNumber);
-				lotteryWinCategory.ifPresent(l -> System.out.println(l.name()));
-			}
-		}
-	}
-
-	/**
-	 * Calculate how much draws will be needed to win with the given lottery ticket in the given win
-	 * category.<br>
-	 * Caution: use with care if win category is first-class this can take a while till a return
-	 * value is calculated.
-	 *
-	 * @param lotteryTicket
-	 *            the lottery ticket
-	 * @param lotteryWinCategory
-	 *            the lottery win category
-	 * @return the quantity of draws for win of the given ticket
-	 */
-	public static int calculateDraws(LotteryTicket lotteryTicket,
-		@NonNull LotteryWinCategory lotteryWinCategory)
-	{
-		return calculateDraws(lotteryTicket, lotteryWinCategory, 10000);
-	}
-
-	/**
-	 * This method provides calculation of how much draws will be needed to win with the given
-	 * lottery ticket in the given win category. Can be used for statistics. <br>
-	 * Caution: use with care if win category is first-class this can take a while till a return
-	 * value is calculated.
-	 *
-	 * @param lotteryTicket
-	 *            the lottery ticket
-	 * @param lotteryWinCategory
-	 *            the lottery win category
-	 * @param maxIterations
-	 *            the max iterations in the while loop
-	 * @return the quantity of draws for win of the given ticket
-	 */
-	public static int calculateDraws(LotteryTicket lotteryTicket,
-		@NonNull LotteryWinCategory lotteryWinCategory, int maxIterations)
-	{
-		final long startTime = System.nanoTime();
-
-		int count = 0;
-
-		DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
-			.newRandomDrawnLotteryNumbers();
-		count++;
-		boolean breakout = false;
-		// int i1 = 3;
-		while (!breakout)
-		{
-			evaluate(luckyNumbers, lotteryTicket);
-			Set<LotteryBox> lotteryBoxes = lotteryTicket.getLotteryBoxes();
-			for (LotteryBox box : lotteryBoxes)
-			{
-				if (!box.getWinCategory().equals(LotteryWinCategory.NONE))
-				{
-					log.info("current draw " + count + " and win category: "
-						+ box.getWinCategory().name());
-				}
-				breakout = box.getWinCategory().equals(lotteryWinCategory);
-			}
-			luckyNumbers = DrawnLotteryNumbersFactory.newRandomDrawnLotteryNumbers();
-			count++;
-			if (maxIterations < count)
-			{
-				breakout = true;
-			}
-		}
-
-		log.info("Elapsed time till you have won something: "
-			+ calculateElapsedTimeInSeconds(startTime));
-		log.info("you have won after " + count + " drawings");
-		log.info("you have won: " + lotteryTicket);
-		return count;
-	}
+	private static final Logger log = Logger.getLogger(LotteryExtensions.class.getName());
 
 	/**
 	 * Calculate draws for statistics.
@@ -278,6 +121,81 @@ public final class LotteryExtensions
 	}
 
 	/**
+	 * Calculate how much draws will be needed to win with the given lottery ticket in the given win
+	 * category.<br>
+	 * Caution: use with care if win category is first-class this can take a while till a return
+	 * value is calculated.
+	 *
+	 * @param lotteryTicket
+	 *            the lottery ticket
+	 * @param lotteryWinCategory
+	 *            the lottery win category
+	 * @return the quantity of draws for win of the given ticket
+	 */
+	public static int calculateDraws(LotteryTicket lotteryTicket,
+		LotteryWinCategory lotteryWinCategory)
+	{
+		Objects.requireNonNull(lotteryWinCategory);
+		return calculateDraws(lotteryTicket, lotteryWinCategory, 10000);
+	}
+
+
+	/**
+	 * This method provides calculation of how much draws will be needed to win with the given
+	 * lottery ticket in the given win category. Can be used for statistics. <br>
+	 * Caution: use with care if win category is first-class this can take a while till a return
+	 * value is calculated.
+	 *
+	 * @param lotteryTicket
+	 *            the lottery ticket
+	 * @param lotteryWinCategory
+	 *            the lottery win category
+	 * @param maxIterations
+	 *            the max iterations in the while loop
+	 * @return the quantity of draws for win of the given ticket
+	 */
+	public static int calculateDraws(LotteryTicket lotteryTicket,
+		LotteryWinCategory lotteryWinCategory, int maxIterations)
+	{
+		Objects.requireNonNull(lotteryWinCategory);
+		final long startTime = System.nanoTime();
+
+		int count = 0;
+
+		DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
+			.newRandomDrawnLotteryNumbers();
+		count++;
+		boolean breakout = false;
+		// int i1 = 3;
+		while (!breakout)
+		{
+			evaluate(luckyNumbers, lotteryTicket);
+			Set<LotteryBox> lotteryBoxes = lotteryTicket.getLotteryBoxes();
+			for (LotteryBox box : lotteryBoxes)
+			{
+				if (!box.getWinCategory().equals(LotteryWinCategory.NONE))
+				{
+					log.info("current draw " + count + " and win category: "
+						+ box.getWinCategory().name());
+				}
+				breakout = box.getWinCategory().equals(lotteryWinCategory);
+			}
+			luckyNumbers = DrawnLotteryNumbersFactory.newRandomDrawnLotteryNumbers();
+			count++;
+			if (maxIterations < count)
+			{
+				breakout = true;
+			}
+		}
+
+		log.info("Elapsed time till you have won something: "
+			+ calculateElapsedTimeInSeconds(startTime));
+		log.info("you have won after " + count + " drawings");
+		log.info("you have won: " + lotteryTicket);
+		return count;
+	}
+
+	/**
 	 * Calculate elapsed time in seconds from the given start time as long to the current system
 	 * time. This is useful for benchmarking
 	 *
@@ -288,6 +206,92 @@ public final class LotteryExtensions
 	public static double calculateElapsedTimeInSeconds(final long startTime)
 	{
 		return ((double)(System.nanoTime() - startTime)) / 1000000;
+	}
+
+	/**
+	 * Checks the result if the drawn lottery numbers are equal to the given played numbers. The
+	 * result is a {@link EvaluatedLotteryNumbers} object that keep the winning numbers.
+	 *
+	 * @param drawnLotteryNumbers
+	 *            the drawn lottery numbers are the numbers that are drawn from the lottery
+	 *            corporation
+	 * @param lotteryPlayedNumbers
+	 *            the lottery played numbers are the numbers that are played from the users
+	 * @return the won numbers
+	 */
+	public static EvaluatedLotteryNumbers checkResult(final DrawnLotteryNumbers drawnLotteryNumbers,
+		final LotteryPlayedNumbers lotteryPlayedNumbers)
+	{
+		final Set<Integer> drawnLuckyLotteryNumbers = drawnLotteryNumbers.getLotteryNumbers();
+		final Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers = lotteryPlayedNumbers
+			.getPlayedLotteryNumbers();
+		final Set<LotteryGameType> playedLotteryTickets = playedLotteryNumbers.keySet();
+		final EvaluatedLotteryNumbers evaluatedLotteryNumbersBean = EvaluatedLotteryNumbers
+			.builder().build();
+		final Map<LotteryGameType, List<Collection<Integer>>> wonLotteryNumbersMap = evaluatedLotteryNumbersBean
+			.getWonLotteryNumbers();
+		for (final LotteryGameType lotteryGameType : playedLotteryTickets)
+		{
+			final List<Set<Integer>> lotteryTicket = playedLotteryNumbers.get(lotteryGameType);
+			final List<Collection<Integer>> currentWonLotteryNumbersList = ListFactory
+				.newArrayList(wonLotteryNumbersMap.get(lotteryGameType));
+			wonLotteryNumbersMap.put(lotteryGameType, currentWonLotteryNumbersList);
+			for (int i = 0; i < lotteryTicket.size(); i++)
+			{
+				Set<Integer> currentLotteryPlayedBox = lotteryTicket.get(i);
+				final Collection<Integer> wonNumbers = CollectionExtensions.intersection(
+					SetFactory.newTreeSet(drawnLuckyLotteryNumbers), currentLotteryPlayedBox);
+				currentWonLotteryNumbersList.add(wonNumbers);
+			}
+		}
+		return evaluatedLotteryNumbersBean;
+	}
+
+	/**
+	 * Evaluate the given lottery ticket from the given drawn numbers.
+	 *
+	 * @param drawnLotteryNumbers
+	 *            the drawn lottery numbers
+	 * @param playedLotteryTicket
+	 *            the played lottery ticket
+	 */
+	public static void evaluate(DrawnLotteryNumbers drawnLotteryNumbers,
+		LotteryTicket playedLotteryTicket)
+	{
+		Set<LotteryBox> lotteryBoxes = playedLotteryTicket.getLotteryBoxes();
+
+		for (LotteryBox lotteryBox : lotteryBoxes)
+		{
+			boolean withSuperNumber = lotteryBox.getSelectedNumbers()
+				.contains(drawnLotteryNumbers.getSuperNumber());
+			Optional<LotteryWinCategory> lotteryWinCategory = LotteryWinCategory
+				.getLotteryWinCategory(drawnLotteryNumbers.getLotteryNumbers(),
+					lotteryBox.getSelectedNumbers(), withSuperNumber);
+			lotteryWinCategory.ifPresent(lwc -> lotteryBox.setWinCategory(lwc));
+		}
+	}
+
+	public static void setWinCategories(final EvaluatedLotteryNumbers evaluatedLotteryNumbers)
+	{
+		final Map<LotteryGameType, List<Collection<Integer>>> wonLotteryNumbersMap = evaluatedLotteryNumbers
+			.getWonLotteryNumbers();
+		Set<LotteryGameType> lotteryGameTypeSet = wonLotteryNumbersMap.keySet();
+		boolean withSuperNumber = false;
+		for (final LotteryGameType lotteryGameType : lotteryGameTypeSet)
+		{
+			List<Collection<Integer>> currentWonLotteryNumbersList = wonLotteryNumbersMap
+				.get(lotteryGameType);
+			for (Collection<Integer> wonLotteryTicket : currentWonLotteryNumbersList)
+			{
+				Optional<LotteryWinCategory> lotteryWinCategory = LotteryWinCategory
+					.getLotteryWinCategory(wonLotteryTicket, withSuperNumber);
+				lotteryWinCategory.ifPresent(l -> System.out.println(l.name()));
+			}
+		}
+	}
+
+	private LotteryExtensions()
+	{
 	}
 
 }

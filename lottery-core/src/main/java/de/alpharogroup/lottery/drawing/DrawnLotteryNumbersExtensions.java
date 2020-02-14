@@ -35,78 +35,13 @@ import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.comparators.ComparatorFactory;
 import de.alpharogroup.random.DefaultSecureRandom;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
-import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link DrawnLotteryNumbersExtensions} provides utility methods to draw lottery numbers
  * with different algorithms
  */
-@UtilityClass
 public final class DrawnLotteryNumbersExtensions
 {
-
-	/**
-	 * Draws a super number that is not in the given already drawn numbers {@link Set}.
-	 *
-	 * @param alreadyDrawnNumbers
-	 *            the already drawn numbers
-	 * @param volume
-	 *            the volume of the numbers starts from 1 till volume
-	 * @return the drawn super number
-	 */
-	public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int volume)
-	{
-		int superNumber = -1;
-		boolean breakout = false;
-		while (!breakout)
-		{
-			superNumber = RandomPrimitivesExtensions.getRandomIntBetween(1, volume);
-			if (!alreadyDrawnNumbers.contains(superNumber))
-			{
-				breakout = true;
-			}
-		}
-		return superNumber;
-	}
-
-	/**
-	 * Draws a super number that is not in the given already drawn numbers {@link Set}.
-	 *
-	 * @param alreadyDrawnNumbers
-	 *            the already drawn numbers
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the max volume
-	 * @return the drawn super number
-	 */
-	public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int minVolume,
-		int maxVolume)
-	{
-		int superNumber = -1;
-		boolean breakout = false;
-		while (!breakout)
-		{
-			superNumber = RandomPrimitivesExtensions.randomIntBetween(minVolume, maxVolume, true,
-				true);
-			if (!alreadyDrawnNumbers.contains(superNumber))
-			{
-				breakout = true;
-			}
-		}
-		return superNumber;
-	}
-
-	/**
-	 * Draw the number of the game seventy seven
-	 *
-	 * @return the drawn number of the game seventy seven
-	 */
-	public static int drawGameSeventySeven()
-	{
-		return RandomPrimitivesExtensions.randomIntBetween(0, 9999999, true, true);
-	}
-
 	/**
 	 * Draw of lottery numbers.
 	 *
@@ -167,6 +102,41 @@ public final class DrawnLotteryNumbersExtensions
 	}
 
 	/**
+	 * This draw algorithm simulates the real world.
+	 *
+	 * @param maxNumbers
+	 *            the max number to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the volume of the numbers starts from 1 till volume
+	 * @return the sets the
+	 */
+	public static Set<Integer> drawDefaultAlgorithm(int maxNumbers, int minVolume, int maxVolume)
+	{
+		Set<Integer> numbers = SetFactory.newTreeSet();
+		ArrayList<Integer> rangeList = new ArrayList<>(
+			ListFactory.newRangeList(minVolume, maxVolume));
+
+		final SecureRandom sr = DefaultSecureRandom.get();
+		int cnt = 0;
+
+		while (cnt < maxNumbers)
+		{
+			Collections.shuffle(rangeList, sr);
+			final int index = RandomPrimitivesExtensions.randomIntBetween(0, rangeList.size(), true,
+				false);
+			Integer drawnNumber = rangeList.get(index);
+			if (!numbers.contains(drawnNumber))
+			{
+				numbers.add(drawnNumber);
+				++cnt;
+			}
+		}
+		return numbers;
+	}
+
+	/**
 	 * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
 	 * times and return a new set.
 	 *
@@ -184,27 +154,6 @@ public final class DrawnLotteryNumbersExtensions
 		int drawCount)
 	{
 		return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, true);
-	}
-
-	/**
-	 * Draw of paranoid lottery numbers from given drawCount and take the numbers that are drawn the
-	 * most times and return a new set.
-	 *
-	 * @param maxNumbers
-	 *            the maximum of numbers to draw
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the max volume
-	 * @param drawCount
-	 *            the draw count defines how many times to draw numbers
-	 * @return the sets of the drawn numbers
-	 */
-	public static Set<Integer> drawParanoidFromMultiMap(int maxNumbers, int minVolume,
-		int maxVolume, int drawCount)
-	{
-		return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount,
-			RandomPrimitivesExtensions.randomBoolean(), true);
 	}
 
 	/**
@@ -285,6 +234,89 @@ public final class DrawnLotteryNumbersExtensions
 	}
 
 	/**
+	 * Draw the number of the game seventy seven
+	 *
+	 * @return the drawn number of the game seventy seven
+	 */
+	public static int drawGameSeventySeven()
+	{
+		return RandomPrimitivesExtensions.randomIntBetween(0, 9999999, true, true);
+	}
+
+	/**
+	 * Draw of paranoid lottery numbers from given drawCount and take the numbers that are drawn the
+	 * most times and return a new set.
+	 *
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
+	 * @return the sets of the drawn numbers
+	 */
+	public static Set<Integer> drawParanoidFromMultiMap(int maxNumbers, int minVolume,
+		int maxVolume, int drawCount)
+	{
+		return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount,
+			RandomPrimitivesExtensions.randomBoolean(), true);
+	}
+
+	/**
+	 * Draws a super number that is not in the given already drawn numbers {@link Set}.
+	 *
+	 * @param alreadyDrawnNumbers
+	 *            the already drawn numbers
+	 * @param volume
+	 *            the volume of the numbers starts from 1 till volume
+	 * @return the drawn super number
+	 */
+	public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int volume)
+	{
+		int superNumber = -1;
+		boolean breakout = false;
+		while (!breakout)
+		{
+			superNumber = RandomPrimitivesExtensions.getRandomIntBetween(1, volume);
+			if (!alreadyDrawnNumbers.contains(superNumber))
+			{
+				breakout = true;
+			}
+		}
+		return superNumber;
+	}
+
+	/**
+	 * Draws a super number that is not in the given already drawn numbers {@link Set}.
+	 *
+	 * @param alreadyDrawnNumbers
+	 *            the already drawn numbers
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @return the drawn super number
+	 */
+	public static int drawSuperNumber(Set<Integer> alreadyDrawnNumbers, int minVolume,
+		int maxVolume)
+	{
+		int superNumber = -1;
+		boolean breakout = false;
+		while (!breakout)
+		{
+			superNumber = RandomPrimitivesExtensions.randomIntBetween(minVolume, maxVolume, true,
+				true);
+			if (!alreadyDrawnNumbers.contains(superNumber))
+			{
+				breakout = true;
+			}
+		}
+		return superNumber;
+	}
+
+	/**
 	 * Resolves the lottery numbers from the given number counter map in the order from the given
 	 * comparator limited to maxNumbers
 	 *
@@ -309,39 +341,8 @@ public final class DrawnLotteryNumbersExtensions
 		return SetFactory.newTreeSet(newLotteryNumbers);
 	}
 
-	/**
-	 * This draw algorithm simulates the real world.
-	 *
-	 * @param maxNumbers
-	 *            the max number to draw
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the volume of the numbers starts from 1 till volume
-	 * @return the sets the
-	 */
-	public static Set<Integer> drawDefaultAlgorithm(int maxNumbers, int minVolume, int maxVolume)
+	private DrawnLotteryNumbersExtensions()
 	{
-		Set<Integer> numbers = SetFactory.newTreeSet();
-		ArrayList<Integer> rangeList = new ArrayList<>(
-			ListFactory.newRangeList(minVolume, maxVolume));
-
-		final SecureRandom sr = DefaultSecureRandom.get();
-		int cnt = 0;
-
-		while (cnt < maxNumbers)
-		{
-			Collections.shuffle(rangeList, sr);
-			final int index = RandomPrimitivesExtensions.randomIntBetween(0, rangeList.size(), true,
-				false);
-			Integer drawnNumber = rangeList.get(index);
-			if (!numbers.contains(drawnNumber))
-			{
-				numbers.add(drawnNumber);
-				++cnt;
-			}
-		}
-		return numbers;
 	}
 
 }

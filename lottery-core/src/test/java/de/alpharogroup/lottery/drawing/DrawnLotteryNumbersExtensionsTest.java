@@ -378,8 +378,7 @@ public class DrawnLotteryNumbersExtensionsTest
 	/**
 	 * Test method for {@link DrawnLotteryNumbersExtensions} with {@link BeanTester}
 	 */
-	@Test(expectedExceptions = { BeanTestException.class, InvocationTargetException.class,
-			UnsupportedOperationException.class })
+	@Test
 	public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();

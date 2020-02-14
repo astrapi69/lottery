@@ -35,8 +35,6 @@ subprojects {
     }
 
     dependencies {
-        compileOnly("org.projectlombok:lombok:$lombokVersion")
-        annotationProcessor("org.projectlombok:lombok:$lombokVersion")
         compile("de.alpharogroup:silly-collections:$sillyCollectionsVersion")
         testCompile("org.meanbean:meanbean:$meanbeanVersion")
         testCompile("org.testng:testng:$testngVersion")

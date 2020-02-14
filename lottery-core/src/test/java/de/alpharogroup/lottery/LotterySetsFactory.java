@@ -28,35 +28,12 @@ import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.box.LotteryBox;
 import de.alpharogroup.lottery.enums.LotteryGameType;
 import de.alpharogroup.lottery.ticket.LotteryTicket;
-import lombok.experimental.UtilityClass;
 
 /**
  * A factory for creating LotterySets objects for tests.
  */
-@UtilityClass
-public class LotterySetsFactory
+public final class LotterySetsFactory
 {
-
-	/**
-	 * Creates a new {@link LotteryTicket} with the given lottery sets.
-	 *
-	 * @param lotterySet
-	 *            the lottery set
-	 * @return the lottery ticket
-	 */
-	public static LotteryTicket newLotteryTicket(List<Set<Integer>> lotterySet)
-	{
-		Set<LotteryBox> lotteryBoxes = SetFactory.newHashSet();
-		for (Set<Integer> lotteryNumbers : lotterySet)
-		{
-			lotteryBoxes.add(LotteryBox.builder().index(lotterySet.indexOf(lotteryNumbers))
-				.gameType(LotteryGameType.SIX_OF_FOURTYNINE_NORMAL).selectedNumbers(lotteryNumbers)
-				.build());
-		}
-		LotteryTicket lotteryTicket = LotteryTicket.builder().lotteryBoxes(lotteryBoxes).build();
-		return lotteryTicket;
-	}
-
 	/**
 	 * New lottery sets for tests.
 	 *
@@ -95,6 +72,30 @@ public class LotterySetsFactory
 			SetFactory.newTreeSet(12, 18, 25, 30, 41, 48),
 			SetFactory.newTreeSet(15, 18, 25, 30, 41, 48));
 		return sixOffourtynineGame;
+	}
+
+	/**
+	 * Creates a new {@link LotteryTicket} with the given lottery sets.
+	 *
+	 * @param lotterySet
+	 *            the lottery set
+	 * @return the lottery ticket
+	 */
+	public static LotteryTicket newLotteryTicket(List<Set<Integer>> lotterySet)
+	{
+		Set<LotteryBox> lotteryBoxes = SetFactory.newHashSet();
+		for (Set<Integer> lotteryNumbers : lotterySet)
+		{
+			lotteryBoxes.add(LotteryBox.builder().index(lotterySet.indexOf(lotteryNumbers))
+				.gameType(LotteryGameType.SIX_OF_FOURTYNINE_NORMAL).selectedNumbers(lotteryNumbers)
+				.build());
+		}
+		LotteryTicket lotteryTicket = LotteryTicket.builder().lotteryBoxes(lotteryBoxes).build();
+		return lotteryTicket;
+	}
+
+	private LotterySetsFactory()
+	{
 	}
 
 
