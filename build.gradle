@@ -16,7 +16,7 @@ buildscript {
 
 allprojects {
     group = "de.alpharogroup"
-    version = "5.9-SNAPSHOT"
+    version = "$projectVersion"
 }
 
 subprojects {

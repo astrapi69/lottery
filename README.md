@@ -64,7 +64,7 @@ You can first define the version properties:
 	<properties>
 			...
 		<!-- LOTTERY versions -->
-		<lottery.version>5.8</lottery.version>
+		<lottery.version>5.9</lottery.version>
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 			...
@@ -106,13 +106,13 @@ You can first define the version in the ext section and add than the following g
 ```
 ext {
 			...
-    lotteryVersion = "5.8"
+    lotteryVersion = "5.9"
 			...
 }
 dependencies {
 			...
-compile "de.alpharogroup:lottery-core:${lotteryVersion}"
-compile "de.alpharogroup:lottery-data:${lotteryVersion}"
+compile("de.alpharogroup:lottery-core:$lotteryVersion")
+compile("de.alpharogroup:lottery-data:$lotteryVersion")
 			...
 }
 ```
