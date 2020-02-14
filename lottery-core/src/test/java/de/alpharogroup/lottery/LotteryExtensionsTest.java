@@ -22,13 +22,11 @@ package de.alpharogroup.lottery;
 
 import static org.testng.Assert.assertEquals;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
@@ -145,7 +143,7 @@ public class LotteryExtensionsTest
 		final EvaluatedLotteryNumbers evaluatedLotteryNumbers = LotteryExtensions
 			.checkResult(drawnLotteryNumbers, lotteryPlayedNumbers);
 
-		// TODO make the checks and map to WinCategories...
+		// make the checks and map to WinCategories...
 		LotteryExtensions.setWinCategories(evaluatedLotteryNumbers);
 		log.info(evaluatedLotteryNumbers.toString());
 	}

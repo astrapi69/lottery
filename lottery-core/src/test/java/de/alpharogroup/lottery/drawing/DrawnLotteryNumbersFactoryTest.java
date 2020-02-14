@@ -23,10 +23,8 @@ package de.alpharogroup.lottery.drawing;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import org.meanbean.test.BeanTestException;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 

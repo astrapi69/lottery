@@ -62,6 +62,7 @@ public class LotteryNumberCount
 				+ this.lotteryGameType + ", numberCounterMap=" + this.numberCounterMap + ")";
 		}
 	}
+
 	public static LotteryNumberCountBuilder builder()
 	{
 		return new LotteryNumberCountBuilder();
