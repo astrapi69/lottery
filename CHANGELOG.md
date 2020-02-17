@@ -14,7 +14,8 @@ CHANGED:
 - removed maven related files
 - changed project nature from maven to gradle nature
 - update of dependency silly-collections major version to 8
-- update of dependency randomizer version to 6.6
+- update of dependency randomizer version to 6.7
+- update of test dependency testng version to 7.1.0
 - update of dependency silly-beans in minor version 1.1 added
 - removed all lombok dependent imports
 - removed lombok dependency
