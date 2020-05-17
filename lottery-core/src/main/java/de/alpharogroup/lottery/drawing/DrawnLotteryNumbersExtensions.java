@@ -210,14 +210,80 @@ public final class DrawnLotteryNumbersExtensions
 		return resolveLotteryNumbers(maxNumbers, mostDrawnComparator, numberCounterMap);
 	}
 
+	/**
+	 * Factory method for create a comparator for sort the lottery numbers
+	 *
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
+	 * @param mostDrawn
+	 *            the flag that indicates if the most drawn numbers should be taken if true,
+	 *            otherwise the reverse order will be taken
+	 * @param paranoid
+	 *            the flag paranoid indicates to create a custom comparator from the counter map and
+	 *            define a random defined order to draw if true, otherwise the flag mostDrawn will
+	 *            define the order to draw
+	 * @param numberCounterMap
+	 * 				the counter map for generate statistics of the drawn lottery numbers
+	 * @return the comparator for sort the lottery numbers
+	 */
 	public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
 		int drawCount, boolean mostDrawn, boolean paranoid, Map<Integer, Integer> numberCounterMap)
+	{
+		return newMostDrawnComparator(
+			mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap),
+			paranoid, mostDrawn);
+	}
+
+	/**
+	 * Merges several drawings of lottery numbers from the given arguments
+	 *
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
+	 * @param numberCounterMap
+	 * 				the counter map for generate statistics of the drawn lottery numbers
+	 * @return the map with the merged lottery numbers
+	 */
+	private static Map<Integer, Integer> mergeDrawings(int maxNumbers, int minVolume, int maxVolume, int drawCount,
+		Map<Integer, Integer> numberCounterMap)
 	{
 		for (int i = 0; i < drawCount; i++)
 		{
 			DrawnLotteryNumbersExtensions.draw(maxNumbers, minVolume, maxVolume)
 				.forEach(key -> numberCounterMap.merge(key, 1, Integer::sum));
 		}
+		return numberCounterMap;
+	}
+
+	/**
+	 * Factory method for create a comparator for sort the lottery numbers
+	 *
+	 * @param numberCounterMap
+	 * 				the counter map for generate statistics of the drawn lottery numbers
+	 * @param paranoid
+	 *            the flag paranoid indicates to create a custom comparator from the counter map and
+	 *            define a random defined order to draw if true, otherwise the flag mostDrawn will
+	 *            define the order to draw
+	 * @param mostDrawn
+	 *            the flag that indicates if the most drawn numbers should be taken if true,
+	 *            otherwise the reverse order will be taken
+	 * @return the comparator for sort the lottery numbers
+	 */
+	private static Comparator<Integer> newMostDrawnComparator(Map<Integer, Integer> numberCounterMap,
+		boolean paranoid, boolean mostDrawn
+		)
+	{
 		Comparator<Integer> mostDrawnComparator;
 		if (paranoid)
 		{
