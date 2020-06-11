@@ -25,6 +25,7 @@ import java.util.Optional;
 
 import de.alpharogroup.collections.CollectionExtensions;
 import de.alpharogroup.collections.set.SetFactory;
+import lombok.Getter;
 
 /**
  * The enum {@link LotteryWinCategory} represents all lottery winning categories.
@@ -141,6 +142,7 @@ public enum LotteryWinCategory
 	}
 
 	/** The bean that represents the win category. */
+	@Getter
 	private final WinCategory winCategory;
 
 	/**
@@ -154,8 +156,4 @@ public enum LotteryWinCategory
 		this.winCategory = winCategory;
 	}
 
-	public WinCategory getWinCategory()
-	{
-		return this.winCategory;
-	}
 }
