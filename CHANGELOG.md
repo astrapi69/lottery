@@ -4,6 +4,11 @@
 Version 5.10-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update gradle to new version 6.5
+- extracted project properties to gradle.properties
+
 Version 5.9
 -------------
 
