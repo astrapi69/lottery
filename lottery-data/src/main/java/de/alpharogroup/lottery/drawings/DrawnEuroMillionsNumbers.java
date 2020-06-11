@@ -20,6 +20,7 @@
  */
 package de.alpharogroup.lottery.drawings;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import lombok.AccessLevel;
@@ -54,5 +55,8 @@ public class DrawnEuroMillionsNumbers
 
 	/** The set with the drawn star numbers. */
 	Set<Integer> starNumbers;
+
+	/** The drawn date of this drawn numbers. */
+	LocalDateTime drawnDate;
 
 }

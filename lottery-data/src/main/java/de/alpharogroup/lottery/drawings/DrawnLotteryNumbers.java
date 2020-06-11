@@ -20,6 +20,7 @@
  */
 package de.alpharogroup.lottery.drawings;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import lombok.AccessLevel;
@@ -57,5 +58,8 @@ public class DrawnLotteryNumbers
 
 	/** The drawn super six number. */
 	Integer superSixNumber;
+
+	/** The drawn date of this drawn numbers. */
+	LocalDateTime drawnDate;
 
 }
