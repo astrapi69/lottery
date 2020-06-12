@@ -25,6 +25,12 @@ import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link WinCategory} represents an win category for a lottery like lottery.
+ *
+ * For calculate the win categories see the description on the
+ * <a href="https://github.com/astrapi69/lottery/wiki/compute-the-win-categories">
+ *     wiki page
+ * </a>
+ *
  */
 @Data
 @AllArgsConstructor
@@ -39,11 +45,20 @@ public class WinCategory implements Cloneable
 	/** The flag if the played super number is selected. */
 	boolean withSuperNumber;
 
+	/** The quota of the profit in this win category */
+	double quotaOfProfit;
+
+	/** The fixed winning units is for win categories that have fixed winning units */
+	int fixedWinningUnits;
+
 	@Override
 	protected Object clone() throws CloneNotSupportedException
 	{
 		WinCategory clone = WinCategory.builder().withSuperNumber(this.withSuperNumber)
-			.quantityOfWonNumbers(this.quantityOfWonNumbers).build();
+			.quantityOfWonNumbers(this.quantityOfWonNumbers)
+			.quotaOfProfit(this.quotaOfProfit)
+			.fixedWinningUnits(this.fixedWinningUnits)
+			.build();
 		return clone;
 	}
 }

@@ -34,25 +34,25 @@ public enum LotteryWinCategory
 {
 
 	/** The eighth winning class. */
-	EIGHTH_CLASS(WinCategory.builder().quantityOfWonNumbers(3).withSuperNumber(false).build()),
+	EIGHTH_CLASS(WinCategory.builder().quotaOfProfit(45.0d).quantityOfWonNumbers(3).withSuperNumber(false).build()),
 	/** The fifth winning class. */
-	FIFTH_CLASS(WinCategory.builder().quantityOfWonNumbers(4).withSuperNumber(true).build()),
+	FIFTH_CLASS(WinCategory.builder().quotaOfProfit(5.0d).quantityOfWonNumbers(4).withSuperNumber(true).build()),
 	/** The first winning class. */
-	FIRST_CLASS(WinCategory.builder().quantityOfWonNumbers(6).withSuperNumber(true).build()),
+	FIRST_CLASS(WinCategory.builder().quotaOfProfit(12.8d).quantityOfWonNumbers(6).withSuperNumber(true).build()),
 	/** The fourth winning class. */
-	FOURTH_CLASS(WinCategory.builder().quantityOfWonNumbers(5).withSuperNumber(false).build()),
+	FOURTH_CLASS(WinCategory.builder().quotaOfProfit(15.0d).quantityOfWonNumbers(5).withSuperNumber(false).build()),
 	/** The ninth winning class. */
-	NINTH_CLASS(WinCategory.builder().quantityOfWonNumbers(2).withSuperNumber(true).build()),
+	NINTH_CLASS(WinCategory.builder().fixedWinningUnits(5).quantityOfWonNumbers(2).withSuperNumber(true).build()),
 	/** The none winning class. */
 	NONE(null),
 	/** The second winning class. */
-	SECOND_CLASS(WinCategory.builder().quantityOfWonNumbers(6).withSuperNumber(false).build()),
+	SECOND_CLASS(WinCategory.builder().quotaOfProfit(10.0d).quantityOfWonNumbers(6).withSuperNumber(false).build()),
 	/** The seventh winning class. */
-	SEVENTH_CLASS(WinCategory.builder().quantityOfWonNumbers(3).withSuperNumber(true).build()),
+	SEVENTH_CLASS(WinCategory.builder().quotaOfProfit(10.0d).quantityOfWonNumbers(3).withSuperNumber(true).build()),
 	/** The sixth winning class. */
-	SIXTH_CLASS(WinCategory.builder().quantityOfWonNumbers(4).withSuperNumber(false).build()),
+	SIXTH_CLASS(WinCategory.builder().quotaOfProfit(10.0d).quantityOfWonNumbers(4).withSuperNumber(false).build()),
 	/** The third winning class. */
-	THIRD_CLASS(WinCategory.builder().quantityOfWonNumbers(5).withSuperNumber(true).build());
+	THIRD_CLASS(WinCategory.builder().quotaOfProfit(5.0d).quantityOfWonNumbers(5).withSuperNumber(true).build());
 
 	/**
 	 * Gets an {@linkplain Optional} with the {@linkplain LotteryWinCategory} from the given
