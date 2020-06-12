@@ -23,24 +23,14 @@ package de.alpharogroup.lottery.drawings;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link DrawnLotteryNumbers} contains data that can be used for the validation if the
  * given played lottery numbers have won.
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)

@@ -25,23 +25,13 @@ import java.util.Map;
 import java.util.Set;
 
 import de.alpharogroup.lottery.enums.LotteryGameType;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link LotteryPlayedNumbers} contains the data of the lottery player.
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)

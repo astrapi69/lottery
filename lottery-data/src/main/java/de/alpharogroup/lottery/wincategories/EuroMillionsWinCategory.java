@@ -20,22 +20,13 @@
  */
 package de.alpharogroup.lottery.wincategories;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link EuroMillionsWinCategory} represents an win category for the EuroMillion lottery.
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)

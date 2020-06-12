@@ -26,24 +26,14 @@ import java.util.Map;
 
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.lottery.enums.LotteryGameType;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link EvaluatedLotteryNumbers} contains the evaluated result of the drawn lottery
  * numbers and the played numbers of a player.
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)

@@ -24,24 +24,13 @@ import java.util.Set;
 
 import de.alpharogroup.lottery.enums.LotteryGameType;
 import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.Singular;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link LotteryBox} represents exactly one lottery box in a lottery ticket
  */
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
