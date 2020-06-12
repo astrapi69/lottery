@@ -22,9 +22,12 @@ package de.alpharogroup.lottery.drawings;
 
 import static org.testng.Assert.assertNotNull;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import org.meanbean.test.BeanTester;
+import org.meanbean.test.Configuration;
+import org.meanbean.test.ConfigurationBuilder;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.set.SetFactory;
@@ -42,21 +45,25 @@ public class DrawnLotteryNumbersTest
 	@Test
 	public void testObjectCreation()
 	{
-		DrawnLotteryNumbers object = DrawnLotteryNumbers.builder().build();
+		Integer id;
+		Set<Integer> lotteryNumbers;
+		Integer superSixNumber;
+		Integer superNumber;
+		LocalDateTime drawnDate;
+		DrawnLotteryNumbers object;
+
+		object = DrawnLotteryNumbers.builder().build();
 		assertNotNull(object);
-		/** The id. */
-		Integer id = 1;
 
-		/** The lucky lottery numbers. */
-		Set<Integer> lotteryNumbers = SetFactory.newTreeSet(3, 7, 22, 23, 34, 45);
+		id = 1;
+		lotteryNumbers = SetFactory.newTreeSet(3, 7, 22, 23, 34, 45);
 
-		/** The super six number. */
-		Integer superSixNumber = 4;
+		superSixNumber = 4;
 
-		/** The super number. */
-		Integer superNumber = 8;
+		superNumber = 8;
+		drawnDate = LocalDateTime.now();
 
-		object = new DrawnLotteryNumbers(id, lotteryNumbers, superSixNumber, superNumber);
+		object = new DrawnLotteryNumbers(id, lotteryNumbers, superSixNumber, superNumber, drawnDate);
 		assertNotNull(object);
 	}
 
@@ -66,7 +73,10 @@ public class DrawnLotteryNumbersTest
 	@Test
 	public void testWithBeanTester()
 	{
+		Configuration configuration = new ConfigurationBuilder()
+			.overrideFactory("drawnDate", LocalDateTime::now).build();
 		final BeanTester beanTester = new BeanTester();
+		beanTester.addCustomConfiguration(DrawnLotteryNumbers.class, configuration);
 		beanTester.testBean(DrawnLotteryNumbers.class);
 	}
 

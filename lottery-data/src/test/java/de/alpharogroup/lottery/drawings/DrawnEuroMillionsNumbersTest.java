@@ -23,15 +23,17 @@
  */
 package de.alpharogroup.lottery.drawings;
 
-import static org.testng.Assert.assertNotNull;
-
-import java.util.Set;
-
-import org.meanbean.test.BeanTester;
-import org.testng.annotations.Test;
-
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
+import org.meanbean.test.BeanTester;
+import org.meanbean.test.Configuration;
+import org.meanbean.test.ConfigurationBuilder;
+import org.testng.annotations.Test;
+
+import java.time.LocalDateTime;
+import java.util.Set;
+
+import static org.testng.Assert.assertNotNull;
 
 /**
  * The unit test class for the class {@link DrawnEuroMillionsNumbers}.
@@ -45,18 +47,20 @@ public class DrawnEuroMillionsNumbersTest
 	@Test
 	public void testObjectCreation()
 	{
-		DrawnEuroMillionsNumbers object = DrawnEuroMillionsNumbers.builder().build();
+		Integer id;
+		Set<Integer> lotteryNumbers;
+		Set<Integer> starNumbers;
+		LocalDateTime drawnDate;
+		DrawnEuroMillionsNumbers object;
+
+		object = DrawnEuroMillionsNumbers.builder().build();
 		assertNotNull(object);
-		/** The id. */
-		Integer id = 1;
+		id = 1;
+		lotteryNumbers = SetFactory.newTreeSet(3, 7, 22, 23, 34);
+		starNumbers = SetFactory.newTreeSet(3, 7);
+		drawnDate = LocalDateTime.now();
 
-		/** The lucky lottery numbers. */
-		Set<Integer> lotteryNumbers = SetFactory.newTreeSet(3, 7, 22, 23, 34);
-
-		/** The super six number. */
-		Set<Integer> starNumbers = SetFactory.newTreeSet(3, 7);
-
-		object = new DrawnEuroMillionsNumbers(id, lotteryNumbers, starNumbers);
+		object = new DrawnEuroMillionsNumbers(id, lotteryNumbers, starNumbers, drawnDate);
 		assertNotNull(object);
 	}
 
@@ -66,7 +70,12 @@ public class DrawnEuroMillionsNumbersTest
 	@Test
 	public void testWithBeanTester()
 	{
+
+		Configuration configuration = new ConfigurationBuilder()
+			.overrideFactory("drawnDate", LocalDateTime::now).build();
+
 		final BeanTester beanTester = new BeanTester();
+		beanTester.addCustomConfiguration(DrawnEuroMillionsNumbers.class, configuration);
 		beanTester.testBean(DrawnEuroMillionsNumbers.class);
 	}
 

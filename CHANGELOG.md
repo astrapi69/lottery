@@ -8,6 +8,7 @@ CHANGED:
 
 - update gradle to new version 6.5
 - extracted project properties to gradle.properties
+- update of dependency jobj-compare version to 3.6.1
 
 Version 5.9
 -------------
@@ -16,15 +17,15 @@ ADDED:
  
 - gradle as build system
 - new factory method for create a map for count drawn numbers and can summarized with a given Map
+- new dependency silly-beans in minor version 1.1 added
 
 CHANGED:
 
 - removed maven related files
 - changed project nature from maven to gradle nature
-- update of dependency silly-collections major version to 8.1
+- update of dependency silly-collections version to 8.1
 - update of dependency randomizer version to 6.7
 - update of test dependency testng version to 7.1.0
-- update of dependency silly-beans in minor version 1.1 added
 - removed all lombok dependent imports
 - removed lombok dependency
 
