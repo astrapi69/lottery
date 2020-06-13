@@ -25,12 +25,18 @@ import java.util.Optional;
 
 import de.alpharogroup.collections.CollectionExtensions;
 import de.alpharogroup.collections.set.SetFactory;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 /**
  * The enum {@link LotteryWinCategory} represents all lottery winning categories.
  */
-public enum LotteryWinCategory
+@Getter
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public enum LotteryWinCategory implements WinningOpportunity
 {
 
 	/** The eighth winning class. */
@@ -142,18 +148,6 @@ public enum LotteryWinCategory
 	}
 
 	/** The bean that represents the win category. */
-	@Getter
-	private final WinCategory winCategory;
-
-	/**
-	 * Instantiates a new {@link LotteryWinCategory}.
-	 *
-	 * @param winCategory
-	 *            the win category
-	 */
-	private LotteryWinCategory(final WinCategory winCategory)
-	{
-		this.winCategory = winCategory;
-	}
+	WinCategory winCategory;
 
 }

@@ -20,31 +20,36 @@
  */
 package de.alpharogroup.lottery.wincategories;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 /**
  * The enum {@link GameSeventySevenWinCategory}.
  */
 @Getter
-public enum GameSeventySevenWinCategory
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+public enum GameSeventySevenWinCategory implements WinningOpportunity
 {
 
 	/** The fifth winning class. */
-	FIFTH_CLASS(3),
+	FIFTH_CLASS(3, 77),
 	/** The first winning class. */
-	FIRST_CLASS(7),
+	FIRST_CLASS(7, 177777),
 	/** The fourth winning class. */
-	FOURTH_CLASS(4),
+	FOURTH_CLASS(4, 777),
 	/** The none winning class. */
-	NONE(0),
+	BLANK(0, 0),
 	/** The second winning class. */
-	SECOND_CLASS(6),
+	SECOND_CLASS(6, 77777),
 	/** The seventh winning class. */
-	SEVENTH_CLASS(1),
+	SEVENTH_CLASS(1, 5),
 	/** The sixth winning class. */
-	SIXTH_CLASS(2),
+	SIXTH_CLASS(2, 17),
 	/** The third winning class. */
-	THIRD_CLASS(5);
+	THIRD_CLASS(5, 7777);
 
 	public static GameSeventySevenWinCategory getGameSeventySevenWinCategory(
 		Integer drawnGameSeventySeven, Integer playedGameSeventySeven)
@@ -108,14 +113,12 @@ public enum GameSeventySevenWinCategory
 		{
 			return GameSeventySevenWinCategory.SEVENTH_CLASS;
 		}
-		return GameSeventySevenWinCategory.NONE;
+		return GameSeventySevenWinCategory.BLANK;
 	}
 
-	private Integer equalNumbers;
-
-	private GameSeventySevenWinCategory(Integer equalNumbers)
-	{
-		this.equalNumbers = equalNumbers;
-	}
+	/** The last numbers that equal the seventy seven numbers  */
+	Integer equalNumbers;
+	/** The fixed winning units is for win categories that have fixed winning units */
+	Integer fixedWinningUnits;
 
 }

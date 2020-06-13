@@ -49,7 +49,8 @@ public class WinCategory implements Cloneable
 	double quotaOfProfit;
 
 	/** The fixed winning units is for win categories that have fixed winning units */
-	int fixedWinningUnits;
+	@Builder.Default
+	int fixedWinningUnits = 0;
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException

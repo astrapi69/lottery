@@ -4,6 +4,10 @@
 Version 5.10-SNAPSHOT
 -------------
 
+ADDED:
+
+- new estimation class for calculate the winning categories
+
 CHANGED:
 
 - update gradle to new version 6.5

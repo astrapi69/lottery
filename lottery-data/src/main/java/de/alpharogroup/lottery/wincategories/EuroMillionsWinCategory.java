@@ -30,7 +30,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-public class EuroMillionsWinCategory implements Cloneable
+public class EuroMillionsWinCategory implements Cloneable, WinningOpportunity
 {
 
 	/** The computation. */

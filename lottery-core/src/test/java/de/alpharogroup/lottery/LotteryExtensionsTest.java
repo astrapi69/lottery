@@ -57,6 +57,10 @@ public class LotteryExtensionsTest
 	@Test(enabled = true)
 	public void test4NumbersWinLuckyNumbers()
 	{
+		int actual;
+		int expected;
+		Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers;
+		LotteryPlayedNumbers lotteryPlayedNumbers;
 		// This numbers is your played lottery numbers...
 		List<Set<Integer>> sixOffourtynineGame;
 
@@ -65,18 +69,17 @@ public class LotteryExtensionsTest
 		// SetExtensions.newTreeSet(3, 7, 22, 23, 34, 45),
 		// SetExtensions.newTreeSet(13, 17, 21, 23, 34, 48),
 		// SetExtensions.newTreeSet(5, 8, 21, 22, 34, 45));
-		final Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers = MapFactory
-			.newHashMap();
+		playedLotteryNumbers = MapFactory.newHashMap();
 		playedLotteryNumbers.put(sixOffourtynineGameType, sixOffourtynineGame);
 
-		final LotteryPlayedNumbers lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
+		lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
 			.playedLotteryNumbers(playedLotteryNumbers).superNumber(23).superSixNumber(4).build();
 
 		LotteryExtensions.calculateDraws(lotteryPlayedNumbers, 4);
 
 
-		int actual = LotteryExtensions.calculateDraws(lotteryPlayedNumbers, 6);
-		int expected = -1;
+		actual = LotteryExtensions.calculateDraws(lotteryPlayedNumbers, 6);
+		expected = -1;
 		assertEquals(actual, expected);
 	}
 
@@ -86,14 +89,16 @@ public class LotteryExtensionsTest
 	@Test
 	public void testCalculateDrawsLotteryPlayedNumbersIntInt()
 	{
+		Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers;
+		LotteryPlayedNumbers lotteryPlayedNumbers;
 		// This numbers is your played lottery numbers...
 		List<Set<Integer>> sixOffourtynineGame;
 
 		sixOffourtynineGame = LotterySetsFactory.newLotterySetsForTests();
-		final Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers = MapFactory
+		playedLotteryNumbers = MapFactory
 			.newHashMap();
 		playedLotteryNumbers.put(sixOffourtynineGameType, sixOffourtynineGame);
-		final LotteryPlayedNumbers lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
+		lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
 			.playedLotteryNumbers(playedLotteryNumbers).superNumber(23).superSixNumber(4).build();
 
 		LotteryExtensions.calculateDraws(lotteryPlayedNumbers, 4, 2);
@@ -107,7 +112,8 @@ public class LotteryExtensionsTest
 	@Test
 	public void testCalculateDrawsLotteryTicketLotteryWinCategoryInt()
 	{
-		LotteryTicket lotteryTicket = LotterySetsFactory
+		LotteryTicket lotteryTicket;
+		lotteryTicket = LotterySetsFactory
 			.newLotteryTicket(LotterySetsFactory.newLotterySetsForTests());
 		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FIRST_CLASS, 2);
 	}
@@ -119,28 +125,30 @@ public class LotteryExtensionsTest
 	@Test
 	public void testCheckResult()
 	{
-
+		Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers;
+		LotteryPlayedNumbers lotteryPlayedNumbers;
+		List<Set<Integer>> sixOffourtynineGame;
+		Set<Integer> lotteryNumbers;
+		EvaluatedLotteryNumbers evaluatedLotteryNumbers;
 		// This numbers are lucky choosen from the lottery queen...
-		final Set<Integer> lotteryNumbers = SetFactory.newTreeSet(7, 23, 34, 42, 45, 48);
+		lotteryNumbers = SetFactory.newTreeSet(7, 23, 34, 42, 45, 48);
 		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder()
 			.lotteryNumbers(lotteryNumbers).superNumber(5).superSixNumber(8).build();
 
 		// This numbers is your played lottery numbers...
-		List<Set<Integer>> sixOffourtynineGame;
-
 		sixOffourtynineGame = ListFactory.<Set<Integer>> newArrayList(
 			SetFactory.newTreeSet(3, 7, 22, 23, 34, 45),
 			SetFactory.newTreeSet(13, 17, 21, 23, 34, 48),
 			SetFactory.newTreeSet(5, 8, 21, 22, 34, 45));
-		final Map<LotteryGameType, List<Set<Integer>>> playedLotteryNumbers = MapFactory
+		playedLotteryNumbers = MapFactory
 			.newHashMap();
 		playedLotteryNumbers.put(sixOffourtynineGameType, sixOffourtynineGame);
 
-		final LotteryPlayedNumbers lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
+		lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
 			.playedLotteryNumbers(playedLotteryNumbers).superNumber(23).superSixNumber(4).build();
 
 		// Lets process if your numbers have won the jackpot...
-		final EvaluatedLotteryNumbers evaluatedLotteryNumbers = LotteryExtensions
+		evaluatedLotteryNumbers = LotteryExtensions
 			.checkResult(drawnLotteryNumbers, lotteryPlayedNumbers);
 
 		// make the checks and map to WinCategories...

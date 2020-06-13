@@ -46,6 +46,8 @@ public class LotteryWinCategoryTest
 		Optional<LotteryWinCategory> actual;
 		Collection<Integer> wonLotteryTicket;
 		boolean withSuperNumber;
+		Integer expectedFixedWinningUnits;
+		Integer actualFixedWinningUnits;
 
 		wonLotteryTicket = SetFactory.newTreeSet(6, 12, 15, 18, 25, 30);
 		withSuperNumber = true;
@@ -100,6 +102,10 @@ public class LotteryWinCategoryTest
 		expected = Optional.of(LotteryWinCategory.NINTH_CLASS);
 		actual = LotteryWinCategory.getLotteryWinCategory(wonLotteryTicket, withSuperNumber);
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 5;
+		LotteryWinCategory lotteryWinCategory = actual.get();
+		actualFixedWinningUnits = lotteryWinCategory.getWinCategory().getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
 
 		wonLotteryTicket = SetFactory.newTreeSet(6, 12);
 		withSuperNumber = false;
@@ -204,7 +210,8 @@ public class LotteryWinCategoryTest
 		LotteryWinCategory object = LotteryWinCategory.EIGHTH_CLASS;
 		assertNotNull(object);
 
-		expected = WinCategory.builder().quantityOfWonNumbers(3).withSuperNumber(false).build();
+		expected = WinCategory.builder().quotaOfProfit(45.0d)
+			.quantityOfWonNumbers(3).withSuperNumber(false).build();
 		actual = object.getWinCategory();
 		assertEquals(expected, actual);
 	}

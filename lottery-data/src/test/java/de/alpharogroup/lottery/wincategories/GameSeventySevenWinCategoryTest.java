@@ -40,37 +40,64 @@ public class GameSeventySevenWinCategoryTest
 	{
 		GameSeventySevenWinCategory expected;
 		GameSeventySevenWinCategory actual;
+		Integer expectedFixedWinningUnits;
+		Integer actualFixedWinningUnits;
 
 		actual = GameSeventySevenWinCategory.getGameSeventySevenWinCategory(7777777, 7777777);
 		expected = GameSeventySevenWinCategory.FIRST_CLASS;
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 177777;
+		actualFixedWinningUnits = actual.getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
 
 		actual = GameSeventySevenWinCategory.getGameSeventySevenWinCategory(7777777, 777777);
 		expected = GameSeventySevenWinCategory.SECOND_CLASS;
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 77777;
+		actualFixedWinningUnits = actual.getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
 
 		actual = GameSeventySevenWinCategory.getGameSeventySevenWinCategory(7777777, 77777);
 		expected = GameSeventySevenWinCategory.THIRD_CLASS;
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 7777;
+		actualFixedWinningUnits = actual.getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
 
 		actual = GameSeventySevenWinCategory.getGameSeventySevenWinCategory(7777777, 7777);
 		expected = GameSeventySevenWinCategory.FOURTH_CLASS;
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 777;
+		actualFixedWinningUnits = actual.getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
+
 		actual = GameSeventySevenWinCategory.getGameSeventySevenWinCategory(7777777, 777);
 		expected = GameSeventySevenWinCategory.FIFTH_CLASS;
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 77;
+		actualFixedWinningUnits = actual.getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
 
 		actual = GameSeventySevenWinCategory.getGameSeventySevenWinCategory(7777777, 77);
 		expected = GameSeventySevenWinCategory.SIXTH_CLASS;
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 17;
+		actualFixedWinningUnits = actual.getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
 
 		actual = GameSeventySevenWinCategory.getGameSeventySevenWinCategory(7777777, 7);
 		expected = GameSeventySevenWinCategory.SEVENTH_CLASS;
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 5;
+		actualFixedWinningUnits = actual.getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
 
 		actual = GameSeventySevenWinCategory.getGameSeventySevenWinCategory(7777777, 1);
-		expected = GameSeventySevenWinCategory.NONE;
+		expected = GameSeventySevenWinCategory.BLANK;
 		assertEquals(actual, expected);
+		expectedFixedWinningUnits = 0;
+		actualFixedWinningUnits = actual.getFixedWinningUnits();
+		assertEquals(actualFixedWinningUnits, expectedFixedWinningUnits);
 	}
 
 	/**
@@ -86,6 +113,10 @@ public class GameSeventySevenWinCategoryTest
 
 		expected = 3;
 		actual = object.getEqualNumbers();
+		assertEquals(expected, actual);
+
+		expected = 77;
+		actual = object.getFixedWinningUnits();
 		assertEquals(expected, actual);
 	}
 
