@@ -2,6 +2,8 @@
 dependencies {
     implementation project(":lottery-data")
     implementation("de.alpharogroup:jobj-compare:$jobjCompareVersion")
+    implementation("de.alpharogroup:silly-math:$sillyMathVersion")
+    implementation("org.apache.commons:commons-math3:$commonsMath3Version")
     implementation("de.alpharogroup:randomizer-core:$randomizerVersion")
     testImplementation("de.alpharogroup:silly-beans:$sillyBeansVersion")
 }

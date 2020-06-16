@@ -3,6 +3,7 @@ package de.alpharogroup.lottery.computation;
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
 import de.alpharogroup.lottery.wincategories.WinEvaluation;
+import static de.alpharogroup.math.MathExtensions.percentageOf;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -146,8 +147,8 @@ public final class UnitEstimationExtensions
 	 * @param percentage The percentage
 	 * @return the result of the percentage of the given value
 	 */
-	public static double percentageOf(double value, double percentage)
-	{
-		return percentage * value / 100;
-	}
+//	public static double percentageOf(double value, double percentage)
+//	{
+//		return percentage * value / 100;
+//	}
 }
