@@ -3,7 +3,6 @@ package de.alpharogroup.lottery.computation;
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
 import de.alpharogroup.lottery.wincategories.WinEvaluation;
-import static de.alpharogroup.math.MathExtensions.percentageOf;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -15,37 +14,17 @@ public final class UnitEstimationExtensions
 	{
 	}
 
-	public static List<WinEvaluation<LotteryWinCategory>> evaluateLotteryPot(double unitsInPot)
-	{
-
-		List<WinEvaluation<LotteryWinCategory>> winningOpportunities = ListFactory.newArrayList();
-
-		WinEvaluation<LotteryWinCategory> firstClassPortionWinEvaluation = getFirstClassPortion(
-			unitsInPot);
-		double firstClassPortion = firstClassPortionWinEvaluation.getEvaluationOfUnitsResult();
-		winningOpportunities.add(firstClassPortionWinEvaluation);
-		double restUnitsOfPot = unitsInPot - firstClassPortion;
-		WinEvaluation<LotteryWinCategory> secondClassPortion = getSecondClassPortion(
-			restUnitsOfPot);
-		winningOpportunities.add(secondClassPortion);
-		WinEvaluation<LotteryWinCategory> thirdClassPortion = getThirdClassPortion(restUnitsOfPot);
-		winningOpportunities.add(thirdClassPortion);
-		WinEvaluation<LotteryWinCategory> fourthClassPortion = getFourthClassPortion(
-			restUnitsOfPot);
-		winningOpportunities.add(fourthClassPortion);
-		WinEvaluation<LotteryWinCategory> fifthClassPortion = getFifthClassPortion(restUnitsOfPot);
-		winningOpportunities.add(fifthClassPortion);
-		WinEvaluation<LotteryWinCategory> sixthClassPortion = getSixthClassPortion(restUnitsOfPot);
-		winningOpportunities.add(sixthClassPortion);
-		WinEvaluation<LotteryWinCategory> seventhClassPortion = getSeventhClassPortion(
-			restUnitsOfPot);
-		winningOpportunities.add(seventhClassPortion);
-		WinEvaluation<LotteryWinCategory> eighthClassPortion = getEighthClassPortion(
-			restUnitsOfPot);
-		winningOpportunities.add(eighthClassPortion);
-		return winningOpportunities;
-	}
-
+	/**
+	 * Calculates the percentage of the given value
+	 *
+	 * @param value      The value
+	 * @param percentage The percentage
+	 * @return the result of the percentage of the given value
+	 */
+		public static double percentageOf(double value, double percentage)
+		{
+			return percentage * value / 100;
+		}
 
 	public static Map<LotteryWinCategory, WinEvaluation<LotteryWinCategory>> calculateLotteryPot(
 		double unitsInPot, double unitsOfWinClassNine)
@@ -140,15 +119,4 @@ public final class UnitEstimationExtensions
 			.winCategory(LotteryWinCategory.EIGHTH_CLASS).evaluationOfUnitsResult(portion).build();
 	}
 
-	/**
-	 * Calculates the percentage of the given value
-	 *
-	 * @param value      The value
-	 * @param percentage The percentage
-	 * @return the result of the percentage of the given value
-	 */
-//	public static double percentageOf(double value, double percentage)
-//	{
-//		return percentage * value / 100;
-//	}
 }
