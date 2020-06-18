@@ -2,11 +2,34 @@ package de.alpharogroup.lottery.combinations;
 
 import de.alpharogroup.check.Argument;
 import de.alpharogroup.collections.list.ListFactory;
+import org.apache.commons.math3.util.CombinatoricsUtils;
 
 import java.util.List;
 
 public final class CombinationResolver
 {
+
+	/**
+	 * Gets the count of all possible combinations from the given size of the set of possible numbers
+	 * and the given size of the subset to be counted.
+	 *
+	 * Note:<br><br>
+	 *
+	 * uses internally the method of
+	 *  	<code>
+	 *  	    org.apache.commons.math3.util.CombinatoricsUtils#binomialCoefficient(int, int)
+	 *  	</code>
+	 *
+	 * @param possibleNumbers
+	 *            the size of possible numbers
+	 * @param combinationSize
+	 *            the size of a single combination
+	 * @return an exact representation of the Binomial Coefficient, "n choose k",
+	 * 			the number of k-element subsets that can be selected from an n-element set.
+	 */
+	public static long getAllPossibleCombinationsCount(int possibleNumbers, int combinationSize) {
+		return CombinatoricsUtils.binomialCoefficient(possibleNumbers, combinationSize);
+	}
 
 	/**
 	 * Gets all possible combinations from the given list of {@link Integer} objects

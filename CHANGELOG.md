@@ -7,6 +7,9 @@ Version 5.10-SNAPSHOT
 ADDED:
 
 - new estimation class for calculate the winning categories
+- new class for resolve all possible combinations with algorithm for 
+    - count all possible combinations
+    - get all possible combinations as a list of lists
 
 CHANGED:
 
