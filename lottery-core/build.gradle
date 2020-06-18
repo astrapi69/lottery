@@ -64,7 +64,7 @@ publishing {
             artifact sourcesJar
             artifact javadocJar
             pom {
-                name = "$rootProject.name"
+                name = "$project.name"
                 description = "$projectCoreDescription"
                 url = "$projectScmProviderUrl"+"$projectHolderUsername"+"/"+"$rootProject.name"
                 organization {
