@@ -23,17 +23,18 @@
  */
 package de.alpharogroup.lottery.drawings;
 
-import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
+import static org.testng.Assert.assertNotNull;
+
+import java.time.LocalDateTime;
+import java.util.Set;
+
 import org.meanbean.test.BeanTester;
 import org.meanbean.test.Configuration;
 import org.meanbean.test.ConfigurationBuilder;
 import org.testng.annotations.Test;
 
-import java.time.LocalDateTime;
-import java.util.Set;
-
-import static org.testng.Assert.assertNotNull;
+import de.alpharogroup.collections.set.SetFactory;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link DrawnEuroMillionsNumbers}.

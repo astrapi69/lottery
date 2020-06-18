@@ -63,7 +63,8 @@ public class DrawnLotteryNumbersTest
 		superNumber = 8;
 		drawnDate = LocalDateTime.now();
 
-		object = new DrawnLotteryNumbers(id, lotteryNumbers, superSixNumber, superNumber, drawnDate);
+		object = new DrawnLotteryNumbers(drawnDate, id, lotteryNumbers, superNumber,
+			superSixNumber);
 		assertNotNull(object);
 	}
 

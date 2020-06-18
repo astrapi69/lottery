@@ -95,8 +95,7 @@ public class LotteryExtensionsTest
 		List<Set<Integer>> sixOffourtynineGame;
 
 		sixOffourtynineGame = LotterySetsFactory.newLotterySetsForTests();
-		playedLotteryNumbers = MapFactory
-			.newHashMap();
+		playedLotteryNumbers = MapFactory.newHashMap();
 		playedLotteryNumbers.put(sixOffourtynineGameType, sixOffourtynineGame);
 		lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
 			.playedLotteryNumbers(playedLotteryNumbers).superNumber(23).superSixNumber(4).build();
@@ -140,16 +139,15 @@ public class LotteryExtensionsTest
 			SetFactory.newTreeSet(3, 7, 22, 23, 34, 45),
 			SetFactory.newTreeSet(13, 17, 21, 23, 34, 48),
 			SetFactory.newTreeSet(5, 8, 21, 22, 34, 45));
-		playedLotteryNumbers = MapFactory
-			.newHashMap();
+		playedLotteryNumbers = MapFactory.newHashMap();
 		playedLotteryNumbers.put(sixOffourtynineGameType, sixOffourtynineGame);
 
 		lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
 			.playedLotteryNumbers(playedLotteryNumbers).superNumber(23).superSixNumber(4).build();
 
 		// Lets process if your numbers have won the jackpot...
-		evaluatedLotteryNumbers = LotteryExtensions
-			.checkResult(drawnLotteryNumbers, lotteryPlayedNumbers);
+		evaluatedLotteryNumbers = LotteryExtensions.checkResult(drawnLotteryNumbers,
+			lotteryPlayedNumbers);
 
 		// make the checks and map to WinCategories...
 		LotteryExtensions.setWinCategories(evaluatedLotteryNumbers);

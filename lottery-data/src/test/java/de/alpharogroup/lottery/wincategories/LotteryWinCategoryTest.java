@@ -210,8 +210,8 @@ public class LotteryWinCategoryTest
 		LotteryWinCategory object = LotteryWinCategory.EIGHTH_CLASS;
 		assertNotNull(object);
 
-		expected = WinCategory.builder().quotaOfProfit(45.0d)
-			.quantityOfWonNumbers(3).withSuperNumber(false).build();
+		expected = WinCategory.builder().quotaOfProfit(45.0d).quantityOfWonNumbers(3)
+			.withSuperNumber(false).build();
 		actual = object.getWinCategory();
 		assertEquals(expected, actual);
 	}

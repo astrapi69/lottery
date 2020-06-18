@@ -34,14 +34,14 @@ import lombok.experimental.FieldDefaults;
 public enum GameSeventySevenWinCategory implements WinningOpportunity
 {
 
+	/** The none winning class. */
+	BLANK(0, 0),
 	/** The fifth winning class. */
 	FIFTH_CLASS(3, 77),
 	/** The first winning class. */
 	FIRST_CLASS(7, 177777),
 	/** The fourth winning class. */
 	FOURTH_CLASS(4, 777),
-	/** The none winning class. */
-	BLANK(0, 0),
 	/** The second winning class. */
 	SECOND_CLASS(6, 77777),
 	/** The seventh winning class. */
@@ -116,7 +116,7 @@ public enum GameSeventySevenWinCategory implements WinningOpportunity
 		return GameSeventySevenWinCategory.BLANK;
 	}
 
-	/** The last numbers that equal the seventy seven numbers  */
+	/** The last numbers that equal the seventy seven numbers */
 	Integer equalNumbers;
 	/** The fixed winning units is for win categories that have fixed winning units */
 	Integer fixedWinningUnits;

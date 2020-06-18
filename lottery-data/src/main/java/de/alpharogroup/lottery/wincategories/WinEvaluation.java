@@ -1,7 +1,10 @@
 package de.alpharogroup.lottery.wincategories;
 
-import de.alpharogroup.lottery.ticket.LotteryTicket;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 /**
@@ -14,6 +17,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class WinEvaluation<C extends WinningOpportunity>
 {
-	C winCategory;
 	double evaluationOfUnitsResult;
+	C winCategory;
 }

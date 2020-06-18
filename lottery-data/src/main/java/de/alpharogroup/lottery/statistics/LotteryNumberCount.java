@@ -20,10 +20,14 @@
  */
 package de.alpharogroup.lottery.statistics;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.util.Map;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link LotteryNumberCount} is used to count the lottery numbers in several draws and

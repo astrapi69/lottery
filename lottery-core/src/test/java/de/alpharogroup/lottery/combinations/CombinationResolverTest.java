@@ -1,51 +1,20 @@
 package de.alpharogroup.lottery.combinations;
 
-import de.alpharogroup.collections.CollectionExtensions;
-import de.alpharogroup.collections.list.ListFactory;
-import org.apache.commons.math3.fraction.Fraction;
-import org.testng.annotations.Test;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 import java.util.List;
 
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertTrue;
+import org.testng.annotations.Test;
+
+import de.alpharogroup.collections.CollectionExtensions;
+import de.alpharogroup.collections.list.ListFactory;
 
 /**
  * The unit test class for the class {@link CombinationResolver}.
  */
 public class CombinationResolverTest
 {
-
-	/**
-	 * Test the method {@link CombinationResolver#getAllPossibleCombinationsCount(int, int)}
-	 */
-	@Test
-	public void testGgetAllPossibleCombinationsCount()
-	{
-		List<Integer> values;
-		long actual;
-		long expected;
-		// new scenario...
-		expected = 4;
-		values = ListFactory.newArrayList(1, 2, 3, 4);
-		actual = CombinationResolver.getAllPossibleCombinationsCount(values.size(), 3);
-		assertEquals(actual, expected);
-		// new scenario...
-		expected = 10;
-		values = ListFactory.newArrayList(1, 2, 3, 4, 5);
-		actual = CombinationResolver.getAllPossibleCombinationsCount(values.size(), 3);
-		assertEquals(actual, expected);
-		// new scenario...
-		expected = 7;
-		values = ListFactory.newArrayList(1, 2, 3, 4, 5, 6, 7);
-		actual = CombinationResolver.getAllPossibleCombinationsCount(values.size(), 6);
-		assertEquals(actual, expected);
-		// new scenario...
-		expected = 165;
-		values = ListFactory.newRangeList(1, 11);
-		actual = CombinationResolver.getAllPossibleCombinationsCount(values.size(), 3);
-		assertEquals(actual, expected);
-	}
 
 	/**
 	 * Test the method {@link CombinationResolver#getAllCombinations(List, int)}
@@ -147,6 +116,37 @@ public class CombinationResolverTest
 		values = ListFactory.newArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11");
 		actual = CombinationResolver.getCombinations(values, 3);
 		assertEquals(actual.size(), 165);
+	}
+
+	/**
+	 * Test the method {@link CombinationResolver#getAllPossibleCombinationsCount(int, int)}
+	 */
+	@Test
+	public void testGgetAllPossibleCombinationsCount()
+	{
+		List<Integer> values;
+		long actual;
+		long expected;
+		// new scenario...
+		expected = 4;
+		values = ListFactory.newArrayList(1, 2, 3, 4);
+		actual = CombinationResolver.getAllPossibleCombinationsCount(values.size(), 3);
+		assertEquals(actual, expected);
+		// new scenario...
+		expected = 10;
+		values = ListFactory.newArrayList(1, 2, 3, 4, 5);
+		actual = CombinationResolver.getAllPossibleCombinationsCount(values.size(), 3);
+		assertEquals(actual, expected);
+		// new scenario...
+		expected = 7;
+		values = ListFactory.newArrayList(1, 2, 3, 4, 5, 6, 7);
+		actual = CombinationResolver.getAllPossibleCombinationsCount(values.size(), 6);
+		assertEquals(actual, expected);
+		// new scenario...
+		expected = 165;
+		values = ListFactory.newRangeList(1, 11);
+		actual = CombinationResolver.getAllPossibleCombinationsCount(values.size(), 3);
+		assertEquals(actual, expected);
 	}
 
 }

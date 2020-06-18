@@ -24,7 +24,12 @@ import java.util.Set;
 
 import de.alpharogroup.lottery.enums.LotteryGameType;
 import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.experimental.FieldDefaults;
 
 /**

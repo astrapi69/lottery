@@ -23,7 +23,11 @@ package de.alpharogroup.lottery.drawings;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 /**
@@ -37,6 +41,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DrawnLotteryNumbers
 {
+	/** The drawn date of this drawn numbers. */
+	LocalDateTime drawnDate;
+
 	/** The id. */
 	Integer id;
 
@@ -48,8 +55,5 @@ public class DrawnLotteryNumbers
 
 	/** The drawn super six number. */
 	Integer superSixNumber;
-
-	/** The drawn date of this drawn numbers. */
-	LocalDateTime drawnDate;
 
 }
