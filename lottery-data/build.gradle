@@ -57,7 +57,7 @@ def releaseVersion = !version.endsWith("SNAPSHOT")
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = "$rootProject.name"
+            artifactId = "$project.name"
             from components.java
             artifact sourcesJar
             artifact javadocJar
