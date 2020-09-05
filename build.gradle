@@ -17,6 +17,11 @@ buildscript {
 allprojects {
     group = "$groupPackage"
     version = "$projectVersion"
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 }
 
 subprojects {
@@ -27,13 +32,6 @@ subprojects {
     apply plugin: "maven-publish"
     apply plugin: "com.github.ben-manes.versions"
     apply plugin: "com.github.hierynomus.license"
-
-    repositories {
-        mavenLocal()
-        maven {
-            url = "https://repo.maven.apache.org/maven2"
-        }
-    }
 
     dependencies {
         implementation("de.alpharogroup:silly-collections:$sillyCollectionsVersion")
