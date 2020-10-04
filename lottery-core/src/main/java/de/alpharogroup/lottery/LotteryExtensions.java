@@ -61,7 +61,7 @@ public final class LotteryExtensions
 	public static int calculateDraws(final LotteryPlayedNumbers lotteryPlayedNumbers,
 		final int winningNumbersCount)
 	{
-		return calculateDraws(lotteryPlayedNumbers, winningNumbersCount, 10000);
+		return calculateDrawsStatistics(lotteryPlayedNumbers, winningNumbersCount, 10000);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public final class LotteryExtensions
 	 *            the max iterations in the while loop
 	 * @return the int
 	 */
-	public static int calculateDraws(final LotteryPlayedNumbers lotteryPlayedNumbers,
+	public static int calculateDrawsStatistics(final LotteryPlayedNumbers lotteryPlayedNumbers,
 		final int winningNumbersCount, int maxIterations)
 	{
 		if (!MathExtensions.isBetween(1, 6, winningNumbersCount))
@@ -136,7 +136,7 @@ public final class LotteryExtensions
 		LotteryWinCategory lotteryWinCategory)
 	{
 		Objects.requireNonNull(lotteryWinCategory);
-		return calculateDraws(lotteryTicket, lotteryWinCategory, 10000);
+		return calculateDraws(lotteryTicket, lotteryWinCategory, 100);
 	}
 
 
@@ -173,11 +173,6 @@ public final class LotteryExtensions
 			Set<LotteryBox> lotteryBoxes = lotteryTicket.getLotteryBoxes();
 			for (LotteryBox box : lotteryBoxes)
 			{
-				if (!box.getWinCategory().equals(LotteryWinCategory.NONE))
-				{
-					log.info("current draw " + count + " and win category: "
-						+ box.getWinCategory().name());
-				}
 				breakout = box.getWinCategory().equals(lotteryWinCategory);
 			}
 			luckyNumbers = DrawnLotteryNumbersFactory.newRandomDrawnLotteryNumbers();

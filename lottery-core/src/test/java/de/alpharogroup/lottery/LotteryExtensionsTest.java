@@ -84,7 +84,7 @@ public class LotteryExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link LotteryExtensions#calculateDraws(LotteryPlayedNumbers, int, int)}.
+	 * Test method for {@link LotteryExtensions#calculateDrawsStatistics(LotteryPlayedNumbers, int, int)}.
 	 */
 	@Test
 	public void testCalculateDrawsLotteryPlayedNumbersIntInt()
@@ -100,9 +100,8 @@ public class LotteryExtensionsTest
 		lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
 			.playedLotteryNumbers(playedLotteryNumbers).superNumber(23).superSixNumber(4).build();
 
-		LotteryExtensions.calculateDraws(lotteryPlayedNumbers, 4, 2);
+		LotteryExtensions.calculateDrawsStatistics(lotteryPlayedNumbers, 3, 2000);
 	}
-
 
 	/**
 	 * Test method for
@@ -114,7 +113,20 @@ public class LotteryExtensionsTest
 		LotteryTicket lotteryTicket;
 		lotteryTicket = LotterySetsFactory
 			.newLotteryTicket(LotterySetsFactory.newLotterySetsForTests());
-		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FIRST_CLASS, 2);
+		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FIFTH_CLASS, 2);
+	}
+
+	/**
+	 * Test method for
+	 * {@link LotteryExtensions#calculateDraws(LotteryTicket, LotteryWinCategory)}
+	 */
+	@Test
+	public void testCalculateDrawsLotteryTicketLotteryWinCategory()
+	{
+		LotteryTicket lotteryTicket;
+		lotteryTicket = LotterySetsFactory
+			.newLotteryTicket(LotterySetsFactory.newLotterySetsForTests());
+		LotteryExtensions.calculateDraws(lotteryTicket, LotteryWinCategory.FIFTH_CLASS);
 	}
 
 	/**
