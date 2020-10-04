@@ -1,15 +1,15 @@
 /**
  * Commercial License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis - All Rights Reserved
- *
+ * <p>
  * Proprietary and confidential
- *
+ * <p>
  * Unauthorized copying of this software and its files,
  * via any medium is strictly prohibited
- *
+ * <p>
  * Written by Asterios Raptis
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,21 +20,26 @@
  */
 package de.alpharogroup.lottery.computation;
 
-import static org.testng.Assert.assertEquals;
+import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
+import de.alpharogroup.lottery.wincategories.WinEvaluation;
+import org.meanbean.test.BeanTester;
+import org.testng.annotations.Test;
 
 import java.util.Map;
 
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
-import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
-import de.alpharogroup.lottery.wincategories.WinEvaluation;
-
+/**
+ * The unit test class for the class {@link UnitEstimationExtensions}.
+ */
 public class UnitEstimationExtensionsTest
 {
 
 
-	@Test(enabled = true)
-	public void testCalculateLotteryPot()
+	/**
+	 * Test the method {@link UnitEstimationExtensions#calculateLotteryPot(double, double)}
+	 */
+	@Test(enabled = true) public void testCalculateLotteryPot()
 	{
 		double actual;
 		double expected;
@@ -90,6 +95,15 @@ public class UnitEstimationExtensionsTest
 		expected = 36000000.0d;
 		assertEquals(actual, expected);
 
+	}
+
+	/**
+	 * Test method for {@link UnitEstimationExtensions} with {@link BeanTester}
+	 */
+	@Test public void testWithBeanTester()
+	{
+		final BeanTester beanTester = new BeanTester();
+		beanTester.testBean(UnitEstimationExtensions.class);
 	}
 
 }

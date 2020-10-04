@@ -18,21 +18,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.alpharogroup.lottery.enums;
+package de.alpharogroup.lottery.box;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.util.Set;
 
 /**
- * The enum {@link LotteryGameType}
+ * The class {@link DoubleCollectionBox} represents exactly one lottery box in a lottery ticket
  */
-public enum LotteryGameType
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class DoubleCollectionBox<T>
 {
 
-	/** The lottery game type six of fourtynine full system. */
-	SIX_OF_FOURTYNINE_FULL_SYSTEM,
+	/** The first collection */
+	Set<T> firstCollection;
 
-	/** The lottery game type six of fourtynine normal. */
-	SIX_OF_FOURTYNINE_NORMAL,
-
-	/** The lottery game type euro jackpot */
-	EUROJACKPOT
+	/** The selected numbers 2 of 10 numbers. */
+	Set<T> secondCollection;
 
 }

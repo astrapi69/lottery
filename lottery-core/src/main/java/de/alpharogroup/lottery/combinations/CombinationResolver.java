@@ -20,12 +20,15 @@
  */
 package de.alpharogroup.lottery.combinations;
 
-import java.util.List;
-
-import org.apache.commons.math3.util.CombinatoricsUtils;
-
 import de.alpharogroup.check.Argument;
 import de.alpharogroup.collections.list.ListFactory;
+import de.alpharogroup.collections.set.SetExtensions;
+import de.alpharogroup.collections.set.SetFactory;
+import de.alpharogroup.lottery.box.DoubleCollectionBox;
+import org.apache.commons.math3.util.CombinatoricsUtils;
+
+import java.util.List;
+import java.util.Set;
 
 public final class CombinationResolver
 {
@@ -114,7 +117,55 @@ public final class CombinationResolver
 	}
 
 	/**
-	 * Gets all possible combinations from the given list
+	 * Gets the count of all possible combinations from the given size of the set of first and second
+	 * possible numbers and the given first and second size of the subset to be counted.
+	 *
+	 * One possible comparision is the lottery game eurojackpot that have 5 of 50 numbers and
+	 * 2 of 10 numbers. So how many combination are there totally.
+	 * So in this example you give as first argument 50, the second is 5, the third is 10 and
+	 * the last argument is 2. The return value is 95344200 and relates to all possible combinations
+	 * that provides the lottery game.
+	 *
+	 * Note:<br>
+	 * <br>
+	 *
+	 * uses internally the method of <code>
+	 *  	    org.apache.commons.math3.util.CombinatoricsUtils#binomialCoefficient(int, int)
+	 *  	</code>
+	 *
+	 * @param firstPossibleNumbers
+	 *            the size of first possible numbers
+	 * @param firstPossibleNumbers
+	 *            the size from the first combination of a single combination
+	 * @param secondPossibleNumbers
+	 *            the size of second possible numbers
+	 * @param secondCombinationSize
+	 *            the size from the second combination of a single combination
+	 * @return an exact representation of the Binomial Coefficient, "n choose k", the number of
+	 *         k-element subsets that can be selected from an n-element set.
+	 */
+	public static long getAllPossibleCombinationsCount(int firstPossibleNumbers,
+		int firstCombinationSize,
+		int secondPossibleNumbers,
+		int secondCombinationSize)
+	{
+		return CombinatoricsUtils.binomialCoefficient(firstPossibleNumbers, firstCombinationSize)
+			* CombinatoricsUtils.binomialCoefficient(secondPossibleNumbers, secondCombinationSize);
+	}
+
+	/**
+	 * Gets all possible combinations from the given list. This is useful if you have a lottery
+	 * system game that a player can play more lottery entries at once. For instance:
+	 * <br><br>
+	 *     In the lottery game 6 of 49 you play 6 numbers for one possible combination
+	 *     If you play the system game you can mark for example 7 numbers. This resolves to
+	 *     7 combinations of 6 numbers, so to get this 7 combinations of numbers you put the
+	 *     7 numbers that the player plays in the list 'possibleValues' and as 'combinationSize'
+	 *     you have to put the number 6. 6 because of 6 of 49.
+	 *     If the player chooses to play now 8 numbers it will resolve to 28 combinations of
+	 *     6 numbers, so to get this 28 combinations of numbers you put the 8 numbers that the
+	 *     player plays in the list 'possibleValues' and as 'combinationSize' you have to put again
+	 *     the number 6 because of the lottery game 6 of 49.
 	 *
 	 * @param <T>
 	 *            the generic type of the elements in the list
@@ -144,6 +195,26 @@ public final class CombinationResolver
 			}
 		}
 		return combinations;
+	}
+
+	public static <T> Set<DoubleCollectionBox<T>> getPossibleCombinations(final List<T> firstCollection,
+		final int firstCollectionCombinationSize,
+		final List<T> secondCollection,
+		final int secondCollectionCombinationSize) {
+		Set<DoubleCollectionBox<T>> doubleCollectionBoxes = SetFactory.newHashSet();
+		List<List<T>> firstCollectioncombinations =
+			getCombinations(firstCollection, firstCollectionCombinationSize);
+		List<List<T>> secondCollectioncombinations =
+			getCombinations(secondCollection, secondCollectionCombinationSize);
+		for(List<T> fcc : firstCollectioncombinations){
+			for(List<T> scc : secondCollectioncombinations){
+				doubleCollectionBoxes.add(DoubleCollectionBox.<T>builder()
+					.firstCollection(SetExtensions.toSet(fcc))
+					.secondCollection(SetExtensions.toSet(scc))
+					.build());
+			}
+		}
+		return doubleCollectionBoxes;
 	}
 
 	/**

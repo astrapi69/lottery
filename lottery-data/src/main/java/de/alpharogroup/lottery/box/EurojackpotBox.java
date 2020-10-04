@@ -18,21 +18,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.alpharogroup.lottery.enums;
+package de.alpharogroup.lottery.box;
+
+import de.alpharogroup.lottery.enums.LotteryGameType;
+import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.util.Set;
 
 /**
- * The enum {@link LotteryGameType}
+ * The class {@link EurojackpotBox} represents exactly one lottery box in a lottery ticket
  */
-public enum LotteryGameType
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class EurojackpotBox
 {
 
-	/** The lottery game type six of fourtynine full system. */
-	SIX_OF_FOURTYNINE_FULL_SYSTEM,
+	/** The selected numbers 5 of 50 numbers. */
+	Set<Integer> selectedNumbersFiveOfFifty;
 
-	/** The lottery game type six of fourtynine normal. */
-	SIX_OF_FOURTYNINE_NORMAL,
-
-	/** The lottery game type euro jackpot */
-	EUROJACKPOT
+	/** The selected numbers 2 of 10 numbers. */
+	Set<Integer> selectedNumbersTwoOfTen;
 
 }

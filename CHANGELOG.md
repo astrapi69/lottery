@@ -4,6 +4,10 @@
 Version 5.11-SNAPSHOT
 -------------
 
+ADDED:
+
+- new method for get all possible combination of two boxes with different number of combination sizes
+- new method for calculate the count of all possible combination of two boxes with different number of combination sizes
 
 CHANGED:
 
