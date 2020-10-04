@@ -5,6 +5,11 @@ Version 5.11-SNAPSHOT
 -------------
 
 
+CHANGED:
+
+- update of gradle to new version 6.6.1
+- update of com.github.ben-manes.versions.gradle.plugin to new version 0.33.0
+- update of test dependency testng to new version 7.3.0
 
 Version 5.10
 -------------
