@@ -112,3 +112,17 @@ signing {
         sign publishing.publications.mavenJava
     }
 }
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: [
+                              "de/alpharogroup/lottery/wincategories/WinEvaluation.class"])
+        }))
+    }
+}

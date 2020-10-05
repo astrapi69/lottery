@@ -18,55 +18,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.alpharogroup.lottery.box;
+package de.alpharogroup.lottery.statistics;
 
-import de.alpharogroup.collections.set.SetFactory;
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
-import de.alpharogroup.lottery.enums.LotteryGameType;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertNotNull;
 
 /**
- * The unit test class for the class {@link EurojackpotBox}
+ * The unit test class for the class {@link LotteryNumberCount}
  */
-public class EurojackpotBoxTest
+public class LotteryNumberCountTest
 {
 
 	/**
-	 * Test method for creation of object {@link EurojackpotBox}
+	 * Test method for creation of object {@link LotteryNumberCount}
 	 */
-	@Test
-	public void testObjectCreation()
+	@Test public void testObjectCreation()
 	{
-		EurojackpotBox object;
-		object = EurojackpotBox.builder().build();
+		LotteryNumberCount object;
+		object = LotteryNumberCount.builder().build();
 		assertNotNull(object);
-		object = new EurojackpotBox(SetFactory.newHashSet(1,2), SetFactory.newHashSet(1,2));
+		object = new LotteryNumberCount("SIX_OF_FOURTYNINE_FULL_SYSTEM", MapFactory.newHashMap());
 		assertNotNull(object);
-		object = new EurojackpotBox();
+		object = new LotteryNumberCount();
 		assertNotNull(object);
 	}
 
 	/**
-	 * Test method for {@link EurojackpotBox}
+	 * Test method for {@link LotteryNumberCount}
 	 */
-	@Test
-	public void testWithBeanTester()
+	@Test public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();
-		beanTester.testBean(EurojackpotBox.class);
+		beanTester.testBean(LotteryNumberCount.class);
 	}
 
 	/**
-	 * Test method for {@link EurojackpotBox#equals(Object)} , {@link EurojackpotBox#hashCode()} and
-	 * {@link EurojackpotBox#toString()}
+	 * Test method for {@link LotteryNumberCount#equals(Object)} , {@link LotteryNumberCount#hashCode()} and
+	 * {@link LotteryNumberCount#toString()}
 	 */
-	@Test
-	public void verifyEqualsHashcodeAndToStringContracts()
+	@Test public void verifyEqualsHashcodeAndToStringContracts()
 	{
-		ContractVerifier.of(EurojackpotBox.class).verify();
+		ContractVerifier.of(LotteryNumberCount.class).verify();
 	}
 
 }
