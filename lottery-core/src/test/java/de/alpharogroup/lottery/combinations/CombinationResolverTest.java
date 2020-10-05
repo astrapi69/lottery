@@ -27,8 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.lottery.LotteryExtensions;
-import de.alpharogroup.lottery.box.DoubleCollectionBox;
+import de.alpharogroup.lottery.box.DoubleSetBox;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
@@ -50,8 +49,8 @@ public class CombinationResolverTest
 		int firstCollectionCombinationSize;
 		List<Integer> secondCollection;
 		int secondCollectionCombinationSize;
-		Set<DoubleCollectionBox<Integer>> actual;
-		Set<DoubleCollectionBox<Integer>> expected;
+		Set<DoubleSetBox<Integer>> actual;
+		Set<DoubleSetBox<Integer>> expected;
 			// new scenario...
 		firstCollection = ListFactory.newArrayList(1, 2, 3, 4, 5, 6);
 		firstCollectionCombinationSize = 5;
@@ -60,81 +59,85 @@ public class CombinationResolverTest
 		actual = CombinationResolver.getPossibleCombinations(firstCollection, firstCollectionCombinationSize,
 			secondCollection, secondCollectionCombinationSize);
 		expected = SetFactory.newHashSet();
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(1, 2)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(1, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(2, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 5, 6))
 			.secondCollection(SetFactory.newHashSet(1, 2)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 5, 6))
 			.secondCollection(SetFactory.newHashSet(1, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 5, 6))
 			.secondCollection(SetFactory.newHashSet(2, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 4, 6))
 			.secondCollection(SetFactory.newHashSet(1, 2)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 4, 6))
 			.secondCollection(SetFactory.newHashSet(1, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 4, 6))
 			.secondCollection(SetFactory.newHashSet(2, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 4, 5))
 			.secondCollection(SetFactory.newHashSet(1, 2)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 4, 5))
 			.secondCollection(SetFactory.newHashSet(1, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 2, 3, 4, 5))
 			.secondCollection(SetFactory.newHashSet(2, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(2, 3, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(1, 2)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(2, 3, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(1, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(2, 3, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(2, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 3, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(1, 2)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 3, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(1, 3)).build());
-		expected.add(DoubleCollectionBox
+		expected.add(DoubleSetBox
 			.<Integer>builder()
 			.firstCollection(SetFactory.newHashSet(1, 3, 4, 5, 6))
 			.secondCollection(SetFactory.newHashSet(2, 3)).build());
 		assertEquals(18, actual.size());
 		assertEquals(expected.size(), actual.size());
 		assertTrue(CollectionExtensions.isEqualCollection(actual, expected));
+		long allPossibleCombinationsCount = CombinationResolver
+			.getAllPossibleCombinationsCount(firstCollection.size(), firstCollectionCombinationSize,
+				secondCollection.size(), secondCollectionCombinationSize);
+		assertEquals(allPossibleCombinationsCount, actual.size());
 	}
 
 	/**
@@ -328,6 +331,12 @@ public class CombinationResolverTest
 		actual = CombinationResolver.getAllPossibleCombinationsCount(firstValues.size(), 3,
 			secondValues.size(), 2);
 		expected = 30;
+		assertEquals(actual, expected);
+		// new scenario...
+		// compute the probability of eurojackpot
+		actual = CombinationResolver.getAllPossibleCombinationsCount(50, 5,
+			10, 2);
+		expected = 95344200;
 		assertEquals(actual, expected);
 	}
 

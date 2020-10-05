@@ -100,7 +100,8 @@ public class LotteryExtensionsTest
 		lotteryPlayedNumbers = LotteryPlayedNumbers.builder()
 			.playedLotteryNumbers(playedLotteryNumbers).superNumber(23).superSixNumber(4).build();
 
-		LotteryExtensions.calculateDrawsStatistics(lotteryPlayedNumbers, 3, 2000);
+		LotteryExtensions.calculateDrawsStatistics(lotteryPlayedNumbers, 2, 1000);
+		LotteryExtensions.calculateDrawsStatistics(lotteryPlayedNumbers, 3, 1000);
 	}
 
 	/**

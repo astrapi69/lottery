@@ -24,7 +24,7 @@ import de.alpharogroup.check.Argument;
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.set.SetExtensions;
 import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.lottery.box.DoubleCollectionBox;
+import de.alpharogroup.lottery.box.DoubleSetBox;
 import org.apache.commons.math3.util.CombinatoricsUtils;
 
 import java.util.List;
@@ -197,24 +197,24 @@ public final class CombinationResolver
 		return combinations;
 	}
 
-	public static <T> Set<DoubleCollectionBox<T>> getPossibleCombinations(final List<T> firstCollection,
+	public static <T> Set<DoubleSetBox<T>> getPossibleCombinations(final List<T> firstCollection,
 		final int firstCollectionCombinationSize,
 		final List<T> secondCollection,
 		final int secondCollectionCombinationSize) {
-		Set<DoubleCollectionBox<T>> doubleCollectionBoxes = SetFactory.newHashSet();
+		Set<DoubleSetBox<T>> doubleSetBoxes = SetFactory.newHashSet();
 		List<List<T>> firstCollectioncombinations =
 			getCombinations(firstCollection, firstCollectionCombinationSize);
 		List<List<T>> secondCollectioncombinations =
 			getCombinations(secondCollection, secondCollectionCombinationSize);
 		for(List<T> fcc : firstCollectioncombinations){
 			for(List<T> scc : secondCollectioncombinations){
-				doubleCollectionBoxes.add(DoubleCollectionBox.<T>builder()
+				doubleSetBoxes.add(DoubleSetBox.<T>builder()
 					.firstCollection(SetExtensions.toSet(fcc))
 					.secondCollection(SetExtensions.toSet(scc))
 					.build());
 			}
 		}
-		return doubleCollectionBoxes;
+		return doubleSetBoxes;
 	}
 
 	/**

@@ -144,8 +144,16 @@ public class DrawnLotteryNumbersFactoryTest
 	@Test
 	public void testNewRandomDrawnLotteryNumbersMaxMinMaxVolumeAlgo()
 	{
-		final DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
+		DrawnLotteryNumbers luckyNumbers;
+
+		luckyNumbers = DrawnLotteryNumbersFactory
 			.newRandomDrawnLotteryNumbers(6, 1, 49, LotteryAlgorithm.MAP);
+		assertNotNull(luckyNumbers);
+		luckyNumbers = DrawnLotteryNumbersFactory
+			.newRandomDrawnLotteryNumbers(6, 1, 49, LotteryAlgorithm.SET);
+		assertNotNull(luckyNumbers);
+		luckyNumbers = DrawnLotteryNumbersFactory
+			.newRandomDrawnLotteryNumbers(6, 1, 49, LotteryAlgorithm.DEFAULT);
 		assertNotNull(luckyNumbers);
 	}
 

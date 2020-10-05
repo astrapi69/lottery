@@ -41,10 +41,13 @@ public class LotteryBoxTest
 	@Test
 	public void testObjectCreation()
 	{
-		LotteryBox object = LotteryBox.builder().build();
+		LotteryBox object;
+		object = LotteryBox.builder().build();
 		assertNotNull(object);
 		object = new LotteryBox(LotteryGameType.SIX_OF_FOURTYNINE_NORMAL, 1,
 			SetFactory.newHashSet(1, 2, 3, 4, 5, 6), null);
+		assertNotNull(object);
+		object = new LotteryBox();
 		assertNotNull(object);
 	}
 
@@ -67,4 +70,5 @@ public class LotteryBoxTest
 	{
 		ContractVerifier.of(LotteryBox.class).verify();
 	}
+
 }

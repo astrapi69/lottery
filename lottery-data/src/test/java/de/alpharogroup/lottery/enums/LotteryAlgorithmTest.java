@@ -18,28 +18,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.alpharogroup.lottery.box;
+package de.alpharogroup.lottery.enums;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.testng.Assert.assertEquals;
 
 /**
- * The class {@link DoubleCollectionBox} represents exactly one lottery box in a lottery ticket
+ * The unit test class for the class {@link LotteryAlgorithm}
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder(toBuilder = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class DoubleCollectionBox<T>
+public class LotteryAlgorithmTest
 {
 
-	/** The first collection */
-	Set<T> firstCollection;
+	/**
+	 * Test method for the constant values of {@link LotteryAlgorithm}
+	 */
+	@Test
+	public void testValues()
+	{
+		String actual;
+		String expected;
 
-	/** The selected numbers 2 of 10 numbers. */
-	Set<T> secondCollection;
+		actual = LotteryAlgorithm.DEFAULT.name();
+		expected = "DEFAULT";
+		assertEquals(actual, expected);
 
+		actual = LotteryAlgorithm.MAP.name();
+		expected = "MAP";
+		assertEquals(actual, expected);
+
+		actual = LotteryAlgorithm.SET.name();
+		expected = "SET";
+		assertEquals(actual, expected);
+
+	}
 }
