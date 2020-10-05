@@ -3,7 +3,7 @@
 <div align="center">
 
 [![Build Status](https://travis-ci.org/astrapi69/lottery.svg?branch=develop)](https://travis-ci.org/astrapi69/lottery)
-[![Coverage Status](https://coveralls.io/repos/github/astrapi69/lottery/badge.svg?branch=develop)](https://coveralls.io/github/astrapi69/lottery?branch=master)
+[![Coverage Status](https://codecov.io/gh/astrapi69/lottery/branch/develop/graph/badge.svg)](https://codecov.io/gh/astrapi69/lottery)
 [![Open Issues](https://img.shields.io/github/issues/astrapi69/lottery.svg?style=flat)](https://github.com/astrapi69/lottery/issues) 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/lottery/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/lottery)
 [![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
@@ -161,10 +161,10 @@ Do not hesitate to contact the lottery developers with your questions, concerns,
 |Special thanks to [sonatype repository](https://www.sonatype.com) for providing a free maven repository service for open source projects|
 |     <img width=1000/>     |
 
-|**coveralls.io**|
+|**codecov.io**|
 |     :---:      |
-|[![Coverage Status](https://coveralls.io/repos/github/astrapi69/lottery/badge.svg?branch=develop)](https://coveralls.io/github/astrapi69/lottery?branch=master)|
-|Special thanks to [coveralls.io](https://coveralls.io) for providing a free code coverage for open source projects|
+|[![Coverage Status](https://codecov.io/gh/astrapi69/lottery/branch/develop/graph/badge.svg)](https://codecov.io/gh/astrapi69/lottery)|
+|Special thanks to [codecov.io](https://codecov.io) for providing a free code coverage for open source projects|
 |     <img width=1000/>     |
 
 |**javadoc.io**|
