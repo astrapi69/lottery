@@ -1,15 +1,15 @@
 /**
  * Commercial License
- *
+ * <p>
  * Copyright (C) 2015 Asterios Raptis - All Rights Reserved
- *
+ * <p>
  * Proprietary and confidential
- *
+ * <p>
  * Unauthorized copying of this software and its files,
  * via any medium is strictly prohibited
- *
+ * <p>
  * Written by Asterios Raptis
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,12 +20,6 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import java.security.SecureRandom;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
 import de.alpharogroup.check.Argument;
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapExtensions;
@@ -33,8 +27,17 @@ import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.lottery.enums.LotteryAlgorithm;
+import de.alpharogroup.random.SecureRandomBean;
 import de.alpharogroup.random.SecureRandomFactory;
 import de.alpharogroup.random.number.RandomPrimitivesExtensions;
+
+import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * A factory for creating {@link DrawnLotteryNumbers} objects with generated lottery numbers
@@ -99,10 +102,30 @@ public final class DrawnLotteryNumbersFactory
 	 */
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume)
 	{
+		return newRandomDrawnLotteryNumbers(max, volume,
+			LocalDateTime.now().toInstant(ZoneOffset.UTC).toEpochMilli());
+	}
+
+	/**
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
+	 *
+	 * @param max
+	 *            the max number to draw
+	 * @param volume
+	 *            the volume of the numbers starts from 1 till volume
+	 * @param drawDate
+	 *            the draw date as long
+	 * @return the new {@link DrawnLotteryNumbers}
+	 */
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume,
+		long drawDate)
+	{
 		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder()
 			.id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
 			.lotteryNumbers(SetFactory.newTreeSet()).build();
-		final SecureRandom sr = SecureRandomFactory.newSecureRandom();
+		final SecureRandom sr = SecureRandomFactory
+			.newSecureRandom(SecureRandomBean.DEFAULT_ALGORITHM, SecureRandomBean.DEFAULT_PROVIDER,
+				drawDate);
 		int cnt = 0;
 
 		while (cnt < max)
@@ -143,8 +166,7 @@ public final class DrawnLotteryNumbersFactory
 		Set<Integer> drawnNumbers = DrawnLotteryNumbersExtensions.draw(max, minVolume, maxVolume);
 		return DrawnLotteryNumbers.builder()
 			.id(RandomPrimitivesExtensions.randomInt(Integer.MAX_VALUE))
-			.lotteryNumbers(drawnNumbers)
-			.superNumber(
+			.lotteryNumbers(drawnNumbers).superNumber(
 				DrawnLotteryNumbersExtensions.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
 			.superSixNumber(RandomPrimitivesExtensions.randomIntBetween(1, 10)).build();
 	}
@@ -172,16 +194,16 @@ public final class DrawnLotteryNumbersFactory
 		Objects.requireNonNull(algorithm);
 		switch (algorithm)
 		{
-			case MAP :
+			case MAP:
 				DrawnLotteryNumbers drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
 					minVolume, maxVolume);
 				drawnLotteryNumbers.setLotteryNumbers(DrawnLotteryNumbersExtensions
 					.drawFromMultiMap(max, minVolume, maxVolume, drawCount));
 				return drawnLotteryNumbers;
-			case SET :
+			case SET:
 				return newRandomDrawnLotteryNumbers(max, maxVolume);
-			case DEFAULT :
-			default :
+			case DEFAULT:
+			default:
 				return newRandomDrawnLotteryNumbersDefaultAlgorithm(max, maxVolume);
 		}
 	}
