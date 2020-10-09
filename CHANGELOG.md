@@ -11,10 +11,13 @@ ADDED:
 
 CHANGED:
 
+- update of dependency lombok version to 1.18.14
 - update of gradle to new version 6.6.1
 - update of com.github.ben-manes.versions.gradle.plugin to new version 0.33.0
 - update of test dependency testng to new version 7.3.0
 - change provider of code coverage to codecov.io
+- update of dependency jobj-core version to 3.6
+- update of dependency randomizer version to 6.9
 
 Version 5.10
 -------------
@@ -31,7 +34,7 @@ ADDED:
 CHANGED:
 
 - changed visibility of method mergeDrawings from private to public
-- update gradle to new version 6.5
+- update gradle to new version 6.6.1
 - extracted project properties to gradle.properties
 - update of dependency jobj-compare version to 3.6.1
 
