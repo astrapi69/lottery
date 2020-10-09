@@ -42,6 +42,7 @@ import de.alpharogroup.random.number.RandomPrimitivesExtensions;
  */
 public final class DrawnLotteryNumbersExtensions
 {
+
 	/**
 	 * Draw of lottery numbers.
 	 *
@@ -241,6 +242,29 @@ public final class DrawnLotteryNumbersExtensions
 	}
 
 	/**
+	 * Factory method for create a comparator for sort the lottery numbers
+	 *
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
+	 * @param numberCounterMap
+	 *            the counter map for generate statistics of the drawn lottery numbers
+	 * @return the comparator for sort the lottery numbers
+	 */
+	public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+													   int drawCount, Map<Integer, Integer> numberCounterMap)
+	{
+		return newMostDrawnComparator(
+				mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap), false,
+				true);
+	}
+
+	/**
 	 * Draw the number of the game seventy seven
 	 *
 	 * @return the drawn number of the game seventy seven
@@ -338,7 +362,7 @@ public final class DrawnLotteryNumbersExtensions
 	 *            the counter map for generate statistics of the drawn lottery numbers
 	 * @return the map with the merged lottery numbers
 	 */
-	private static Map<Integer, Integer> mergeDrawings(int maxNumbers, int minVolume, int maxVolume,
+	public static Map<Integer, Integer> mergeDrawings(int maxNumbers, int minVolume, int maxVolume,
 		int drawCount, Map<Integer, Integer> numberCounterMap)
 	{
 		for (int i = 0; i < drawCount; i++)
@@ -387,6 +411,21 @@ public final class DrawnLotteryNumbersExtensions
 	 *
 	 * @param maxNumbers
 	 *            the max numbers
+	 * @param numberCounterMap
+	 *            the number counter map
+	 * @return the sets of the lottery numbers
+	 */
+	public static Set<Integer> resolveLotteryNumbers(int maxNumbers, Map<Integer, Integer> numberCounterMap)
+	{
+		return resolveLotteryNumbers(maxNumbers, newMostDrawnComparator(numberCounterMap,false, true), numberCounterMap);
+	}
+
+	/**
+	 * Resolves the lottery numbers from the given number counter map in the order from the given
+	 * comparator limited to maxNumbers
+	 *
+	 * @param maxNumbers
+	 *            the max numbers
 	 * @param mostDrawn
 	 *            the comparator that defines in which order to take the drawn numbers. For instance
 	 *            if you want to have the reverse order you can simply give the
@@ -396,13 +435,13 @@ public final class DrawnLotteryNumbersExtensions
 	 * @return the sets of the lottery numbers
 	 */
 	public static Set<Integer> resolveLotteryNumbers(int maxNumbers, Comparator<Integer> mostDrawn,
-		Map<Integer, Integer> numberCounterMap)
+													 Map<Integer, Integer> numberCounterMap)
 	{
 		List<Map.Entry<Integer, Integer>> sortByValue = MapExtensions
-			.sortByValueAsList(numberCounterMap, mostDrawn);
+				.sortByValueAsList(numberCounterMap, mostDrawn);
 
 		List<Integer> newLotteryNumbers = sortByValue.stream().map(Map.Entry::getKey)
-			.limit(maxNumbers).collect(Collectors.toList());
+				.limit(maxNumbers).collect(Collectors.toList());
 		return SetFactory.newTreeSet(newLotteryNumbers);
 	}
 

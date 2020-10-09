@@ -44,6 +44,7 @@ import java.util.Set;
  */
 public final class DrawnLotteryNumbersFactory
 {
+
 	/**
 	 * Factory method for create a map for count drawn numbers
 	 *
@@ -55,9 +56,7 @@ public final class DrawnLotteryNumbersFactory
 	 */
 	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume)
 	{
-		List<Integer> integerList = ListFactory.newRangeList(minVolume, maxVolume);
-		Map<Integer, Integer> numberCounterMap = MapFactory.newCounterMap(integerList);
-		return numberCounterMap;
+		return MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume));
 	}
 
 	/**

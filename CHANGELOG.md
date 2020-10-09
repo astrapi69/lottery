@@ -25,9 +25,12 @@ ADDED:
 - new class for resolve all possible combinations with algorithm for 
     - count all possible combinations
     - get all possible combinations as a list of lists
+- new method for resolve lottery numbers with a default most drawn comparator
+- new method for draw from multimap with an existing number counter map
 
 CHANGED:
 
+- changed visibility of method mergeDrawings from private to public
 - update gradle to new version 6.5
 - extracted project properties to gradle.properties
 - update of dependency jobj-compare version to 3.6.1

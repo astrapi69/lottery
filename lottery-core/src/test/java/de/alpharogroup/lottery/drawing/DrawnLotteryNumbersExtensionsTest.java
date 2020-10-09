@@ -20,10 +20,7 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
+import java.util.Map;
 import java.util.Set;
 
 import org.meanbean.test.BeanTester;
@@ -32,12 +29,44 @@ import org.testng.annotations.Test;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.math.MathExtensions;
 
+import static org.testng.Assert.*;
+
 /**
  * The class {@link DrawnLotteryNumbersExtensionsTest}.
  */
 public class DrawnLotteryNumbersExtensionsTest
 {
-
+	/**
+	 * Test method for {@link DrawnLotteryNumbersExtensions#mergeDrawings(int, int, int, int, Map)}
+	 */
+	@Test
+	public void testMergeDrawings() {
+		// actual return types
+		Map<Integer, Integer> mergeDrawings;
+		// actual count and ex
+		long actual;
+		long expected;
+		// declare parameters
+		int maxNumbers;
+		int minVolume;
+		int maxVolume;
+		int drawCount;
+		Map<Integer, Integer> numberCounterMap;
+		// new scenario...
+		// set arguments
+		maxNumbers = 5;
+		minVolume = 1;
+		maxVolume = 49;
+		drawCount = 1000;
+		numberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume, maxVolume);
+		mergeDrawings = DrawnLotteryNumbersExtensions
+				.mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap);
+		assertNotNull(mergeDrawings);
+		// summarize all count values
+		actual = mergeDrawings.values().stream().reduce(0, Integer::sum);
+		expected = 5000;
+		assertEquals(actual, expected);
+	}
 	/**
 	 * Test method for {@link DrawnLotteryNumbersExtensions#drawDefaultAlgorithm(int, int, int)}.
 	 */
