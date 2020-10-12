@@ -1,6 +1,6 @@
 # Overview
 
-<div align="center">
+<div style="text-align: center">
 
 [![Build Status](https://travis-ci.org/astrapi69/lottery.svg?branch=develop)](https://travis-ci.org/astrapi69/lottery)
 [![Coverage Status](https://codecov.io/gh/astrapi69/lottery/branch/develop/graph/badge.svg)](https://codecov.io/gh/astrapi69/lottery)
