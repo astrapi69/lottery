@@ -25,13 +25,13 @@ import static org.testng.Assert.assertNotNull;
 
 import java.util.Map;
 
+import de.alpharogroup.random.number.RandomIntFactory;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
 import de.alpharogroup.collections.map.MapExtensions;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.lottery.enums.LotteryAlgorithm;
-import de.alpharogroup.random.number.RandomPrimitivesExtensions;
 
 /**
  * The class {@link DrawnLotteryNumbersFactory}.
@@ -55,14 +55,14 @@ public class DrawnLotteryNumbersFactoryTest
 		numberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume, maxVolume);
 		for (int i = minVolume; i <= maxVolume; i++)
 		{
-			numberCounterMap.merge(i, RandomPrimitivesExtensions.getRandomIntBetween(1, 4),
+			numberCounterMap.merge(i, RandomIntFactory.randomIntBetween(1, 4),
 				Integer::sum);
 		}
 		initialNumberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume,
 			maxVolume, numberCounterMap);
 		for (int i = minVolume; i <= maxVolume; i++)
 		{
-			initialNumberCounterMap.merge(i, RandomPrimitivesExtensions.getRandomIntBetween(1, 4),
+			initialNumberCounterMap.merge(i, RandomIntFactory.randomIntBetween(1, 4),
 				Integer::sum);
 		}
 		Map<Integer, Integer> mergedMap = MapExtensions.mergeAndSummarize(initialNumberCounterMap,

@@ -34,7 +34,8 @@ import de.alpharogroup.collections.map.MapExtensions;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.comparators.ComparatorFactory;
 import de.alpharogroup.random.DefaultSecureRandom;
-import de.alpharogroup.random.number.RandomPrimitivesExtensions;
+import de.alpharogroup.random.number.RandomBooleanFactory;
+import de.alpharogroup.random.number.RandomIntFactory;
 
 /**
  * The class {@link DrawnLotteryNumbersExtensions} provides utility methods to draw lottery numbers
@@ -60,7 +61,7 @@ public final class DrawnLotteryNumbersExtensions
 
 		while (cnt < maxNumbers)
 		{
-			final int num = RandomPrimitivesExtensions.getRandomIntBetween(1, volume);
+			final int num = RandomIntFactory.randomIntBetween(1, volume);
 
 			if (!numbers.contains(num))
 			{
@@ -90,7 +91,7 @@ public final class DrawnLotteryNumbersExtensions
 
 		while (cnt < maxNumbers)
 		{
-			final int num = RandomPrimitivesExtensions.randomIntBetween(minVolume, maxVolume, true,
+			final int num = RandomIntFactory.randomIntBetween(minVolume, maxVolume, true,
 				true);
 
 			if (!numbers.contains(num))
@@ -125,7 +126,7 @@ public final class DrawnLotteryNumbersExtensions
 		while (cnt < maxNumbers)
 		{
 			Collections.shuffle(rangeList, sr);
-			final int index = RandomPrimitivesExtensions.randomIntBetween(0, rangeList.size(), true,
+			final int index = RandomIntFactory.randomIntBetween(0, rangeList.size(), true,
 				false);
 			Integer drawnNumber = rangeList.get(index);
 			if (!numbers.contains(drawnNumber))
@@ -271,7 +272,7 @@ public final class DrawnLotteryNumbersExtensions
 	 */
 	public static int drawGameSeventySeven()
 	{
-		return RandomPrimitivesExtensions.randomIntBetween(0, 9999999, true, true);
+		return RandomIntFactory.randomIntBetween(0, 9999999, true, true);
 	}
 
 	/**
@@ -292,7 +293,7 @@ public final class DrawnLotteryNumbersExtensions
 		int maxVolume, int drawCount)
 	{
 		return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount,
-			RandomPrimitivesExtensions.randomBoolean(), true);
+				RandomBooleanFactory.randomBoolean(), true);
 	}
 
 	/**
@@ -310,7 +311,7 @@ public final class DrawnLotteryNumbersExtensions
 		boolean breakout = false;
 		while (!breakout)
 		{
-			superNumber = RandomPrimitivesExtensions.getRandomIntBetween(1, volume);
+			superNumber = RandomIntFactory.randomIntBetween(1, volume);
 			if (!alreadyDrawnNumbers.contains(superNumber))
 			{
 				breakout = true;
@@ -337,7 +338,7 @@ public final class DrawnLotteryNumbersExtensions
 		boolean breakout = false;
 		while (!breakout)
 		{
-			superNumber = RandomPrimitivesExtensions.randomIntBetween(minVolume, maxVolume, true,
+			superNumber = RandomIntFactory.randomIntBetween(minVolume, maxVolume, true,
 				true);
 			if (!alreadyDrawnNumbers.contains(superNumber))
 			{

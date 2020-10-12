@@ -17,8 +17,8 @@ allprojects {
     version = "$projectVersion"
 
     repositories {
-        jcenter()
         mavenCentral()
+        jcenter()
     }
 }
 
