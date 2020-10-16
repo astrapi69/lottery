@@ -23,6 +23,7 @@ package de.alpharogroup.lottery.drawing;
 import java.util.Map;
 import java.util.Set;
 
+import de.alpharogroup.collections.map.MapFactory;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
@@ -58,7 +59,7 @@ public class DrawnLotteryNumbersExtensionsTest
 		minVolume = 1;
 		maxVolume = 49;
 		drawCount = 1000;
-		numberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume, maxVolume);
+		numberCounterMap = MapFactory.newNumberCounterMap(minVolume, maxVolume);
 		mergeDrawings = DrawnLotteryNumbersExtensions
 				.mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap);
 		assertNotNull(mergeDrawings);
@@ -138,7 +139,7 @@ public class DrawnLotteryNumbersExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link DrawnLotteryNumbersExtensions#draw(int, int)}.
+	 * Test method for {@link DrawLotteryNumbersFactory#draw(int, int)}.
 	 */
 	@Test
 	public void testDrawIntInt()
@@ -153,7 +154,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 7 of 39
 		volume = 39;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -164,7 +165,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 7 of 36
 		volume = 36;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -175,7 +176,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 7 of 35
 		volume = 35;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -188,7 +189,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 6 of 59
 		volume = 59;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -199,7 +200,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 6 of 49
 		volume = 49;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -210,7 +211,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 6 of 48
 		volume = 48;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -221,7 +222,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 6 of 45
 		volume = 45;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -232,7 +233,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 6 of 42
 		volume = 42;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -243,7 +244,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 6 of 30
 		volume = 30;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -256,7 +257,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 5 of 90
 		volume = 90;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -267,7 +268,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 5 of 75
 		volume = 75;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -278,7 +279,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 5 of 69
 		volume = 69;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -289,7 +290,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 5 of 49
 		volume = 49;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -300,7 +301,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 5 of 42
 		volume = 42;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -311,7 +312,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 5 of 40
 		volume = 40;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -322,7 +323,7 @@ public class DrawnLotteryNumbersExtensionsTest
 
 		// simulate a draw of 5 of 35
 		volume = 35;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);
@@ -333,7 +334,7 @@ public class DrawnLotteryNumbersExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link DrawnLotteryNumbersExtensions#draw(int, int, int)}.
+	 * Test method for {@link DrawLotteryNumbersFactory#draw(int, int, int)}.
 	 */
 	@Test
 	public void testDrawIntIntInt()
@@ -350,7 +351,7 @@ public class DrawnLotteryNumbersExtensionsTest
 		max = 7;
 		minVolume = 5;
 		maxVolume = 39;
-		lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, minVolume, maxVolume);
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, minVolume, maxVolume);
 		actual = lotteryNumbers.size();
 		expected = max;
 		assertEquals(actual, expected);

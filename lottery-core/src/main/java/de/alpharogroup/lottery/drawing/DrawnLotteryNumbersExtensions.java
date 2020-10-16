@@ -31,6 +31,7 @@ import java.util.stream.Collectors;
 
 import de.alpharogroup.collections.list.ListFactory;
 import de.alpharogroup.collections.map.MapExtensions;
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.comparators.ComparatorFactory;
 import de.alpharogroup.random.DefaultSecureRandom;
@@ -45,65 +46,6 @@ public final class DrawnLotteryNumbersExtensions
 {
 
 	/**
-	 * Draw of lottery numbers.
-	 *
-	 * @param maxNumbers
-	 *            the max number to draw
-	 * @param volume
-	 *            the volume of the numbers starts from 1 till volume
-	 * @return the sets the
-	 */
-	public static Set<Integer> draw(int maxNumbers, int volume)
-	{
-		Set<Integer> numbers = SetFactory.newTreeSet();
-
-		int cnt = 0;
-
-		while (cnt < maxNumbers)
-		{
-			final int num = RandomIntFactory.randomIntBetween(1, volume);
-
-			if (!numbers.contains(num))
-			{
-				numbers.add(num);
-				++cnt;
-			}
-		}
-		return numbers;
-	}
-
-	/**
-	 * Draw of lottery numbers.
-	 *
-	 * @param maxNumbers
-	 *            the maximum of numbers to draw
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the max volume
-	 * @return the sets of the drawn numbers
-	 */
-	public static Set<Integer> draw(int maxNumbers, int minVolume, int maxVolume)
-	{
-		Set<Integer> numbers = SetFactory.newTreeSet();
-
-		int cnt = 0;
-
-		while (cnt < maxNumbers)
-		{
-			final int num = RandomIntFactory.randomIntBetween(minVolume, maxVolume, true,
-				true);
-
-			if (!numbers.contains(num))
-			{
-				numbers.add(num);
-				++cnt;
-			}
-		}
-		return numbers;
-	}
-
-	/**
 	 * This draw algorithm simulates the real world.
 	 *
 	 * @param maxNumbers
@@ -116,26 +58,7 @@ public final class DrawnLotteryNumbersExtensions
 	 */
 	public static Set<Integer> drawDefaultAlgorithm(int maxNumbers, int minVolume, int maxVolume)
 	{
-		Set<Integer> numbers = SetFactory.newTreeSet();
-		ArrayList<Integer> rangeList = new ArrayList<>(
-			ListFactory.newRangeList(minVolume, maxVolume));
-
-		final SecureRandom sr = DefaultSecureRandom.get();
-		int cnt = 0;
-
-		while (cnt < maxNumbers)
-		{
-			Collections.shuffle(rangeList, sr);
-			final int index = RandomIntFactory.randomIntBetween(0, rangeList.size(), true,
-				false);
-			Integer drawnNumber = rangeList.get(index);
-			if (!numbers.contains(drawnNumber))
-			{
-				numbers.add(drawnNumber);
-				++cnt;
-			}
-		}
-		return numbers;
+		return DrawLotteryNumbersFactory.drawWithShuffle(maxNumbers, minVolume, maxVolume, DefaultSecureRandom.get());
 	}
 
 	/**
@@ -205,7 +128,7 @@ public final class DrawnLotteryNumbersExtensions
 	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
 		int drawCount, boolean mostDrawn, boolean paranoid)
 	{
-		Map<Integer, Integer> numberCounterMap = DrawnLotteryNumbersFactory
+		Map<Integer, Integer> numberCounterMap = MapFactory
 			.newNumberCounterMap(minVolume, maxVolume);
 		Comparator<Integer> mostDrawnComparator = drawFromMultiMap(maxNumbers, minVolume, maxVolume,
 			drawCount, mostDrawn, paranoid, numberCounterMap);
@@ -368,7 +291,7 @@ public final class DrawnLotteryNumbersExtensions
 	{
 		for (int i = 0; i < drawCount; i++)
 		{
-			DrawnLotteryNumbersExtensions.draw(maxNumbers, minVolume, maxVolume)
+			DrawLotteryNumbersFactory.draw(maxNumbers, minVolume, maxVolume)
 				.forEach(key -> numberCounterMap.merge(key, 1, Integer::sum));
 		}
 		return numberCounterMap;
