@@ -46,20 +46,6 @@ public final class DrawnLotteryNumbersFactory
 {
 
 	/**
-	 * Factory method for create a map for count drawn numbers
-	 *
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the max volume
-	 * @return the new map with the initial values
-	 */
-	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume)
-	{
-		return MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume));
-	}
-
-	/**
 	 * Factory method for create a map for count drawn numbers and will be summarized with the given
 	 * Map
 	 *
@@ -162,7 +148,7 @@ public final class DrawnLotteryNumbersFactory
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int minVolume,
 		int maxVolume)
 	{
-		Set<Integer> drawnNumbers = DrawnLotteryNumbersExtensions.draw(max, minVolume, maxVolume);
+		Set<Integer> drawnNumbers = DrawLotteryNumbersFactory.draw(max, minVolume, maxVolume);
 		return DrawnLotteryNumbers.builder()
 			.id(RandomIntFactory.randomInt(Integer.MAX_VALUE))
 			.lotteryNumbers(drawnNumbers).superNumber(
@@ -240,7 +226,7 @@ public final class DrawnLotteryNumbersFactory
 	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbersDefaultAlgorithm(int max,
 		int volume)
 	{
-		Set<Integer> lotteryNumbers = DrawnLotteryNumbersExtensions.draw(max, volume);
+		Set<Integer> lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		int id = RandomIntFactory.randomInt(Integer.MAX_VALUE);
 		int superNumber = DrawnLotteryNumbersExtensions.drawSuperNumber(lotteryNumbers, volume);
 		int superSixNumber = RandomIntFactory.randomIntBetween(1, 10);

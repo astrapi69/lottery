@@ -25,6 +25,7 @@ import static org.testng.Assert.assertNotNull;
 
 import java.util.Map;
 
+import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.random.number.RandomIntFactory;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
@@ -52,7 +53,7 @@ public class DrawnLotteryNumbersFactoryTest
 
 		minVolume = 1;
 		maxVolume = 10;
-		numberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume, maxVolume);
+		numberCounterMap = MapFactory.newNumberCounterMap(minVolume, maxVolume);
 		for (int i = minVolume; i <= maxVolume; i++)
 		{
 			numberCounterMap.merge(i, RandomIntFactory.randomIntBetween(1, 4),
@@ -73,22 +74,6 @@ public class DrawnLotteryNumbersFactoryTest
 			int expected = numberCounterMap.get(i) + initialNumberCounterMap.get(i);
 			assertEquals(actual, expected);
 		}
-	}
-
-	/**
-	 * Test method for {@link DrawnLotteryNumbersFactory#newNumberCounterMap(int, int)}
-	 */
-	@Test
-	public void testNewNumberCounterMap()
-	{
-		int minVolume;
-		int maxVolume;
-		minVolume = 1;
-		maxVolume = 10;
-		Map<Integer, Integer> numberCounterMap = DrawnLotteryNumbersFactory
-			.newNumberCounterMap(minVolume, maxVolume);
-		assertNotNull(numberCounterMap);
-		assertEquals(numberCounterMap.size(), maxVolume);
 	}
 
 	/**
