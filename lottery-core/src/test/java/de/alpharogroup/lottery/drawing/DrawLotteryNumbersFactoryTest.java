@@ -33,16 +33,75 @@ import java.util.Set;
 import static org.testng.Assert.*;
 
 /**
- * The unit test class for the class {@link DrawLotteryNumbersFactory}.
+ * The unit test class for the class {@link DrawLotteryNumbersFactory}
  */
 public class DrawLotteryNumbersFactoryTest
 {
+
+	/**
+	 * Test method for {@link DrawLotteryNumbersFactory#draw(int, int, int)}
+	 */
+	@Test
+	public void testDrawIntIntInt()
+	{
+		int actual;
+		int expected;
+		Set<Integer> lotteryNumbers;
+		int max;
+		int minVolume;
+		int maxVolume;
+
+
+		// simulate a draw of 7 numbers in between of 5 and 39
+		max = 7;
+		minVolume = 5;
+		maxVolume = 39;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, minVolume, maxVolume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
 
 	/**
 	 * Test method for {@link DrawLotteryNumbersFactory#drawWithShuffle(int, int, int, SecureRandom)}
 	 */
 	@Test
 	public void testDrawWithShuffle()
+	{
+		int actual;
+		int expected;
+
+		Set<Integer> lotteryNumbers;
+		int max;
+		int minVolume;
+		int maxVolume;
+
+
+		// simulate a draw of 7 numbers in between of 5 and 39
+		max = 7;
+		minVolume = 5;
+		maxVolume = 39;
+		lotteryNumbers = DrawLotteryNumbersFactory.drawWithShuffle(max, minVolume,
+			maxVolume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
+
+
+	/**
+	 * Test method for {@link DrawLotteryNumbersFactory#drawWithShuffle(int, int, int, SecureRandom)}
+	 */
+	@Test
+	public void testDrawWithShuffleSecureRandom()
 	{
 		int actual;
 		int expected;
@@ -65,6 +124,201 @@ public class DrawLotteryNumbersFactoryTest
 		for (Integer lotteryNumber : lotteryNumbers)
 		{
 			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
+
+	/**
+	 * Test method for {@link DrawLotteryNumbersFactory#draw(int, int)}
+	 */
+	@Test
+	public void testDrawIntInt()
+	{
+		int actual;
+		int expected;
+		Set<Integer> lotteryNumbers;
+		int volume;
+		int max;
+
+		max = 7;
+
+		// simulate a draw of 7 of 39
+		volume = 39;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 7 of 36
+		volume = 36;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 7 of 35
+		volume = 35;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		max = 6;
+
+		// simulate a draw of 6 of 59
+		volume = 59;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 6 of 49
+		volume = 49;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 6 of 48
+		volume = 48;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 6 of 45
+		volume = 45;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 6 of 42
+		volume = 42;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 6 of 30
+		volume = 30;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		max = 5;
+
+		// simulate a draw of 5 of 90
+		volume = 90;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 5 of 75
+		volume = 75;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 5 of 69
+		volume = 69;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 5 of 49
+		volume = 49;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 5 of 42
+		volume = 42;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 5 of 40
+		volume = 40;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+
+		// simulate a draw of 5 of 35
+		volume = 35;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
 		}
 	}
 

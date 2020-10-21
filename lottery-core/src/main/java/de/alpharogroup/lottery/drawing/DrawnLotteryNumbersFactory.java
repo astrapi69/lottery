@@ -152,7 +152,7 @@ public final class DrawnLotteryNumbersFactory
 		return DrawnLotteryNumbers.builder()
 			.id(RandomIntFactory.randomInt(Integer.MAX_VALUE))
 			.lotteryNumbers(drawnNumbers).superNumber(
-				DrawnLotteryNumbersExtensions.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
+				DrawSuperNumbersFactory.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
 			.superSixNumber(RandomIntFactory.randomIntBetween(1, 10)).build();
 	}
 
@@ -182,7 +182,7 @@ public final class DrawnLotteryNumbersFactory
 			case MAP:
 				DrawnLotteryNumbers drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
 					minVolume, maxVolume);
-				drawnLotteryNumbers.setLotteryNumbers(DrawnLotteryNumbersExtensions
+				drawnLotteryNumbers.setLotteryNumbers(DrawMultiMapLotteryNumbersFactory
 					.drawFromMultiMap(max, minVolume, maxVolume, drawCount));
 				return drawnLotteryNumbers;
 			case SET:
@@ -228,7 +228,7 @@ public final class DrawnLotteryNumbersFactory
 	{
 		Set<Integer> lotteryNumbers = DrawLotteryNumbersFactory.draw(max, volume);
 		int id = RandomIntFactory.randomInt(Integer.MAX_VALUE);
-		int superNumber = DrawnLotteryNumbersExtensions.drawSuperNumber(lotteryNumbers, volume);
+		int superNumber = DrawSuperNumbersFactory.drawSuperNumber(lotteryNumbers, volume);
 		int superSixNumber = RandomIntFactory.randomIntBetween(1, 10);
 		return DrawnLotteryNumbers.builder().id(id).lotteryNumbers(lotteryNumbers)
 			.superNumber(superNumber).superSixNumber(superSixNumber).build();

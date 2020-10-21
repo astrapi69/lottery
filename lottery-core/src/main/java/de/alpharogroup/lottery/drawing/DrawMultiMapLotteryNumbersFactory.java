@@ -6,13 +6,25 @@ import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
 import de.alpharogroup.comparators.ComparatorFactory;
 import de.alpharogroup.random.DefaultSecureRandom;
+import de.alpharogroup.random.number.RandomBooleanFactory;
 import de.alpharogroup.random.number.RandomIntFactory;
 
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DrawMultiMapLotteryNumbersFactory {
+/**
+ * The factory class {@link DrawMultiMapLotteryNumbersFactory} provides factory methods to draw
+ * lottery numbers
+ * with different algorithms and {@link SecureRandom} argument for custom randomize draws, like
+ * for a special draw date we could initialize the {@link SecureRandom} with the draw date. It
+ * has provides methods for merge several multi maps
+ */
+public final class DrawMultiMapLotteryNumbersFactory {
+
+    private DrawMultiMapLotteryNumbersFactory()
+    {
+    }
 
     /**
      * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
@@ -29,9 +41,30 @@ public class DrawMultiMapLotteryNumbersFactory {
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
-                                                int drawCount)
+        int drawCount)
     {
-        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, true);
+        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, DefaultSecureRandom.get());
+    }
+
+    /**
+     * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
+     * times and return a new set.
+     *
+     * @param maxNumbers
+     *            the maximum of numbers to draw
+     * @param minVolume
+     *            the min volume
+     * @param maxVolume
+     *            the max volume
+     * @param drawCount
+     *            the draw count defines how many times to draw numbers
+     * @return the sets of the drawn numbers
+     */
+    public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+        int drawCount, SecureRandom secureRandom)
+    {
+        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, true,
+            false, secureRandom);
     }
 
     /**
@@ -52,9 +85,32 @@ public class DrawMultiMapLotteryNumbersFactory {
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
-                                                int drawCount, boolean mostDrawn)
+        int drawCount, boolean mostDrawn)
     {
-        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, false);
+        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, DefaultSecureRandom.get());
+    }
+
+    /**
+     * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
+     * times and return a new set.
+     *
+     * @param maxNumbers
+     *            the maximum of numbers to draw
+     * @param minVolume
+     *            the min volume
+     * @param maxVolume
+     *            the max volume
+     * @param drawCount
+     *            the draw count defines how many times to draw numbers
+     * @param mostDrawn
+     *            the flag that indicates if the most drawn numbers should be taken if true,
+     *            otherwise the reverse order will be taken
+     * @return the sets of the drawn numbers
+     */
+    public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+        int drawCount, boolean mostDrawn, SecureRandom secureRandom)
+    {
+        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, false, secureRandom);
     }
 
     /**
@@ -79,12 +135,39 @@ public class DrawMultiMapLotteryNumbersFactory {
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
-                                                int drawCount, boolean mostDrawn, boolean paranoid)
+        int drawCount, boolean mostDrawn, boolean paranoid)
+    {
+        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, paranoid, DefaultSecureRandom.get());
+    }
+
+    /**
+     * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
+     * times and return a new set.
+     *
+     * @param maxNumbers
+     *            the maximum of numbers to draw
+     * @param minVolume
+     *            the min volume
+     * @param maxVolume
+     *            the max volume
+     * @param drawCount
+     *            the draw count defines how many times to draw numbers
+     * @param mostDrawn
+     *            the flag that indicates if the most drawn numbers should be taken if true,
+     *            otherwise the reverse order will be taken
+     * @param paranoid
+     *            the flag paranoid indicates to create a custom comparator from the counter map and
+     *            define a random defined order to draw if true, otherwise the flag mostDrawn will
+     *            define the order to draw
+     * @return the sets of the drawn numbers
+     */
+    public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+        int drawCount, boolean mostDrawn, boolean paranoid, SecureRandom secureRandom)
     {
         Map<Integer, Integer> numberCounterMap = MapFactory
-                .newNumberCounterMap(minVolume, maxVolume);
+            .newNumberCounterMap(minVolume, maxVolume);
         Comparator<Integer> mostDrawnComparator = drawFromMultiMap(maxNumbers, minVolume, maxVolume,
-                drawCount, mostDrawn, paranoid, numberCounterMap);
+            drawCount, mostDrawn, paranoid, numberCounterMap, secureRandom);
         return resolveLotteryNumbers(maxNumbers, mostDrawnComparator, numberCounterMap);
     }
 
@@ -113,9 +196,40 @@ public class DrawMultiMapLotteryNumbersFactory {
     public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
                                                        int drawCount, boolean mostDrawn, boolean paranoid, Map<Integer, Integer> numberCounterMap)
     {
+        return drawFromMultiMap(
+                maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, paranoid,
+                numberCounterMap, DefaultSecureRandom.get());
+    }
+
+    /**
+     * Factory method for create a comparator for sort the lottery numbers
+     *
+     * @param maxNumbers
+     *            the maximum of numbers to draw
+     * @param minVolume
+     *            the min volume
+     * @param maxVolume
+     *            the max volume
+     * @param drawCount
+     *            the draw count defines how many times to draw numbers
+     * @param mostDrawn
+     *            the flag that indicates if the most drawn numbers should be taken if true,
+     *            otherwise the reverse order will be taken
+     * @param paranoid
+     *            the flag paranoid indicates to create a custom comparator from the counter map and
+     *            define a random defined order to draw if true, otherwise the flag mostDrawn will
+     *            define the order to draw
+     * @param numberCounterMap
+     *            the counter map for generate statistics of the drawn lottery numbers
+     * @return the comparator for sort the lottery numbers
+     */
+    public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+        int drawCount, boolean mostDrawn,
+        boolean paranoid, Map<Integer, Integer> numberCounterMap, SecureRandom secureRandom)
+    {
         return newMostDrawnComparator(
-                mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap), paranoid,
-                mostDrawn);
+            mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap), paranoid,
+            mostDrawn, secureRandom);
     }
 
     /**
@@ -136,9 +250,71 @@ public class DrawMultiMapLotteryNumbersFactory {
     public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
                                                        int drawCount, Map<Integer, Integer> numberCounterMap)
     {
+        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap, DefaultSecureRandom.get());
+    }
+
+    /**
+     * Factory method for create a comparator for sort the lottery numbers
+     *
+     * @param maxNumbers
+     *            the maximum of numbers to draw
+     * @param minVolume
+     *            the min volume
+     * @param maxVolume
+     *            the max volume
+     * @param drawCount
+     *            the draw count defines how many times to draw numbers
+     * @param numberCounterMap
+     *            the counter map for generate statistics of the drawn lottery numbers
+     * @return the comparator for sort the lottery numbers
+     */
+    public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
+        int drawCount, Map<Integer, Integer> numberCounterMap, SecureRandom secureRandom)
+    {
         return newMostDrawnComparator(
-                mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap), false,
-                true);
+            mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap), false,
+            true, secureRandom);
+    }
+
+    /**
+     * Draw of paranoid lottery numbers from given drawCount and take the numbers that are drawn the
+     * most times and return a new set.
+     *
+     * @param maxNumbers
+     *            the maximum of numbers to draw
+     * @param minVolume
+     *            the min volume
+     * @param maxVolume
+     *            the max volume
+     * @param drawCount
+     *            the draw count defines how many times to draw numbers
+     * @return the sets of the drawn numbers
+     */
+    public static Set<Integer> drawParanoidFromMultiMap(int maxNumbers, int minVolume,
+        int maxVolume, int drawCount)
+    {
+        return drawParanoidFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, DefaultSecureRandom.get());
+    }
+
+    /**
+     * Draw of paranoid lottery numbers from given drawCount and take the numbers that are drawn the
+     * most times and return a new set.
+     *
+     * @param maxNumbers
+     *            the maximum of numbers to draw
+     * @param minVolume
+     *            the min volume
+     * @param maxVolume
+     *            the max volume
+     * @param drawCount
+     *            the draw count defines how many times to draw numbers
+     * @return the sets of the drawn numbers
+     */
+    public static Set<Integer> drawParanoidFromMultiMap(int maxNumbers, int minVolume,
+        int maxVolume, int drawCount, SecureRandom secureRandom)
+    {
+        return drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount,
+            RandomBooleanFactory.randomBoolean(), true, secureRandom);
     }
 
     /**
@@ -156,14 +332,34 @@ public class DrawMultiMapLotteryNumbersFactory {
      * @return the comparator for sort the lottery numbers
      */
     private static Comparator<Integer> newMostDrawnComparator(
-            Map<Integer, Integer> numberCounterMap, boolean paranoid, boolean mostDrawn)
+        Map<Integer, Integer> numberCounterMap, boolean paranoid, boolean mostDrawn)
+    {
+        return newMostDrawnComparator(numberCounterMap, paranoid, mostDrawn, DefaultSecureRandom.get());
+    }
+
+    /**
+     * Factory method for create a comparator for sort the lottery numbers
+     *
+     * @param numberCounterMap
+     *            the counter map for generate statistics of the drawn lottery numbers
+     * @param paranoid
+     *            the flag paranoid indicates to create a custom comparator from the counter map and
+     *            define a random defined order to draw if true, otherwise the flag mostDrawn will
+     *            define the order to draw
+     * @param mostDrawn
+     *            the flag that indicates if the most drawn numbers should be taken if true,
+     *            otherwise the reverse order will be taken
+     * @return the comparator for sort the lottery numbers
+     */
+    private static Comparator<Integer> newMostDrawnComparator(
+        Map<Integer, Integer> numberCounterMap, boolean paranoid, boolean mostDrawn, SecureRandom secureRandom)
     {
         Comparator<Integer> mostDrawnComparator;
         if (paranoid)
         {
             List<Integer> numberCounterValues = ListFactory
-                    .newArrayList(SetFactory.newTreeSet(numberCounterMap.values()));
-            Collections.shuffle(numberCounterValues, DefaultSecureRandom.get());
+                .newArrayList(SetFactory.newTreeSet(numberCounterMap.values()));
+            Collections.shuffle(numberCounterValues, secureRandom);
             mostDrawnComparator = ComparatorFactory.newComparator(numberCounterValues);
         }
         else

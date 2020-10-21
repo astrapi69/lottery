@@ -10,7 +10,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
 
-public class DrawLotteryNumbersFactory {
+/**
+ * The factory class {@link DrawLotteryNumbersFactory} provides factory methods to draw lottery numbers
+ * with different algorithms and {@link SecureRandom} argument for custom randomize draws, like
+ * for a special draw date we could initialize the {@link SecureRandom} with the draw date.
+ */
+public final class DrawLotteryNumbersFactory {
+
+    private DrawLotteryNumbersFactory()
+    {
+    }
 
     /**
      * Draw of lottery numbers.
@@ -19,6 +28,8 @@ public class DrawLotteryNumbersFactory {
      *            the max number to draw
      * @param volume
      *            the volume of the numbers starts from 1 till volume
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the sets the
      */
     public static Set<Integer> draw(int maxNumbers, int volume, SecureRandom secureRandom)
@@ -42,11 +53,27 @@ public class DrawLotteryNumbersFactory {
      * Draw of lottery numbers.
      *
      * @param maxNumbers
+     *            the max number to draw
+     * @param volume
+     *            the volume of the numbers starts from 1 till volume
+     * @return the sets the
+     */
+    public static Set<Integer> draw(int maxNumbers, int volume)
+    {
+        return draw(maxNumbers, volume, DefaultSecureRandom.get());
+    }
+
+    /**
+     * Draw of lottery numbers.
+     *
+     * @param maxNumbers
      *            the maximum of numbers to draw
      * @param minVolume
      *            the min volume
      * @param maxVolume
      *            the max volume
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> draw(int maxNumbers, int minVolume, int maxVolume, SecureRandom secureRandom)
@@ -75,19 +102,21 @@ public class DrawLotteryNumbersFactory {
      *            the min volume
      * @param maxVolume
      *            the max volume
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> drawWithShuffle(int maxNumbers, int minVolume, int maxVolume, SecureRandom secureRandom)
     {
         Set<Integer> numbers = SetFactory.newTreeSet();
         ArrayList<Integer> rangeList = new ArrayList<>(
-                ListFactory.newRangeList(minVolume, maxVolume));
+            ListFactory.newRangeList(minVolume, maxVolume));
         int cnt = 0;
         while (cnt < maxNumbers)
         {
             Collections.shuffle(rangeList, secureRandom);
             final int index = RandomIntFactory.randomIntBetween(0, rangeList.size(), true,
-                    false, secureRandom);
+                false, secureRandom);
             Integer drawnNumber = rangeList.get(index);
             if (!numbers.contains(drawnNumber))
             {
@@ -102,14 +131,16 @@ public class DrawLotteryNumbersFactory {
      * Draw of lottery numbers.
      *
      * @param maxNumbers
-     *            the max number to draw
-     * @param volume
-     *            the volume of the numbers starts from 1 till volume
-     * @return the sets the
+     *            the maximum of numbers to draw
+     * @param minVolume
+     *            the min volume
+     * @param maxVolume
+     *            the max volume
+     * @return the sets of the drawn numbers
      */
-    public static Set<Integer> draw(int maxNumbers, int volume)
+    public static Set<Integer> drawWithShuffle(int maxNumbers, int minVolume, int maxVolume)
     {
-        return draw(maxNumbers, volume, DefaultSecureRandom.get());
+        return drawWithShuffle(maxNumbers, minVolume, maxVolume, DefaultSecureRandom.get());
     }
 
     /**
