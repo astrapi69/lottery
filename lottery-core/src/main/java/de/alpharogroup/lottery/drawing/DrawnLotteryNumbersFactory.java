@@ -1,15 +1,15 @@
 /**
  * Commercial License
- * <p>
+ *
  * Copyright (C) 2015 Asterios Raptis - All Rights Reserved
- * <p>
+ *
  * Proprietary and confidential
- * <p>
+ *
  * Unauthorized copying of this software and its files,
  * via any medium is strictly prohibited
- * <p>
+ *
  * Written by Asterios Raptis
- * <p>
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE

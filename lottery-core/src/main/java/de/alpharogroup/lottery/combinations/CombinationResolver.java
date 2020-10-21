@@ -135,7 +135,7 @@ public final class CombinationResolver
 	 *
 	 * @param firstPossibleNumbers
 	 *            the size of first possible numbers
-	 * @param firstPossibleNumbers
+	 * @param firstCombinationSize
 	 *            the size from the first combination of a single combination
 	 * @param secondPossibleNumbers
 	 *            the size of second possible numbers
