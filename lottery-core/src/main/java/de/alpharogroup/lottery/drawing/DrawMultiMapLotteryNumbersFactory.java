@@ -1,3 +1,23 @@
+/**
+ * Commercial License
+ *
+ * Copyright (C) 2015 Asterios Raptis - All Rights Reserved
+ *
+ * Proprietary and confidential
+ *
+ * Unauthorized copying of this software and its files,
+ * via any medium is strictly prohibited
+ *
+ * Written by Asterios Raptis
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package de.alpharogroup.lottery.drawing;
 
 import de.alpharogroup.collections.list.ListFactory;
@@ -58,6 +78,8 @@ public final class DrawMultiMapLotteryNumbersFactory {
      *            the max volume
      * @param drawCount
      *            the draw count defines how many times to draw numbers
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
@@ -105,6 +127,8 @@ public final class DrawMultiMapLotteryNumbersFactory {
      * @param mostDrawn
      *            the flag that indicates if the most drawn numbers should be taken if true,
      *            otherwise the reverse order will be taken
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
@@ -159,6 +183,8 @@ public final class DrawMultiMapLotteryNumbersFactory {
      *            the flag paranoid indicates to create a custom comparator from the counter map and
      *            define a random defined order to draw if true, otherwise the flag mostDrawn will
      *            define the order to draw
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
@@ -221,6 +247,8 @@ public final class DrawMultiMapLotteryNumbersFactory {
      *            define the order to draw
      * @param numberCounterMap
      *            the counter map for generate statistics of the drawn lottery numbers
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the comparator for sort the lottery numbers
      */
     public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
@@ -266,6 +294,8 @@ public final class DrawMultiMapLotteryNumbersFactory {
      *            the draw count defines how many times to draw numbers
      * @param numberCounterMap
      *            the counter map for generate statistics of the drawn lottery numbers
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the comparator for sort the lottery numbers
      */
     public static Comparator<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
@@ -308,6 +338,8 @@ public final class DrawMultiMapLotteryNumbersFactory {
      *            the max volume
      * @param drawCount
      *            the draw count defines how many times to draw numbers
+     * @param secureRandom
+     *            the secure random object for random generation
      * @return the sets of the drawn numbers
      */
     public static Set<Integer> drawParanoidFromMultiMap(int maxNumbers, int minVolume,

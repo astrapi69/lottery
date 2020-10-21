@@ -21,6 +21,7 @@ CHANGED:
 - update of dependency randomizer version to 8
 - update of dependency silly-collections version to 8.3
 - update of test dependency testng to new version 7.3.0
+- increase code coverage
 
 Version 5.10
 -------------

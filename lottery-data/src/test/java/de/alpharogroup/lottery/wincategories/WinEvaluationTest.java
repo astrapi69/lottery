@@ -40,13 +40,21 @@ public class WinEvaluationTest
 	@Test
 	public void testObjectCreation()
 	{
-		WinEvaluation object;
-		object = WinEvaluation.builder().build();
+		WinEvaluation<LotteryWinCategory> object;
+		WinEvaluation<LotteryWinCategory> other;
+		object = WinEvaluation.<LotteryWinCategory>builder().build();
 		assertNotNull(object);
-		object = new WinEvaluation<LotteryWinCategory>(2.0, LotteryWinCategory.EIGHTH_CLASS);
+		other = new WinEvaluation<>(2.0, LotteryWinCategory.EIGHTH_CLASS);
+		assertNotNull(other);
+		object = new WinEvaluation<>();
 		assertNotNull(object);
-		object = new WinEvaluation<LotteryWinCategory>();
-		assertNotNull(object);
+		int hashCode = object.hashCode();
+		assertNotNull(hashCode);
+		String toString = object.toString();
+		assertNotNull(toString);
+		boolean equals = object.equals(other);
+		assertNotNull(equals);
+
 	}
 
 }

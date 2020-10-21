@@ -1,3 +1,23 @@
+/**
+ * Commercial License
+ *
+ * Copyright (C) 2015 Asterios Raptis - All Rights Reserved
+ *
+ * Proprietary and confidential
+ *
+ * Unauthorized copying of this software and its files,
+ * via any medium is strictly prohibited
+ *
+ * Written by Asterios Raptis
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 package de.alpharogroup.lottery.drawing;
 
 import de.alpharogroup.collections.map.MapFactory;
@@ -49,7 +69,6 @@ public class DrawMultiMapLotteryNumbersFactoryTest
 		assertEquals(actual, expected);
 	}
 
-
 	/**
 	 * Test method for {@link DrawMultiMapLotteryNumbersFactory#drawFromMultiMap(int, int, int, int)}
 	 */
@@ -80,6 +99,99 @@ public class DrawMultiMapLotteryNumbersFactoryTest
 	}
 
 	/**
+	 * Test method for {@link DrawMultiMapLotteryNumbersFactory#drawFromMultiMap(int, int, int, int, boolean)}
+	 */
+	@Test
+	public void testDrawFromMultiMapIntIntIntIntBoolean()
+	{
+		int actual;
+		int expected;
+		Set<Integer> lotteryNumbers;
+		int maxNumbers;
+		int minVolume;
+		int maxVolume;
+		int drawCount;
+		boolean mostDrawn;
+
+		maxNumbers = 7;
+		minVolume = 1;
+		maxVolume = 70;
+		drawCount = 10000;
+		mostDrawn = true;
+		lotteryNumbers = DrawMultiMapLotteryNumbersFactory
+			.drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn);
+		actual = lotteryNumbers.size();
+		expected = maxNumbers;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
+
+
+	/**
+	 * Test method for {@link DrawMultiMapLotteryNumbersFactory#drawFromMultiMap(int, int, int, int, boolean, boolean)}
+	 */
+	@Test
+	public void testDrawFromMultiMapIntIntIntIntBooleanBoolean()
+	{
+		int actual;
+		int expected;
+		Set<Integer> lotteryNumbers;
+		int maxNumbers;
+		int minVolume;
+		int maxVolume;
+		int drawCount;
+		boolean mostDrawn;
+		boolean paranoid;
+
+		maxNumbers = 7;
+		minVolume = 1;
+		maxVolume = 70;
+		drawCount = 10000;
+		mostDrawn = true;
+		paranoid = true;
+		lotteryNumbers = DrawMultiMapLotteryNumbersFactory
+			.drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, paranoid);
+		actual = lotteryNumbers.size();
+		expected = maxNumbers;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
+
+	/**
+	 * Test method for {@link DrawMultiMapLotteryNumbersFactory#drawFromMultiMap(int, int, int, int, boolean, boolean, Map)}
+	 */
+	@Test
+	public void testDrawFromMultiMapIntIntIntIntBooleanBooleanMap()
+	{
+		int maxNumbers;
+		int minVolume;
+		int maxVolume;
+		int drawCount;
+		boolean mostDrawn;
+		boolean paranoid;
+		Comparator<Integer> comparator;
+
+		maxNumbers = 7;
+		minVolume = 1;
+		maxVolume = 70;
+		drawCount = 10000;
+		mostDrawn = true;
+		paranoid = true;
+
+		Map<Integer, Integer> numberCounterMap;
+		numberCounterMap = MapFactory.newNumberCounterMap(minVolume, maxVolume);
+		comparator = DrawMultiMapLotteryNumbersFactory
+			.drawFromMultiMap(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, paranoid, numberCounterMap);
+		assertNotNull(comparator);
+	}
+
+	/**
 	 * Test method for {@link DrawMultiMapLotteryNumbersFactory#drawFromMultiMap(int, int, int, int)}
 	 */
 	@Test
@@ -87,9 +199,6 @@ public class DrawMultiMapLotteryNumbersFactoryTest
 	{
 		// actual return types
 		Map<Integer, Integer> mergeDrawings;
-		int actual;
-		int expected;
-		Set<Integer> lotteryNumbers;
 		int maxNumbers;
 		int minVolume;
 		int maxVolume;
