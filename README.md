@@ -64,7 +64,7 @@ You can first define the version properties:
 	<properties>
 			...
 		<!-- LOTTERY versions -->
-		<lottery.version>5.10</lottery.version>
+		<lottery.version>6</lottery.version>
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 			...
@@ -106,7 +106,7 @@ You can first define the version in the ext section and add than the following g
 ```
 ext {
 			...
-    lotteryVersion = "5.10"
+    lotteryVersion = "6"
 			...
 }
 dependencies {
