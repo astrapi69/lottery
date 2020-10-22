@@ -363,7 +363,7 @@ public final class DrawMultiMapLotteryNumbersFactory {
      *            otherwise the reverse order will be taken
      * @return the comparator for sort the lottery numbers
      */
-    private static Comparator<Integer> newMostDrawnComparator(
+    public static Comparator<Integer> newMostDrawnComparator(
         Map<Integer, Integer> numberCounterMap, boolean paranoid, boolean mostDrawn)
     {
         return newMostDrawnComparator(numberCounterMap, paranoid, mostDrawn, DefaultSecureRandom.get());
@@ -383,7 +383,7 @@ public final class DrawMultiMapLotteryNumbersFactory {
      *            otherwise the reverse order will be taken
      * @return the comparator for sort the lottery numbers
      */
-    private static Comparator<Integer> newMostDrawnComparator(
+    public static Comparator<Integer> newMostDrawnComparator(
         Map<Integer, Integer> numberCounterMap, boolean paranoid, boolean mostDrawn, SecureRandom secureRandom)
     {
         Comparator<Integer> mostDrawnComparator;
