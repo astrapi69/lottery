@@ -40,12 +40,12 @@ public class DoubleSetBoxTest
 	@Test
 	public void testObjectCreation()
 	{
-		DoubleSetBox object;
-		object = DoubleSetBox.builder().build();
+		DoubleSetBox<Integer> object;
+		object = DoubleSetBox.<Integer>builder().build();
 		assertNotNull(object);
-		object = new DoubleSetBox(SetFactory.newHashSet(1, 2), SetFactory.newHashSet(1, 2));
+		object = new DoubleSetBox<>(SetFactory.newHashSet(1, 2), SetFactory.newHashSet(1, 2));
 		assertNotNull(object);
-		object = new DoubleSetBox();
+		object = new DoubleSetBox<>();
 		assertNotNull(object);
 	}
 
