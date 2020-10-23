@@ -41,7 +41,7 @@ public class DoubleSetBoxTest
 	public void testObjectCreation()
 	{
 		DoubleSetBox<Integer> object;
-		object = DoubleSetBox.<Integer>builder().build();
+		object = DoubleSetBox.<Integer> builder().build();
 		assertNotNull(object);
 		object = new DoubleSetBox<>(SetFactory.newHashSet(1, 2), SetFactory.newHashSet(1, 2));
 		assertNotNull(object);
