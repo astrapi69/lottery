@@ -20,13 +20,13 @@
  */
 package de.alpharogroup.lottery.box;
 
-import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
-import de.alpharogroup.lottery.enums.LotteryGameType;
+import static org.testng.Assert.assertNotNull;
+
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertNotNull;
+import de.alpharogroup.collections.set.SetFactory;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link EurojackpotBox}
@@ -43,7 +43,7 @@ public class EurojackpotBoxTest
 		EurojackpotBox object;
 		object = EurojackpotBox.builder().build();
 		assertNotNull(object);
-		object = new EurojackpotBox(SetFactory.newHashSet(1,2), SetFactory.newHashSet(1,2));
+		object = new EurojackpotBox(SetFactory.newHashSet(1, 2), SetFactory.newHashSet(1, 2));
 		assertNotNull(object);
 		object = new EurojackpotBox();
 		assertNotNull(object);

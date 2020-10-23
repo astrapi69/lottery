@@ -20,10 +20,14 @@
  */
 package de.alpharogroup.lottery.box;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.util.Set;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link DoubleSetBox} represents exactly one lottery box in a lottery ticket

@@ -20,9 +20,9 @@
  */
 package de.alpharogroup.lottery.enums;
 
-import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertEquals;
+
+import org.testng.annotations.Test;
 
 /**
  * The unit test class for the class {@link LotteryAlgorithm}

@@ -20,13 +20,9 @@
  */
 package de.alpharogroup.lottery.wincategories;
 
-import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
-import de.alpharogroup.lottery.box.DoubleSetBox;
-import org.meanbean.test.BeanTester;
-import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertNotNull;
+
+import org.testng.annotations.Test;
 
 /**
  * The unit test class for the class {@link WinEvaluation}
@@ -42,7 +38,7 @@ public class WinEvaluationTest
 	{
 		WinEvaluation<LotteryWinCategory> object;
 		WinEvaluation<LotteryWinCategory> other;
-		object = WinEvaluation.<LotteryWinCategory>builder().build();
+		object = WinEvaluation.<LotteryWinCategory> builder().build();
 		assertNotNull(object);
 		other = new WinEvaluation<>(2.0, LotteryWinCategory.EIGHTH_CLASS);
 		assertNotNull(other);

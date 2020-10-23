@@ -20,12 +20,14 @@
  */
 package de.alpharogroup.lottery.box;
 
-import de.alpharogroup.lottery.enums.LotteryGameType;
-import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.util.Set;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 /**
  * The class {@link EurojackpotBox} represents exactly one lottery box in a lottery ticket

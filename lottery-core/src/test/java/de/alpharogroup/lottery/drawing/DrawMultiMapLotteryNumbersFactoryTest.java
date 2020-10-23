@@ -161,8 +161,8 @@ public class DrawMultiMapLotteryNumbersFactoryTest
 		numberCounterMap = MapFactory.newNumberCounterMap(minVolume, maxVolume);
 		mergeDrawings = DrawMerger.mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount,
 			numberCounterMap);
-		comparator = MostDrawnComparatorFactory.newMostDrawnComparator(maxNumbers, minVolume, maxVolume,
-			drawCount, mergeDrawings);
+		comparator = MostDrawnComparatorFactory.newMostDrawnComparator(maxNumbers, minVolume,
+			maxVolume, drawCount, mergeDrawings);
 		assertNotNull(comparator);
 	}
 
@@ -206,9 +206,6 @@ public class DrawMultiMapLotteryNumbersFactoryTest
 
 		// actual return types
 		Map<Integer, Integer> mergeDrawings;
-		int actual;
-		int expected;
-		Set<Integer> lotteryNumbers;
 		int maxNumbers;
 		int minVolume;
 		int maxVolume;
@@ -218,7 +215,6 @@ public class DrawMultiMapLotteryNumbersFactoryTest
 		minVolume = 1;
 		maxVolume = 70;
 		drawCount = 10000;
-		Comparator<Integer> comparator;
 		Map<Integer, Integer> numberCounterMap;
 		// new scenario...
 		numberCounterMap = MapFactory.newNumberCounterMap(minVolume, maxVolume);

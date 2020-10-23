@@ -35,8 +35,9 @@ public final class MostDrawnComparatorFactory
 	 *            the counter map for generate statistics of the drawn lottery numbers
 	 * @return the comparator for sort the lottery numbers
 	 */
-	public static Comparator<Integer> newMostDrawnComparator(int maxNumbers, int minVolume, int maxVolume,
-		int drawCount, boolean mostDrawn, boolean paranoid, Map<Integer, Integer> numberCounterMap)
+	public static Comparator<Integer> newMostDrawnComparator(int maxNumbers, int minVolume,
+		int maxVolume, int drawCount, boolean mostDrawn, boolean paranoid,
+		Map<Integer, Integer> numberCounterMap)
 	{
 		return newMostDrawnComparator(maxNumbers, minVolume, maxVolume, drawCount, mostDrawn,
 			paranoid, numberCounterMap, DefaultSecureRandom.get());
@@ -57,8 +58,8 @@ public final class MostDrawnComparatorFactory
 	 *            the counter map for generate statistics of the drawn lottery numbers
 	 * @return the comparator for sort the lottery numbers
 	 */
-	public static Comparator<Integer> newMostDrawnComparator(int maxNumbers, int minVolume, int maxVolume,
-		int drawCount, Map<Integer, Integer> numberCounterMap)
+	public static Comparator<Integer> newMostDrawnComparator(int maxNumbers, int minVolume,
+		int maxVolume, int drawCount, Map<Integer, Integer> numberCounterMap)
 	{
 		return MostDrawnComparatorFactory.newMostDrawnComparator(maxNumbers, minVolume, maxVolume,
 			drawCount, numberCounterMap, DefaultSecureRandom.get());
@@ -81,8 +82,9 @@ public final class MostDrawnComparatorFactory
 	 *            the secure random object for random generation
 	 * @return the comparator for sort the lottery numbers
 	 */
-	public static Comparator<Integer> newMostDrawnComparator(int maxNumbers, int minVolume, int maxVolume,
-		int drawCount, Map<Integer, Integer> numberCounterMap, SecureRandom secureRandom)
+	public static Comparator<Integer> newMostDrawnComparator(int maxNumbers, int minVolume,
+		int maxVolume, int drawCount, Map<Integer, Integer> numberCounterMap,
+		SecureRandom secureRandom)
 	{
 		return MostDrawnComparatorFactory.newMostDrawnComparator(
 			DrawMerger.mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap),

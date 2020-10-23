@@ -20,12 +20,13 @@
  */
 package de.alpharogroup.lottery.statistics;
 
-import de.alpharogroup.collections.map.MapFactory;
-import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
+import static org.testng.Assert.assertNotNull;
+
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertNotNull;
+import de.alpharogroup.collections.map.MapFactory;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link LotteryNumberCount}
@@ -36,7 +37,8 @@ public class LotteryNumberCountTest
 	/**
 	 * Test method for creation of object {@link LotteryNumberCount}
 	 */
-	@Test public void testObjectCreation()
+	@Test
+	public void testObjectCreation()
 	{
 		LotteryNumberCount object;
 		object = LotteryNumberCount.builder().build();
@@ -50,17 +52,19 @@ public class LotteryNumberCountTest
 	/**
 	 * Test method for {@link LotteryNumberCount}
 	 */
-	@Test public void testWithBeanTester()
+	@Test
+	public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(LotteryNumberCount.class);
 	}
 
 	/**
-	 * Test method for {@link LotteryNumberCount#equals(Object)} , {@link LotteryNumberCount#hashCode()} and
-	 * {@link LotteryNumberCount#toString()}
+	 * Test method for {@link LotteryNumberCount#equals(Object)} ,
+	 * {@link LotteryNumberCount#hashCode()} and {@link LotteryNumberCount#toString()}
 	 */
-	@Test public void verifyEqualsHashcodeAndToStringContracts()
+	@Test
+	public void verifyEqualsHashcodeAndToStringContracts()
 	{
 		ContractVerifier.of(LotteryNumberCount.class).verify();
 	}

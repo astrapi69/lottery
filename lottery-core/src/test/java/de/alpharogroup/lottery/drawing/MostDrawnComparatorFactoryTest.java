@@ -1,13 +1,13 @@
 package de.alpharogroup.lottery.drawing;
 
-import de.alpharogroup.collections.map.MapFactory;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertNotNull;
 
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Set;
 
-import static org.testng.Assert.assertNotNull;
+import org.testng.annotations.Test;
+
+import de.alpharogroup.collections.map.MapFactory;
 
 /**
  * The unit test class for the class {@link MostDrawnComparatorFactory}
@@ -22,9 +22,6 @@ public class MostDrawnComparatorFactoryTest
 	@Test
 	public void testNewMostDrawnComparator()
 	{
-		int actual;
-		int expected;
-		Set<Integer> lotteryNumbers;
 		int maxNumbers;
 		int minVolume;
 		int maxVolume;
@@ -43,8 +40,8 @@ public class MostDrawnComparatorFactoryTest
 		paranoid = false;
 		numberCounterMap = MapFactory.newNumberCounterMap(minVolume, maxVolume);
 
-		comparator = MostDrawnComparatorFactory.newMostDrawnComparator(maxNumbers, minVolume, maxVolume, drawCount,
-				mostDrawn, paranoid, numberCounterMap);
+		comparator = MostDrawnComparatorFactory.newMostDrawnComparator(maxNumbers, minVolume,
+			maxVolume, drawCount, mostDrawn, paranoid, numberCounterMap);
 		assertNotNull(comparator);
 	}
 

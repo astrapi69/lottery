@@ -20,12 +20,13 @@
  */
 package de.alpharogroup.lottery.box;
 
-import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
+import static org.testng.Assert.assertNotNull;
+
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertNotNull;
+import de.alpharogroup.collections.set.SetFactory;
+import de.alpharogroup.evaluate.object.verifier.ContractVerifier;
 
 /**
  * The unit test class for the class {@link DoubleSetBox}
@@ -42,7 +43,7 @@ public class DoubleSetBoxTest
 		DoubleSetBox object;
 		object = DoubleSetBox.builder().build();
 		assertNotNull(object);
-		object = new DoubleSetBox(SetFactory.newHashSet(1,2), SetFactory.newHashSet(1,2));
+		object = new DoubleSetBox(SetFactory.newHashSet(1, 2), SetFactory.newHashSet(1, 2));
 		assertNotNull(object);
 		object = new DoubleSetBox();
 		assertNotNull(object);
