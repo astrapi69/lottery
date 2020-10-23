@@ -20,112 +20,23 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.math.MathExtensions;
-import de.alpharogroup.random.DefaultSecureRandom;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.security.SecureRandom;
+import java.util.Set;
+
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import java.security.SecureRandom;
-import java.util.Map;
-import java.util.Set;
-
-import static org.testng.Assert.*;
+import de.alpharogroup.math.MathExtensions;
+import de.alpharogroup.random.DefaultSecureRandom;
 
 /**
  * The unit test class for the class {@link DrawLotteryNumbersFactory}
  */
 public class DrawLotteryNumbersFactoryTest
 {
-
-	/**
-	 * Test method for {@link DrawLotteryNumbersFactory#draw(int, int, int)}
-	 */
-	@Test
-	public void testDrawIntIntInt()
-	{
-		int actual;
-		int expected;
-		Set<Integer> lotteryNumbers;
-		int max;
-		int minVolume;
-		int maxVolume;
-
-
-		// simulate a draw of 7 numbers in between of 5 and 39
-		max = 7;
-		minVolume = 5;
-		maxVolume = 39;
-		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, minVolume, maxVolume);
-		actual = lotteryNumbers.size();
-		expected = max;
-		assertEquals(actual, expected);
-		for (Integer lotteryNumber : lotteryNumbers)
-		{
-			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
-		}
-	}
-
-	/**
-	 * Test method for {@link DrawLotteryNumbersFactory#drawWithShuffle(int, int, int, SecureRandom)}
-	 */
-	@Test
-	public void testDrawWithShuffle()
-	{
-		int actual;
-		int expected;
-
-		Set<Integer> lotteryNumbers;
-		int max;
-		int minVolume;
-		int maxVolume;
-
-
-		// simulate a draw of 7 numbers in between of 5 and 39
-		max = 7;
-		minVolume = 5;
-		maxVolume = 39;
-		lotteryNumbers = DrawLotteryNumbersFactory.drawWithShuffle(max, minVolume,
-			maxVolume);
-		actual = lotteryNumbers.size();
-		expected = max;
-		assertEquals(actual, expected);
-		for (Integer lotteryNumber : lotteryNumbers)
-		{
-			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
-		}
-	}
-
-
-	/**
-	 * Test method for {@link DrawLotteryNumbersFactory#drawWithShuffle(int, int, int, SecureRandom)}
-	 */
-	@Test
-	public void testDrawWithShuffleSecureRandom()
-	{
-		int actual;
-		int expected;
-
-		Set<Integer> lotteryNumbers;
-		int max;
-		int minVolume;
-		int maxVolume;
-
-
-		// simulate a draw of 7 numbers in between of 5 and 39
-		max = 7;
-		minVolume = 5;
-		maxVolume = 39;
-		lotteryNumbers = DrawLotteryNumbersFactory.drawWithShuffle(max, minVolume,
-			maxVolume, DefaultSecureRandom.get());
-		actual = lotteryNumbers.size();
-		expected = max;
-		assertEquals(actual, expected);
-		for (Integer lotteryNumber : lotteryNumbers)
-		{
-			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
-		}
-	}
 
 	/**
 	 * Test method for {@link DrawLotteryNumbersFactory#draw(int, int)}
@@ -319,6 +230,96 @@ public class DrawLotteryNumbersFactoryTest
 		for (Integer lotteryNumber : lotteryNumbers)
 		{
 			assertTrue(MathExtensions.isBetween(1, volume, lotteryNumber, true, true));
+		}
+	}
+
+	/**
+	 * Test method for {@link DrawLotteryNumbersFactory#draw(int, int, int)}
+	 */
+	@Test
+	public void testDrawIntIntInt()
+	{
+		int actual;
+		int expected;
+		Set<Integer> lotteryNumbers;
+		int max;
+		int minVolume;
+		int maxVolume;
+
+
+		// simulate a draw of 7 numbers in between of 5 and 39
+		max = 7;
+		minVolume = 5;
+		maxVolume = 39;
+		lotteryNumbers = DrawLotteryNumbersFactory.draw(max, minVolume, maxVolume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
+
+
+	/**
+	 * Test method for
+	 * {@link DrawLotteryNumbersFactory#drawWithShuffle(int, int, int, SecureRandom)}
+	 */
+	@Test
+	public void testDrawWithShuffle()
+	{
+		int actual;
+		int expected;
+
+		Set<Integer> lotteryNumbers;
+		int max;
+		int minVolume;
+		int maxVolume;
+
+
+		// simulate a draw of 7 numbers in between of 5 and 39
+		max = 7;
+		minVolume = 5;
+		maxVolume = 39;
+		lotteryNumbers = DrawLotteryNumbersFactory.drawWithShuffle(max, minVolume, maxVolume);
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
+		}
+	}
+
+	/**
+	 * Test method for
+	 * {@link DrawLotteryNumbersFactory#drawWithShuffle(int, int, int, SecureRandom)}
+	 */
+	@Test
+	public void testDrawWithShuffleSecureRandom()
+	{
+		int actual;
+		int expected;
+
+		Set<Integer> lotteryNumbers;
+		int max;
+		int minVolume;
+		int maxVolume;
+
+
+		// simulate a draw of 7 numbers in between of 5 and 39
+		max = 7;
+		minVolume = 5;
+		maxVolume = 39;
+		lotteryNumbers = DrawLotteryNumbersFactory.drawWithShuffle(max, minVolume, maxVolume,
+			DefaultSecureRandom.get());
+		actual = lotteryNumbers.size();
+		expected = max;
+		assertEquals(actual, expected);
+		for (Integer lotteryNumber : lotteryNumbers)
+		{
+			assertTrue(MathExtensions.isBetween(minVolume, maxVolume, lotteryNumber, true, true));
 		}
 	}
 

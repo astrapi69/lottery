@@ -65,6 +65,76 @@ public final class LotteryExtensions
 	}
 
 	/**
+	 * Calculate how much draws will be needed to win with the given lottery ticket in the given win
+	 * category.<br>
+	 * Caution: use with care if win category is first-class this can take a while till a return
+	 * value is calculated.
+	 *
+	 * @param lotteryTicket
+	 *            the lottery ticket
+	 * @param lotteryWinCategory
+	 *            the lottery win category
+	 * @return the quantity of draws for win of the given ticket
+	 */
+	public static int calculateDraws(LotteryTicket lotteryTicket,
+		LotteryWinCategory lotteryWinCategory)
+	{
+		Objects.requireNonNull(lotteryWinCategory);
+		return calculateDraws(lotteryTicket, lotteryWinCategory, 100);
+	}
+
+	/**
+	 * This method provides calculation of how much draws will be needed to win with the given
+	 * lottery ticket in the given win category. Can be used for statistics. <br>
+	 * Caution: use with care if win category is first-class this can take a while till a return
+	 * value is calculated.
+	 *
+	 * @param lotteryTicket
+	 *            the lottery ticket
+	 * @param lotteryWinCategory
+	 *            the lottery win category
+	 * @param maxIterations
+	 *            the max iterations in the while loop
+	 * @return the quantity of draws for win of the given ticket
+	 */
+	public static int calculateDraws(LotteryTicket lotteryTicket,
+		LotteryWinCategory lotteryWinCategory, int maxIterations)
+	{
+		Objects.requireNonNull(lotteryWinCategory);
+		final long startTime = System.nanoTime();
+
+		int count = 0;
+
+		DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
+			.newRandomDrawnLotteryNumbers();
+		count++;
+		boolean breakout = false;
+		// int i1 = 3;
+		while (!breakout)
+		{
+			evaluate(luckyNumbers, lotteryTicket);
+			Set<LotteryBox> lotteryBoxes = lotteryTicket.getLotteryBoxes();
+			for (LotteryBox box : lotteryBoxes)
+			{
+				breakout = box.getWinCategory().equals(lotteryWinCategory);
+			}
+			luckyNumbers = DrawnLotteryNumbersFactory.newRandomDrawnLotteryNumbers();
+			count++;
+			if (maxIterations < count)
+			{
+				breakout = true;
+			}
+		}
+
+		log.info("Elapsed time till you have won something: "
+			+ calculateElapsedTimeInSeconds(startTime));
+		log.info("you have won after " + count + " drawings");
+		log.info("you have won: " + lotteryTicket);
+		return count;
+	}
+
+
+	/**
 	 * Calculate draws for statistics.
 	 *
 	 * @param lotteryPlayedNumbers
@@ -117,76 +187,6 @@ public final class LotteryExtensions
 			}
 		}
 
-		return count;
-	}
-
-	/**
-	 * Calculate how much draws will be needed to win with the given lottery ticket in the given win
-	 * category.<br>
-	 * Caution: use with care if win category is first-class this can take a while till a return
-	 * value is calculated.
-	 *
-	 * @param lotteryTicket
-	 *            the lottery ticket
-	 * @param lotteryWinCategory
-	 *            the lottery win category
-	 * @return the quantity of draws for win of the given ticket
-	 */
-	public static int calculateDraws(LotteryTicket lotteryTicket,
-		LotteryWinCategory lotteryWinCategory)
-	{
-		Objects.requireNonNull(lotteryWinCategory);
-		return calculateDraws(lotteryTicket, lotteryWinCategory, 100);
-	}
-
-
-	/**
-	 * This method provides calculation of how much draws will be needed to win with the given
-	 * lottery ticket in the given win category. Can be used for statistics. <br>
-	 * Caution: use with care if win category is first-class this can take a while till a return
-	 * value is calculated.
-	 *
-	 * @param lotteryTicket
-	 *            the lottery ticket
-	 * @param lotteryWinCategory
-	 *            the lottery win category
-	 * @param maxIterations
-	 *            the max iterations in the while loop
-	 * @return the quantity of draws for win of the given ticket
-	 */
-	public static int calculateDraws(LotteryTicket lotteryTicket,
-		LotteryWinCategory lotteryWinCategory, int maxIterations)
-	{
-		Objects.requireNonNull(lotteryWinCategory);
-		final long startTime = System.nanoTime();
-
-		int count = 0;
-
-		DrawnLotteryNumbers luckyNumbers = DrawnLotteryNumbersFactory
-			.newRandomDrawnLotteryNumbers();
-		count++;
-		boolean breakout = false;
-		// int i1 = 3;
-		while (!breakout)
-		{
-			evaluate(luckyNumbers, lotteryTicket);
-			Set<LotteryBox> lotteryBoxes = lotteryTicket.getLotteryBoxes();
-			for (LotteryBox box : lotteryBoxes)
-			{
-				breakout = box.getWinCategory().equals(lotteryWinCategory);
-			}
-			luckyNumbers = DrawnLotteryNumbersFactory.newRandomDrawnLotteryNumbers();
-			count++;
-			if (maxIterations < count)
-			{
-				breakout = true;
-			}
-		}
-
-		log.info("Elapsed time till you have won something: "
-			+ calculateElapsedTimeInSeconds(startTime));
-		log.info("you have won after " + count + " drawings");
-		log.info("you have won: " + lotteryTicket);
 		return count;
 	}
 

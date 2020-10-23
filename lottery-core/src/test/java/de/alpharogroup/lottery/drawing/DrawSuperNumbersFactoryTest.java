@@ -20,16 +20,19 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import de.alpharogroup.collections.set.SetFactory;
-import de.alpharogroup.math.MathExtensions;
-import org.testng.annotations.Test;
-
-import java.util.Set;
-
-import static org.junit.Assert.*;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.util.Set;
+
+import org.testng.annotations.Test;
+
+import de.alpharogroup.collections.set.SetFactory;
+import de.alpharogroup.math.MathExtensions;
+
+/**
+ * The unit test class for the class {@link DrawSuperNumbersFactory}
+ */
 public class DrawSuperNumbersFactoryTest
 {
 

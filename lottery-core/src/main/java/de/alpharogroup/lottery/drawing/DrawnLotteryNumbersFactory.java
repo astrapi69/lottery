@@ -20,51 +20,23 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import de.alpharogroup.check.Argument;
-import de.alpharogroup.collections.list.ListFactory;
-import de.alpharogroup.collections.map.MapExtensions;
-import de.alpharogroup.collections.map.MapFactory;
-import de.alpharogroup.collections.set.SetFactory;
+import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Objects;
+import java.util.Set;
+
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.lottery.enums.LotteryAlgorithm;
 import de.alpharogroup.random.SecureRandomBean;
 import de.alpharogroup.random.SecureRandomFactory;
 import de.alpharogroup.random.number.RandomIntFactory;
 
-import java.security.SecureRandom;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-
 /**
- * A factory for creating {@link DrawnLotteryNumbers} objects with generated lottery numbers
+ * A factory class for creating {@link DrawnLotteryNumbers} objects with generated lottery numbers
  */
 public final class DrawnLotteryNumbersFactory
 {
-
-	/**
-	 * Factory method for create a map for count drawn numbers and will be summarized with the given
-	 * Map
-	 *
-	 * @param minVolume
-	 *            the min volume
-	 * @param maxVolume
-	 *            the max volume
-	 * @param numberCounterMap
-	 *            the Map that will be summarized
-	 * @return the new map with the initial values
-	 */
-	public static Map<Integer, Integer> newNumberCounterMap(int minVolume, int maxVolume,
-		Map<Integer, Integer> numberCounterMap)
-	{
-		Argument.notNull(numberCounterMap, "numberCounterMap");
-		return MapExtensions.mergeAndSummarize(
-			MapFactory.newCounterMap(ListFactory.newRangeList(minVolume, maxVolume)),
-			numberCounterMap);
-	}
 
 	/**
 	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
@@ -96,49 +68,6 @@ public final class DrawnLotteryNumbersFactory
 	 *
 	 * @param max
 	 *            the max number to draw
-	 * @param volume
-	 *            the volume of the numbers starts from 1 till volume
-	 * @param drawDate
-	 *            the draw date as long
-	 * @return the new {@link DrawnLotteryNumbers}
-	 */
-	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume,
-		long drawDate)
-	{
-		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder()
-			.id(RandomIntFactory.randomInt(Integer.MAX_VALUE))
-			.lotteryNumbers(SetFactory.newTreeSet()).build();
-		final SecureRandom sr = SecureRandomFactory
-			.newSecureRandom(SecureRandomBean.DEFAULT_ALGORITHM, SecureRandomBean.DEFAULT_PROVIDER,
-				drawDate);
-		int cnt = 0;
-
-		while (cnt < max)
-		{
-			final int num = 1 + Math.abs(sr.nextInt()) % volume;
-
-			if (!drawnLotteryNumbers.getLotteryNumbers().contains(num))
-			{
-				if (cnt == (max - 1))
-				{
-					drawnLotteryNumbers.setSuperNumber(num);
-				}
-				else
-				{
-					drawnLotteryNumbers.getLotteryNumbers().add(num);
-				}
-				++cnt;
-			}
-		}
-		drawnLotteryNumbers.setSuperSixNumber(RandomIntFactory.randomIntBetween(1, 10));
-		return drawnLotteryNumbers;
-	}
-
-	/**
-	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
-	 *
-	 * @param max
-	 *            the max number to draw
 	 * @param minVolume
 	 *            the min volume
 	 * @param maxVolume
@@ -149,9 +78,9 @@ public final class DrawnLotteryNumbersFactory
 		int maxVolume)
 	{
 		Set<Integer> drawnNumbers = DrawLotteryNumbersFactory.draw(max, minVolume, maxVolume);
-		return DrawnLotteryNumbers.builder()
-			.id(RandomIntFactory.randomInt(Integer.MAX_VALUE))
-			.lotteryNumbers(drawnNumbers).superNumber(
+		return DrawnLotteryNumbers.builder().id(RandomIntFactory.randomInt(Integer.MAX_VALUE))
+			.lotteryNumbers(drawnNumbers)
+			.superNumber(
 				DrawSuperNumbersFactory.drawSuperNumber(drawnNumbers, minVolume, maxVolume))
 			.superSixNumber(RandomIntFactory.randomIntBetween(1, 10)).build();
 	}
@@ -179,16 +108,16 @@ public final class DrawnLotteryNumbersFactory
 		Objects.requireNonNull(algorithm);
 		switch (algorithm)
 		{
-			case MAP:
+			case MAP :
 				DrawnLotteryNumbers drawnLotteryNumbers = newRandomDrawnLotteryNumbers(max,
 					minVolume, maxVolume);
 				drawnLotteryNumbers.setLotteryNumbers(DrawMultiMapLotteryNumbersFactory
 					.drawFromMultiMap(max, minVolume, maxVolume, drawCount));
 				return drawnLotteryNumbers;
-			case SET:
+			case SET :
 				return newRandomDrawnLotteryNumbers(max, maxVolume);
-			case DEFAULT:
-			default:
+			case DEFAULT :
+			default :
 				return newRandomDrawnLotteryNumbersDefaultAlgorithm(max, maxVolume);
 		}
 	}
@@ -212,6 +141,31 @@ public final class DrawnLotteryNumbersFactory
 	{
 		Objects.requireNonNull(algorithm);
 		return newRandomDrawnLotteryNumbers(max, minVolume, maxVolume, 200, algorithm);
+	}
+
+	/**
+	 * Factory method for create a new {@link DrawnLotteryNumbers} object with all drawn numbers
+	 *
+	 * @param max
+	 *            the max number to draw
+	 * @param volume
+	 *            the volume of the numbers starts from 1 till volume
+	 * @param drawDate
+	 *            the draw date as long
+	 * @return the new {@link DrawnLotteryNumbers}
+	 */
+	public static DrawnLotteryNumbers newRandomDrawnLotteryNumbers(int max, int volume,
+		long drawDate)
+	{
+		final SecureRandom sr = SecureRandomFactory.newSecureRandom(
+			SecureRandomBean.DEFAULT_ALGORITHM, SecureRandomBean.DEFAULT_PROVIDER, drawDate);
+		final DrawnLotteryNumbers drawnLotteryNumbers = DrawnLotteryNumbers.builder()
+			.id(RandomIntFactory.randomInt(Integer.MAX_VALUE))
+			.lotteryNumbers(DrawLotteryNumbersFactory.draw(max, volume, sr)).build();
+		drawnLotteryNumbers.setSuperNumber(DrawSuperNumbersFactory
+			.drawSuperNumber(drawnLotteryNumbers.getLotteryNumbers(), volume));
+		drawnLotteryNumbers.setSuperSixNumber(RandomIntFactory.randomIntBetween(1, 10));
+		return drawnLotteryNumbers;
 	}
 
 	/**

@@ -20,61 +20,19 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.util.Map;
-
-import de.alpharogroup.collections.map.MapFactory;
-import de.alpharogroup.random.number.RandomIntFactory;
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import de.alpharogroup.collections.map.MapExtensions;
 import de.alpharogroup.lottery.drawings.DrawnLotteryNumbers;
 import de.alpharogroup.lottery.enums.LotteryAlgorithm;
 
 /**
- * The class {@link DrawnLotteryNumbersFactory}.
+ * The unit test class for the class {@link DrawnLotteryNumbersFactory}
  */
 public class DrawnLotteryNumbersFactoryTest
 {
-
-	/**
-	 * Test method for {@link DrawnLotteryNumbersFactory#newNumberCounterMap(int, int, Map)}
-	 */
-	@Test
-	public void testMergeAndSummarize()
-	{
-		int minVolume;
-		int maxVolume;
-		Map<Integer, Integer> initialNumberCounterMap;
-		Map<Integer, Integer> numberCounterMap;
-
-		minVolume = 1;
-		maxVolume = 10;
-		numberCounterMap = MapFactory.newNumberCounterMap(minVolume, maxVolume);
-		for (int i = minVolume; i <= maxVolume; i++)
-		{
-			numberCounterMap.merge(i, RandomIntFactory.randomIntBetween(1, 4),
-				Integer::sum);
-		}
-		initialNumberCounterMap = DrawnLotteryNumbersFactory.newNumberCounterMap(minVolume,
-			maxVolume, numberCounterMap);
-		for (int i = minVolume; i <= maxVolume; i++)
-		{
-			initialNumberCounterMap.merge(i, RandomIntFactory.randomIntBetween(1, 4),
-				Integer::sum);
-		}
-		Map<Integer, Integer> mergedMap = MapExtensions.mergeAndSummarize(initialNumberCounterMap,
-			numberCounterMap);
-		for (int i = minVolume; i <= maxVolume; i++)
-		{
-			int actual = mergedMap.get(i);
-			int expected = numberCounterMap.get(i) + initialNumberCounterMap.get(i);
-			assertEquals(actual, expected);
-		}
-	}
 
 	/**
 	 * Test method for {@link DrawnLotteryNumbersFactory#newRandomDrawnLotteryNumbers()}.
@@ -131,14 +89,14 @@ public class DrawnLotteryNumbersFactoryTest
 	{
 		DrawnLotteryNumbers luckyNumbers;
 
-		luckyNumbers = DrawnLotteryNumbersFactory
-			.newRandomDrawnLotteryNumbers(6, 1, 49, LotteryAlgorithm.MAP);
+		luckyNumbers = DrawnLotteryNumbersFactory.newRandomDrawnLotteryNumbers(6, 1, 49,
+			LotteryAlgorithm.MAP);
 		assertNotNull(luckyNumbers);
-		luckyNumbers = DrawnLotteryNumbersFactory
-			.newRandomDrawnLotteryNumbers(6, 1, 49, LotteryAlgorithm.SET);
+		luckyNumbers = DrawnLotteryNumbersFactory.newRandomDrawnLotteryNumbers(6, 1, 49,
+			LotteryAlgorithm.SET);
 		assertNotNull(luckyNumbers);
-		luckyNumbers = DrawnLotteryNumbersFactory
-			.newRandomDrawnLotteryNumbers(6, 1, 49, LotteryAlgorithm.DEFAULT);
+		luckyNumbers = DrawnLotteryNumbersFactory.newRandomDrawnLotteryNumbers(6, 1, 49,
+			LotteryAlgorithm.DEFAULT);
 		assertNotNull(luckyNumbers);
 	}
 

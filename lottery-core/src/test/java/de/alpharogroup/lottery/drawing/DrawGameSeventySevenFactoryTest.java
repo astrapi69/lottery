@@ -20,11 +20,12 @@
  */
 package de.alpharogroup.lottery.drawing;
 
-import de.alpharogroup.math.MathExtensions;
+import static org.testng.Assert.assertTrue;
+
 import org.meanbean.test.BeanTester;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import de.alpharogroup.math.MathExtensions;
 
 /**
  * The unit test class for the class {@link DrawGameSeventySevenFactory}

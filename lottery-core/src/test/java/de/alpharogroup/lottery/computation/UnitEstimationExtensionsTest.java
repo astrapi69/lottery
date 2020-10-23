@@ -20,14 +20,15 @@
  */
 package de.alpharogroup.lottery.computation;
 
-import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
-import de.alpharogroup.lottery.wincategories.WinEvaluation;
-import org.meanbean.test.BeanTester;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import java.util.Map;
 
-import static org.testng.Assert.assertEquals;
+import org.meanbean.test.BeanTester;
+import org.testng.annotations.Test;
+
+import de.alpharogroup.lottery.wincategories.LotteryWinCategory;
+import de.alpharogroup.lottery.wincategories.WinEvaluation;
 
 /**
  * The unit test class for the class {@link UnitEstimationExtensions}.
@@ -39,7 +40,8 @@ public class UnitEstimationExtensionsTest
 	/**
 	 * Test the method {@link UnitEstimationExtensions#calculateLotteryPot(double, double)}
 	 */
-	@Test(enabled = true) public void testCalculateLotteryPot()
+	@Test(enabled = true)
+	public void testCalculateLotteryPot()
 	{
 		double actual;
 		double expected;
@@ -100,7 +102,8 @@ public class UnitEstimationExtensionsTest
 	/**
 	 * Test method for {@link UnitEstimationExtensions} with {@link BeanTester}
 	 */
-	@Test public void testWithBeanTester()
+	@Test
+	public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(UnitEstimationExtensions.class);
