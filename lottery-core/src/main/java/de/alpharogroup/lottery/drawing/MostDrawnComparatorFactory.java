@@ -157,6 +157,8 @@ public final class MostDrawnComparatorFactory
 	 * @param mostDrawn
 	 *            the flag that indicates if the most drawn numbers should be taken if true,
 	 *            otherwise the reverse order will be taken
+	 * @param secureRandom
+	 *            the secure random object for random generation
 	 * @return the comparator for sort the lottery numbers
 	 */
 	public static Comparator<Integer> newMostDrawnComparator(Map<Integer, Integer> numberCounterMap,
