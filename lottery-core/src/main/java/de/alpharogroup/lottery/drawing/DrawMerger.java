@@ -1,5 +1,9 @@
 package de.alpharogroup.lottery.drawing;
 
+import de.alpharogroup.lottery.drawings.DrawModelBean;
+import de.alpharogroup.random.DefaultSecureRandom;
+
+import java.security.SecureRandom;
 import java.util.Map;
 
 public final class DrawMerger
@@ -20,14 +24,64 @@ public final class DrawMerger
 	 * @return the map with the merged lottery numbers
 	 */
 	public static Map<Integer, Integer> mergeDrawings(int maxNumbers, int minVolume, int maxVolume,
-		int drawCount, Map<Integer, Integer> numberCounterMap)
+													  int drawCount, Map<Integer, Integer> numberCounterMap)
+	{
+		return mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap, DefaultSecureRandom.get());
+	}
+
+	/**
+	 * Merges several drawings of lottery numbers from the given arguments
+	 *
+	 * @param maxNumbers
+	 *            the maximum of numbers to draw
+	 * @param minVolume
+	 *            the min volume
+	 * @param maxVolume
+	 *            the max volume
+	 * @param drawCount
+	 *            the draw count defines how many times to draw numbers
+	 * @param numberCounterMap
+	 *            the counter map for generate statistics of the drawn lottery numbers
+	 * @return the map with the merged lottery numbers
+	 */
+	public static Map<Integer, Integer> mergeDrawings(int maxNumbers, int minVolume, int maxVolume,
+													  int drawCount, Map<Integer, Integer> numberCounterMap,
+													  SecureRandom secureRandom)
 	{
 		for (int i = 0; i < drawCount; i++)
 		{
-			DrawLotteryNumbersFactory.draw(maxNumbers, minVolume, maxVolume)
-				.forEach(key -> numberCounterMap.merge(key, 1, Integer::sum));
+			DrawLotteryNumbersFactory.draw(maxNumbers, minVolume, maxVolume, secureRandom)
+					.forEach(key -> numberCounterMap.merge(key, 1, Integer::sum));
 		}
 		return numberCounterMap;
+	}
+
+	/**
+	 * Merges several drawings of lottery numbers from the given arguments
+	 *
+	 * @param drawModelBean
+	 *            the bean that holds the data how to draw the numbers
+	 * @param numberCounterMap
+	 *            the counter map for generate statistics of the drawn lottery numbers
+	 * @return the map with the merged lottery numbers
+	 */
+	public static Map<Integer, Integer> mergeDrawings(DrawModelBean drawModelBean, Map<Integer, Integer> numberCounterMap)
+	{
+		if(drawModelBean.isShuffle()) {
+			for (int i = 0; i < drawModelBean.getDrawCount(); i++)
+			{
+				DrawLotteryNumbersFactory.drawWithShuffle(drawModelBean.getMaxNumbers(),
+						drawModelBean.getMinVolume(),
+						drawModelBean.getMaxVolume(), drawModelBean.getSecureRandom())
+						.forEach(key -> numberCounterMap.merge(key, 1, Integer::sum));
+			}
+			return numberCounterMap;
+		} else {
+			return mergeDrawings(drawModelBean.getMaxNumbers(),
+					drawModelBean.getMinVolume(),
+					drawModelBean.getMaxVolume(),
+					drawModelBean.getDrawCount(), numberCounterMap, drawModelBean.getSecureRandom());
+		}
 	}
 
 	private DrawMerger()

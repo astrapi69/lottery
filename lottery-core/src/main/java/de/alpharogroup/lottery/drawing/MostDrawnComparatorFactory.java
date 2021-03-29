@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Map;
 
 import de.alpharogroup.comparators.ComparatorFactory;
+import de.alpharogroup.lottery.drawings.DrawModelBean;
 import de.alpharogroup.random.DefaultSecureRandom;
 
 /**
@@ -119,9 +120,32 @@ public final class MostDrawnComparatorFactory
 		int maxVolume, int drawCount, boolean mostDrawn, boolean paranoid,
 		Map<Integer, Integer> numberCounterMap, SecureRandom secureRandom)
 	{
+		return newMostDrawnComparator(DrawModelBean.builder()
+				.maxNumbers(maxNumbers)
+				.minVolume(minVolume)
+				.maxVolume(maxVolume)
+				.drawCount(drawCount)
+				.paranoid(paranoid)
+				.mostDrawn(mostDrawn)
+				.secureRandom(secureRandom)
+				.build(), numberCounterMap);
+	}
+
+	/**
+	 * Factory method for create a comparator for sort the lottery numbers
+	 *
+	 * @param drawModelBean
+	 *            the bean that holds the data how to draw the numbers
+	 * @param numberCounterMap
+	 *            the counter map for generate statistics of the drawn lottery numbers
+	 * @return the comparator for sort the lottery numbers
+	 */
+	public static Comparator<Integer> newMostDrawnComparator(DrawModelBean drawModelBean,
+															 Map<Integer, Integer> numberCounterMap)
+	{
 		return MostDrawnComparatorFactory.newMostDrawnComparator(
-			DrawMerger.mergeDrawings(maxNumbers, minVolume, maxVolume, drawCount, numberCounterMap),
-			paranoid, mostDrawn, secureRandom);
+				DrawMerger.mergeDrawings(drawModelBean, numberCounterMap),
+				drawModelBean.isParanoid(), drawModelBean.isMostDrawn(), drawModelBean.getSecureRandom());
 	}
 
 	/**

@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 import de.alpharogroup.collections.map.MapExtensions;
 import de.alpharogroup.collections.map.MapFactory;
 import de.alpharogroup.collections.set.SetFactory;
+import de.alpharogroup.lottery.drawings.DrawModelBean;
 import de.alpharogroup.random.DefaultSecureRandom;
 import de.alpharogroup.random.number.RandomBooleanFactory;
 
@@ -141,12 +142,32 @@ public final class DrawMultiMapLotteryNumbersFactory
 	public static Set<Integer> drawFromMultiMap(int maxNumbers, int minVolume, int maxVolume,
 		int drawCount, boolean mostDrawn, boolean paranoid, SecureRandom secureRandom)
 	{
-		Map<Integer, Integer> numberCounterMap = MapFactory.newNumberCounterMap(minVolume,
-			maxVolume);
+		return drawFromMultiMap(DrawModelBean.builder()
+				.maxNumbers(maxNumbers)
+				.minVolume(minVolume)
+				.maxVolume(maxVolume)
+				.drawCount(drawCount)
+				.mostDrawn(mostDrawn)
+				.paranoid(paranoid)
+				.secureRandom(secureRandom)
+				.build());
+	}
+
+	/**
+	 * Draw of lottery numbers from given drawCount and take the numbers that are drawn the most
+	 * times and return a new set.
+	 *
+	 * @param drawModelBean
+	 *            the bean that holds the data how to draw the numbers
+	 * @return the sets of the drawn numbers
+	 */
+	public static Set<Integer> drawFromMultiMap(DrawModelBean drawModelBean)
+	{
+		Map<Integer, Integer> numberCounterMap = MapFactory.newNumberCounterMap(drawModelBean.getMinVolume(),
+				drawModelBean.getMaxVolume());
 		Comparator<Integer> mostDrawnComparator = MostDrawnComparatorFactory.newMostDrawnComparator(
-			maxNumbers, minVolume, maxVolume, drawCount, mostDrawn, paranoid, numberCounterMap,
-			secureRandom);
-		return resolveLotteryNumbers(maxNumbers, mostDrawnComparator, numberCounterMap);
+				drawModelBean, numberCounterMap);
+		return resolveLotteryNumbers(drawModelBean.getMaxNumbers(), mostDrawnComparator, numberCounterMap);
 	}
 
 	/**

@@ -4,7 +4,15 @@
 Version 6.1-SNAPSHOT
 -------------
 
+ADDED:
 
+- new bean class DrawModelBean that contains data that can be used for the draw of lottery numbers
+- new methods with the new bean class DrawModelBean as argument created
+
+CHANGED:
+
+- update of dependency lombok version to 1.18.18
+- update of gradle to new version 6.8.3
 
 Version 6
 -------------
