@@ -55,10 +55,10 @@ public class DrawMultiMapLotteryNumbersFactoryTest
 		int maxVolume;
 		int drawCount;
 
-		maxNumbers = 7;
+		maxNumbers = 8;
 		minVolume = 1;
-		maxVolume = 70;
-		drawCount = 10000;
+		maxVolume = 49;
+		drawCount = 1000000;
 		lotteryNumbers = DrawMultiMapLotteryNumbersFactory.drawFromMultiMap(maxNumbers, minVolume,
 			maxVolume, drawCount);
 		actual = lotteryNumbers.size();
