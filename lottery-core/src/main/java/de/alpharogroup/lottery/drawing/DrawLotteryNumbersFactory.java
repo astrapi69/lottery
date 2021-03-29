@@ -38,6 +38,10 @@ import de.alpharogroup.random.number.RandomIntFactory;
 public final class DrawLotteryNumbersFactory
 {
 
+	private DrawLotteryNumbersFactory()
+	{
+	}
+
 	/**
 	 * Draw of lottery numbers.
 	 *
@@ -176,9 +180,5 @@ public final class DrawLotteryNumbersFactory
 			}
 		}
 		return numbers;
-	}
-
-	private DrawLotteryNumbersFactory()
-	{
 	}
 }

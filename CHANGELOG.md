@@ -20,8 +20,10 @@ Version 6
 ADDED:
 
 - added new dependency commons-math3 in version 3.6.1
-- new method for get all possible combination of two boxes with different number of combination sizes
-- new method for calculate the count of all possible combination of two boxes with different number of combination sizes
+- new method for get all possible combination of two boxes with different number of combination
+  sizes
+- new method for calculate the count of all possible combination of two boxes with different number
+  of combination sizes
 
 CHANGED:
 
@@ -42,7 +44,7 @@ Version 5.10
 ADDED:
 
 - new estimation class for calculate the winning categories
-- new class for resolve all possible combinations with algorithm for 
+- new class for resolve all possible combinations with algorithm for
     - count all possible combinations
     - get all possible combinations as a list of lists
 - new method for resolve lottery numbers with a default most drawn comparator
@@ -59,7 +61,7 @@ Version 5.9
 -------------
 
 ADDED:
- 
+
 - gradle as build system
 - new factory method for create a map for count drawn numbers and can summarized with a given Map
 - new dependency silly-beans in minor version 1.1 added
@@ -78,7 +80,7 @@ Version 5.8
 -------------
 
 ADDED:
- 
+
 - new dependency of silly-beans in version 1 added
 
 CHANGED:
@@ -92,10 +94,10 @@ Version 5.7
 -------------
 
 ADDED:
- 
+
 - new dependency of jobj-compare in version 3.2 added
 - new method created for drawing with a multimap
-- new method created for drawing in paranoid manner with a multimap 
+- new method created for drawing in paranoid manner with a multimap
 
 CHANGED:
 
@@ -123,7 +125,7 @@ Version 5.5
 -------------
 
 ADDED:
- 
+
 - new dependency of jobj-contract-verifier in version 3.2 added
 
 CHANGED:
@@ -157,6 +159,6 @@ Version 5.2.0
 -------------
 
 ADDED:
- 
+
 - moved all lottery classes from project randomizer to this project
 - created two new projects core and data

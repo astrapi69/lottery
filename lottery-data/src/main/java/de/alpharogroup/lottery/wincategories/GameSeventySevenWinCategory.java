@@ -51,6 +51,11 @@ public enum GameSeventySevenWinCategory implements WinningOpportunity
 	/** The third winning class. */
 	THIRD_CLASS(5, 7777);
 
+	/** The last numbers that equal the seventy seven numbers */
+	Integer equalNumbers;
+	/** The fixed winning units is for win categories that have fixed winning units */
+	Integer fixedWinningUnits;
+
 	public static GameSeventySevenWinCategory getGameSeventySevenWinCategory(
 		Integer drawnGameSeventySeven, Integer playedGameSeventySeven)
 	{
@@ -115,10 +120,5 @@ public enum GameSeventySevenWinCategory implements WinningOpportunity
 		}
 		return GameSeventySevenWinCategory.BLANK;
 	}
-
-	/** The last numbers that equal the seventy seven numbers */
-	Integer equalNumbers;
-	/** The fixed winning units is for win categories that have fixed winning units */
-	Integer fixedWinningUnits;
 
 }

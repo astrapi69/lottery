@@ -69,6 +69,9 @@ public enum LotteryWinCategory implements WinningOpportunity
 	THIRD_CLASS(WinCategory.builder().quotaOfProfit(5.0d).quantityOfWonNumbers(5)
 		.withSuperNumber(true).build());
 
+	/** The bean that represents the win category. */
+	WinCategory winCategory;
+
 	/**
 	 * Gets an {@linkplain Optional} with the {@linkplain LotteryWinCategory} from the given
 	 * Collection that contains the result of an intersection with the drawn lottery numbers.
@@ -155,8 +158,5 @@ public enum LotteryWinCategory implements WinningOpportunity
 			.intersection(SetFactory.newTreeSet(drawnLotteryNumbers), playedLotteryTicket);
 		return getLotteryWinCategory(wonNumbers, withSuperNumber);
 	}
-
-	/** The bean that represents the win category. */
-	WinCategory winCategory;
 
 }

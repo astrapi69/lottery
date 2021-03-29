@@ -4,13 +4,13 @@
 
 [![Build Status](https://travis-ci.org/astrapi69/lottery.svg?branch=develop)](https://travis-ci.org/astrapi69/lottery)
 [![Coverage Status](https://codecov.io/gh/astrapi69/lottery/branch/develop/graph/badge.svg)](https://codecov.io/gh/astrapi69/lottery)
-[![Open Issues](https://img.shields.io/github/issues/astrapi69/lottery.svg?style=flat)](https://github.com/astrapi69/lottery/issues) 
+[![Open Issues](https://img.shields.io/github/issues/astrapi69/lottery.svg?style=flat)](https://github.com/astrapi69/lottery/issues)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/lottery/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/lottery)
 [![Donate](https://img.shields.io/badge/donate-❤-ff2244.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8)
 
 </div>
 
-The target of this project is to create random lottery results. 
+The target of this project is to create random lottery results.
 
 ## Note
 
@@ -18,8 +18,9 @@ No animals were harmed in the making of this library.
 
 # Donations
 
-This project is kept as an open source product and relies on contributions to remain being developed. 
-If you like this project, please consider a donation through paypal: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8" target="_blank">
+This project is kept as an open source product and relies on contributions to remain being
+developed. If you like this project, please consider a donation through
+paypal: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GVBTWLRAZ7HB8" target="_blank">
 <img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal this" title="PayPal – The safer, easier way to pay online!" border="0" />
 </a>
 
@@ -31,7 +32,8 @@ or over ether with:
 
 0xaB6EaE10F352268B0CA672Dd6e999C86344D49D8
 
-or over flattr: <a href="http://flattr.com/thing/4152938/astrapi69lottery-on-GitHub" target="_blank">
+or over
+flattr: <a href="http://flattr.com/thing/4152938/astrapi69lottery-on-GitHub" target="_blank">
 <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
 </a>
 
@@ -43,21 +45,25 @@ or over flattr: <a href="http://flattr.com/thing/4152938/astrapi69lottery-on-Git
 * Draw the number of the game seventy seven
 * Draw of lottery numbers in a given number area and a given volume
 * Summarize draw with a given counter map from already drawn lottery numbers
- 
+
 ## License
 
-The source code comes under a propriatary and confidential license. Unauthorized copying of this software and its files, via any medium is strictly prohibited.
+The source code comes under a propriatary and confidential license. Unauthorized copying of this
+software and its files, via any medium is strictly prohibited.
 
 ## Javadoc
 
-[![Javadoc](http://www.javadoc.io/badge/de.alpharogroup/lottery-core.svg)](http://www.javadoc.io/doc/de.alpharogroup/lottery-core) lottery-core
+[![Javadoc](http://www.javadoc.io/badge/de.alpharogroup/lottery-core.svg)](http://www.javadoc.io/doc/de.alpharogroup/lottery-core)
+lottery-core
 
-[![Javadoc](http://www.javadoc.io/badge/de.alpharogroup/lottery-data.svg)](http://www.javadoc.io/doc/de.alpharogroup/lottery-data) lottery-data
+[![Javadoc](http://www.javadoc.io/badge/de.alpharogroup/lottery-data.svg)](http://www.javadoc.io/doc/de.alpharogroup/lottery-data)
+lottery-data
 
 ## Maven dependency
 
-Maven dependency is now available on sonatype.
-Check out [sonatype repository](https://oss.sonatype.org/index.html#nexus-search;quick~lottery) for latest snapshots and releases.
+Maven dependency is now available on sonatype. Check
+out [sonatype repository](https://oss.sonatype.org/index.html#nexus-search;quick~lottery) for latest
+snapshots and releases.
 
 You can first define the version properties:
 
@@ -69,10 +75,11 @@ You can first define the version properties:
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 			...
 	</properties>
-	
+
 You can add the following dependencies to your project for use the functionality of lottery.
 
-Add the following maven dependency to your project `pom.xml` if you want to import the core functionality of lottery-core:
+Add the following maven dependency to your project `pom.xml` if you want to import the core
+functionality of lottery-core:
 
 		<dependencies>
 			...
@@ -85,7 +92,8 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 			...
 		</dependencies>
 
-Add the following maven dependency to your project `pom.xml` if you want to import only the lottery-data like algorithms, modes, paddings etc.:
+Add the following maven dependency to your project `pom.xml` if you want to import only the
+lottery-data like algorithms, modes, paddings etc.:
 
 		<dependencies>
 			...
@@ -97,15 +105,14 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 			</dependency>
 			...
 		</dependencies>
-	
-			
+
 ## gradle dependency
 
-You can first define the version in the ext section and add than the following gradle dependency to 
+You can first define the version in the ext section and add than the following gradle dependency to
 your project `build.gradle` if you want to import the core functionality of lottery:
 
-
 define version in file gradle.properties
+
 ```
 lotteryVersion=6.1
 ```
@@ -139,7 +146,8 @@ Release version numbers will be incremented in the following format:
 
 `<major>.<minor>.<patch>`
 
-For detailed information on versioning you can visit the [wiki page](https://github.com/lightblueseas/mvn-parent-projects/wiki/Semantic-Versioning).
+For detailed information on versioning you can visit
+the [wiki page](https://github.com/lightblueseas/mvn-parent-projects/wiki/Semantic-Versioning).
 
 ## Want to Help and improve it? ###
 
@@ -147,14 +155,18 @@ The source code for lottery are on GitHub. Please feel free to fork and send pul
 
 Create your own fork of [astrapi69/lottery/fork](https://github.com/astrapi69/lottery/fork)
 
-To share your changes, [submit a pull request](https://github.com/astrapi69/lottery/pull/new/develop).
+To share your
+changes, [submit a pull request](https://github.com/astrapi69/lottery/pull/new/develop).
 
 Don't forget to add new units tests on your changes.
 
 ## Contacting the Developer
 
-Do not hesitate to contact the lottery developers with your questions, concerns, comments, bug reports, or feature requests.
-- Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/astrapi69/lottery/issues).
+Do not hesitate to contact the lottery developers with your questions, concerns, comments, bug
+reports, or feature requests.
+
+- Feature requests, questions and bug reports can be reported at
+  the [issues page](https://github.com/astrapi69/lottery/issues).
 
 ## Similar projects and links
 

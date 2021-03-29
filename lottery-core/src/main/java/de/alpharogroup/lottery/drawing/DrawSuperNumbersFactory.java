@@ -34,6 +34,10 @@ import de.alpharogroup.random.number.RandomIntFactory;
 public final class DrawSuperNumbersFactory
 {
 
+	private DrawSuperNumbersFactory()
+	{
+	}
+
 	/**
 	 * Draws a super number that is not in the given already drawn numbers {@link Set}.
 	 *
@@ -121,10 +125,6 @@ public final class DrawSuperNumbersFactory
 			}
 		}
 		return superNumber;
-	}
-
-	private DrawSuperNumbersFactory()
-	{
 	}
 
 }
