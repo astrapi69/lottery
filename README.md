@@ -64,7 +64,7 @@ You can first define the version properties:
 	<properties>
 			...
 		<!-- LOTTERY versions -->
-		<lottery.version>6</lottery.version>
+		<lottery.version>6.1</lottery.version>
 		<lottery-core.version>${lottery.version}</lottery-core.version>
 		<lottery-data.version>${lottery.version}</lottery-data.version>
 			...
@@ -101,18 +101,32 @@ Add the following maven dependency to your project `pom.xml` if you want to impo
 			
 ## gradle dependency
 
-You can first define the version in the ext section and add than the following gradle dependency to your project `build.gradle` if you want to import the core functionality of lottery:
+You can first define the version in the ext section and add than the following gradle dependency to 
+your project `build.gradle` if you want to import the core functionality of lottery:
+
+
+define version in file gradle.properties
+```
+lotteryVersion=6.1
+```
+
+or in build.gradle ext area
 
 ```
 ext {
 			...
-    lotteryVersion = "6"
+    lotteryVersion = "6.1"
 			...
 }
+```
+
+and than add the dependency to the dependencies area
+
+```
 dependencies {
 			...
-compile("de.alpharogroup:lottery-core:$lotteryVersion")
-compile("de.alpharogroup:lottery-data:$lotteryVersion")
+    implementation("de.alpharogroup:lottery-core:$lotteryVersion")
+    implementation("de.alpharogroup:lottery-data:$lotteryVersion")
 			...
 }
 ```
