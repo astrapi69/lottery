@@ -15,10 +15,6 @@ allprojects {
     group = "$groupPackage"
     version = "$projectVersion"
 
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
 }
 
 subprojects {
@@ -28,6 +24,11 @@ subprojects {
     apply plugin: "maven-publish"
     apply plugin: "com.github.ben-manes.versions"
     apply plugin: "com.github.hierynomus.license"
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 
     dependencies {
         implementation("de.alpharogroup:silly-collections:$sillyCollectionsVersion")

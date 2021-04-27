@@ -4,6 +4,12 @@
 Version 6.2-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of gradle to new version 7.0
+- update of dependency lombok version to 1.18.20
+- update of com.github.ben-manes.versions.gradle.plugin to new version 0.38.0
+
 Version 6.1
 -------------
 
